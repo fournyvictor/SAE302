@@ -366,3 +366,21 @@ body {
 #bouton-recherche {
     background-image: url("../Misc/icon_search.svg");
 }
+
+.search-container input {
+    /* ... tes propriétés existantes ... */
+    -webkit-appearance: none;
+    /* Ajoute ceci */
+    appearance: none;
+    /* Et ceci */
+    box-sizing: border-box;
+    /* Toujours utile pour être sûr des dimensions */
+}
+
+/* Ajoute cette nouvelle règle pour supprimer les marges internes cachées sur Chrome/Safari */
+.search-container input::-webkit-search-decoration,
+.search-container input::-webkit-search-cancel-button,
+.search-container input::-webkit-search-results-button,
+.search-container input::-webkit-search-results-decoration {
+    display: none;
+}
