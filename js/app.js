@@ -12,7 +12,7 @@ const SEARCHBAR = document.getElementById("searchbar");
 
 INSTALL_BUTTON.addEventListener("click", installPwa);
 RELOAD_BUTTON.addEventListener("click", reloadPwa);
-SEARCHBAR.addEventListener("change", searchTmdb(SEARCHBAR.value));
+SEARCHBAR.addEventListener("input", searchTmdb(SEARCHBAR.value));
 
 /******************************************************************************/
 /* Global Variable                                                            */
@@ -143,6 +143,7 @@ function reloadPwa() {
 /******************************************************************************/
 
 function searchTmdb(string) {
+    console.log("recherche tmdb : ", string);
     const options = {
         method: 'GET',
         headers: {
