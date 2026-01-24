@@ -63,10 +63,12 @@ function makeFilmDisplayHtml(DATA, CAST) {
                 </div>
         
                 <div class="col-md-6 text-white pt-4">
-                    <h1 class="fw-bold display-5 gap-3 d-flex align-items-center">
-                        ${DATA.title}
-                        <span class="text-secondary fw-light"> ${YEAR}</span>
-                        <div class="d-flex gap-2 ms-3">
+                    <h1 class="fw-bold display-5 mb-2">${DATA.title}</h1>
+                    
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <span class="text-secondary fw-light fs-4">${YEAR}</span>
+                        
+                        <div class="d-flex gap-2">
                             <button class="btn btn-sm btn-outline-secondary action-btn" data-type="like">
                                 <img src="../Misc/icon_heart.svg" width="20" height="20">
                             </button>
@@ -74,7 +76,8 @@ function makeFilmDisplayHtml(DATA, CAST) {
                                 <img src="../Misc/icon_book.svg" width="20" height="20">
                             </button>
                         </div>
-                    </h1>
+                    </div>
+
                     <p class="text-secondary">${DATA.original_title}</p>
                     <p class="mt-4 small-caps tracking-widest text-secondary">${DATA.tagline}</p>
                     <p class="lead">${DATA.overview}</p>
