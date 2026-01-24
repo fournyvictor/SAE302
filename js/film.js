@@ -44,7 +44,7 @@ function makeFilmDisplayHtml(DATA) {
                 </div>
         
                 <div class="col-md-6 text-white pt-4">
-                    <h1 class="fw-bold display-5">${DATA.title}<span class="text-secondary fw-light">2025</span></h1>
+                    <h1 class="fw-bold display-5">${DATA.title}<span class="text-secondary fw-light"> ${DATA.release_date}</span></h1>
                     <p class="text-secondary">Directed by <span class="text-white border-bottom">${DATA.title}</span></p>
                     <p class="mt-4 small-caps text-uppercase tracking-widest text-secondary">${DATA.original_title}</p>
                     <p class="lead">${DATA.overview}</p>
