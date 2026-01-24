@@ -266,12 +266,17 @@ button:disabled {
 }
 
 /* Apparition au survol du parent (.logo) */
-.logo:hover #bouton2,
+.logo:hover #bouton2 {
+    opacity: 1;
+    transition-delay: 0.2s;
+    background-image: url('../Misc/icon_heart_full.svg');
+}
+
 .logo:hover #bouton3 {
     opacity: 1;
-    /* Visible quand déplié */
-    transition-delay: 0.1s;
-    /* Petit délai pour la fluidité */
+    transition-delay: 0.2s;
+    background-image: url('../Misc/icon_book_full.svg');
+
 }
 
 /* Picto Coeur */
