@@ -63,7 +63,18 @@ function makeFilmDisplayHtml(DATA, CAST) {
                 </div>
         
                 <div class="col-md-6 text-white pt-4">
-                    <h1 class="fw-bold display-5">${DATA.title}<span class="text-secondary fw-light"> ${YEAR}</span></h1>
+                    <h1 class="fw-bold display-5 gap-3 d-flex align-items-center">
+                        ${DATA.title}
+                        <span class="text-secondary fw-light"> ${YEAR}</span>
+                        <div class="d-flex gap-2 ms-3">
+                            <button class="btn btn-sm btn-outline-secondary action-btn" data-type="like">
+                                <img src="../Misc/icon_heart.svg" width="20" height="20">
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary action-btn" data-type="watchlist">
+                                <img src="../Misc/icon_book.svg" width="20" height="20">
+                            </button>
+                        </div>
+                    </h1>
                     <p class="text-secondary">${DATA.original_title}</p>
                     <p class="mt-4 small-caps tracking-widest text-secondary">${DATA.tagline}</p>
                     <p class="lead">${DATA.overview}</p>
