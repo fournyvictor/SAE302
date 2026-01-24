@@ -206,7 +206,7 @@ button:disabled {
     left: 0;
     width: 100%;
     height: 100%;
-    border: 5px solid #5b7692;
+    border: 5px solid #14181c;
     border-radius: 5px;
     /* Doit correspondre à celui du parent */
     pointer-events: none;
