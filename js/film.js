@@ -78,7 +78,7 @@ function makeFilmDisplayHtml(DATA, CAST) {
     for (let element of CAST.slice(0, 10)) {
         html += `<div class="cast-item d-flex align-items-center mb-2">
                     <div class="cast-photo-wrapper me-3">
-                        <img src="https://image.tmdb.org/t/p/original${element.profile_path}" alt="${element.name}" class="cast-img">
+                        <img src="https://image.tmdb.org/t/p/w185${element.profile_path}" alt="${element.name}" class="cast-img">
                     </div>
                     <div class="cast-info">
                         <div class="cast-name fw-bold text-white mb-0">${element.name}</div>
