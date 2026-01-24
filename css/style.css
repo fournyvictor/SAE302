@@ -402,6 +402,12 @@ body {
 
 /* Uniquement pour les écrans de moins de 768px de large (mobiles) */
 @media (max-width: 768px) {
+    .dropdown-menu {
+        max-height: 40vh;
+        width: 100vw;
+        overflow-y: auto;
+        background-color: #2c3440;
+    }
 
     /* Réduit le titre */
     .dropdown-search-card .card-title {
