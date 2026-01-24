@@ -1,6 +1,7 @@
 const PARAMS = new URLSearchParams(document.location.search);
 const FILM_ID = PARAMS.get("id");
 const FILM_CONTAINER = document.getElementById("film-container");
+const LIKE_BUTTON_IMAGE = document.getElementById("like-button-image");
 let is_movie_liked = false;
 
 
@@ -10,6 +11,9 @@ async function main() {
 
     if (FILM_ID) {
         checkIfMovieLiked();
+        if (is_movie_liked) {
+            LIKE_BUTTON_IMAGE.src = "../Misc/icon_heart_full.svg"
+        } else { LIKE_BUTTON_IMAGE.src = "../Misc/icon_heart.svg" }
         console.debug(FILM_ID);
         const CAST = await getMovieCast(FILM_ID);
         console.debug(CAST[0]);
