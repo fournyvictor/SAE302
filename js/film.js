@@ -119,47 +119,41 @@ function makeFilmDisplayHtml(DATA, CAST) {
 }
 
 function onLikeButtonClick() {
-    const dbName = "the_name";
-    // This is what our customer data looks like.
-    const customerData = [
-        { ssn: "444-44-4444", name: "Bill", age: 35, email: "bill@company.com" },
-        { ssn: "555-55-5555", name: "Donna", age: 32, email: "donna@home.org" },
-    ];
-
-    const request = indexedDB.open(dbName, 2);
+    const dbName = "FullBoxdDB";
+    const request = indexedDB.open(dbName, 1);
 
     request.onerror = (event) => {
-        // Handle errors.
+        console.error("Erreur IndexedDB:", event.target.error);
     };
+
+    // Création de la structure si elle n'existe pas (première ouverture ou changement de version)
     request.onupgradeneeded = (event) => {
         const db = event.target.result;
+        // On crée un store "likes" avec "filmId" comme clé unique
+        if (!db.objectStoreNames.contains("likes")) {
+            db.createObjectStore("likes", { keyPath: "filmId" });
+        }
+    };
 
-        // Create an objectStore to hold information about our customers. We're
-        // going to use "ssn" as our key path because it's guaranteed to be
-        // unique - or at least that's what I was told during the kickoff meeting.
-        const objectStore = db.createObjectStore("customers", { keyPath: "ssn" });
+    request.onsuccess = (event) => {
+        const db = event.target.result;
 
-        // Create an index to search customers by name. We may have duplicates
-        // so we can't use a unique index.
-        objectStore.createIndex("name", "name", { unique: false });
+        // Transaction en lecture/écriture
+        const transaction = db.transaction(["likes"], "readwrite");
+        const objectStore = transaction.objectStore("likes");
 
-        // Create an index to search customers by email. We want to ensure that
-        // no two customers have the same email, so use a unique index.
-        objectStore.createIndex("email", "email", { unique: true });
+        // Ajout du film ID
+        const entry = { filmId: FILM_ID, addedAt: new Date() };
+        const addRequest = objectStore.add(entry);
 
-        // Use transaction oncomplete to make sure the objectStore creation is
-        // finished before adding data into it.
-        objectStore.transaction.oncomplete = (event) => {
-            // Store values in the newly created objectStore.
-            const customerObjectStore = db
-                .transaction("customers", "readwrite")
-                .objectStore("customers");
-            customerData.forEach((customer) => {
-                customerObjectStore.add(customer);
-            });
+        addRequest.onsuccess = () => {
+            console.log(`Film ${FILM_ID} ajouté aux likes !`);
+        };
+
+        addRequest.onerror = (err) => {
+            console.error("Erreur ajout (déjà liké ?) :", err.target.error);
         };
     };
-    console.debug("HIHIHIH");
 }
 function onReviewButtonClick() {
     console.debug("AHAHAHA");
