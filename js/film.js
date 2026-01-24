@@ -65,7 +65,7 @@ function makeFilmDisplayHtml(DATA, CAST) {
                 <div class="col-md-6 text-white pt-4">
                     <h1 class="fw-bold display-5">${DATA.title}<span class="text-secondary fw-light"> ${YEAR}</span></h1>
                     <p class="text-secondary">${DATA.original_title}</p>
-                    <p class="mt-4 small-caps text-uppercase tracking-widest text-secondary">${DATA.tagline}</p>
+                    <p class="mt-4 small-caps tracking-widest text-secondary">${DATA.tagline}</p>
                     <p class="lead">${DATA.overview}</p>
                 </div>
 
