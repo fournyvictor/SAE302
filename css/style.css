@@ -73,7 +73,6 @@ button:disabled {
     width: 100%;
     transition: ease-in-out;
     transition-duration: 200ms;
-    height: 100px;
 }
 
 .dropdown-menu a {
