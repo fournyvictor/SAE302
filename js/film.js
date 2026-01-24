@@ -42,7 +42,7 @@ async function getMovieCast(ID) {
 
     const RESPONSE = await fetch(`https://api.themoviedb.org/3/movie/${ID}/credits?language=en-US`, options);
     const RESPONSE_JSON = await RESPONSE.json();
-    return RESPONSE_JSON;
+    return RESPONSE_JSON.cast;
 }
 
 function makeFilmDisplayHtml(DATA, CAST) {
