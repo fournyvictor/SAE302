@@ -182,7 +182,7 @@ button:disabled {
     z-index: 90;
     margin-top: 10px;
     margin-left: 10px;
-    border-radius: 50px;
+    border-radius: 5px;
     overflow: hidden;
     max-width: 10vh;
     max-height: 10vh;
