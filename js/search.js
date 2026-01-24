@@ -31,7 +31,7 @@ function deselectSearchBar() {
 
 }
 function resetSearchBar() {
-    SEARCHBAR_DROPDOWN.hide();
+    //SEARCHBAR_DROPDOWN.hide();
     SEARCHBAR.style.width = "36px";
     SEARCHBAR.placeholder = "⌕";
     SEARCHBAR.value = "";
