@@ -52,6 +52,7 @@ button:disabled {
 
 .dropdown-menu {
     max-height: 80vh;
+    width: 75vw;
     overflow-y: auto;
 }
 
