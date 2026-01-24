@@ -53,6 +53,21 @@ function makeFilmDisplayHtml(DATA) {
                 </div>
 
                 <div class="col-md-3 pt-4">
+                    <div class="cast-wrapper">
+                        <h6 class="text-uppercase text-secondary border-bottom border-secondary pb-2 mb-3 tracking-widest small">Cast</h6>
+        
+                        <div class="cast-scroll-container">
+                            <div class="cast-item d-flex align-items-center mb-2">
+                                <span class="cast-name">Timothée Chalamet</span>
+                            </div>
+                            <div class="cast-item d-flex align-items-center mb-2">
+                                <span class="cast-name">Gwyneth Paltrow</span>
+                            </div>
+                            <div class="cast-item d-flex align-items-center mb-2">
+                                <span class="cast-name">Tyler the Creator</span>
+                            </div>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>`;
