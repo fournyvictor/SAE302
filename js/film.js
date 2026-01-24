@@ -11,9 +11,10 @@ async function main() {
 
     if (FILM_ID) {
         checkIfMovieLiked();
+        console.debug('is_movie_liked : ', is_movie_liked);
         if (is_movie_liked) {
-            LIKE_BUTTON_IMAGE.src = "../Misc/icon_heart_full.svg"
-        } else { LIKE_BUTTON_IMAGE.src = "../Misc/icon_heart.svg" }
+            LIKE_BUTTON_IMAGE.src = "../Misc/icon_heart_full.svg";
+        } else { LIKE_BUTTON_IMAGE.src = "../Misc/icon_heart.svg"; }
         console.debug(FILM_ID);
         const CAST = await getMovieCast(FILM_ID);
         console.debug(CAST[0]);
