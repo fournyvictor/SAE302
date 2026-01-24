@@ -180,20 +180,14 @@ async function searchTmdb(SEARCHSTRING) {
 
     console.debug(RESPONSE_JSON);
 
-    let array = [];
-
-    for (let element of RESPONSE_JSON.results) {
-        array.push(element.title);
-        console.debug(element.title);
-    }
-    createSeachDropdownHtmlList(array);
+    createSeachDropdownHtmlList(RESPONSE_JSON.results);
 }
 
 function createSeachDropdownHtmlList(array) {
     let html = '';
     console.debug(array);
     for (let element of array) {
-        html += '<li><a class="dropdown-item" href="#">' + element + '</a></li>';
+        html += '<li><img href="https://image.tmdb.org/t/p/w92"' + element.poster_path + '><a class="dropdown-item" href="#">' + element.title + '</a></li>';
     }
     console.debug(SEARCHBAR_DROPDOWN_LIST.innerHTML);
     SEARCHBAR_DROPDOWN_LIST.innerHTML = html;
