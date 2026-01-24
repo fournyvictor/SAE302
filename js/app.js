@@ -92,6 +92,9 @@ function showInstallModal() {
 }
 
 function hideInstallModal() {
+    if (document.activeElement && INSTALL_MODAL.contains(document.activeElement)) {
+        document.activeElement.blur();
+    }
     INSTALL_MODAL_OBJ.hide();
 }
 
