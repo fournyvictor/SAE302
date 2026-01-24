@@ -161,7 +161,7 @@ function deselectSearchBar() {
     SEARCHBAR_DROPDOWN.hide();
 }
 
-function searchTmdb(SEARCHSTRING) {
+async function searchTmdb(SEARCHSTRING) {
     console.log("recherche tmdb : ", SEARCHSTRING);
     const options = {
         method: 'GET',
@@ -171,14 +171,18 @@ function searchTmdb(SEARCHSTRING) {
         }
     };
 
-    fetch('https://api.themoviedb.org/3/search/movie?query=' + SEARCHSTRING + '&include_adult=false&language=en-US&page=1', options)
-        .then(res => res.json())
-        .then(res => console.log(res.results))
-        .catch(err => console.error(err));
+    const RESPONSE = await fetch('https://api.themoviedb.org/3/search/movie?query=' + SEARCHSTRING + '&include_adult=false&language=en-US&page=1', options);
+    const RESPONSE_JSON = await RESPONSE.json();
+    //fetch('https://api.themoviedb.org/3/search/movie?query=' + SEARCHSTRING + '&include_adult=false&language=en-US&page=1', options)
+    //    .then(res => res.json())
+    //    .then(res => console.log(res.results))
+    //    .catch(err => console.error(err));
+
+    console.debug(RESPONSE_JSON);
 
     let array = [];
 
-    for (let element of res.results) {
+    for (let element of RESPONSE_JSON.results) {
         array += element.original_title;
     }
     createSeachDropdownHtmlList(array);
