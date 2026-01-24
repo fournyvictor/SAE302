@@ -195,6 +195,8 @@ button:disabled {
 .logo {
     display: block;
     position: absolute;
+    transition-duration: 0.2s;
+    transition: ease;
     z-index: 90;
     top: 0;
     /* Coincide avec le haut */
