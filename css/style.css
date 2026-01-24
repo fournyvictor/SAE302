@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+/**************************************/
+/* Reset                              */
+/**************************************/
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    outline: none;
+    padding: 0;
+}
+
+/**************************************/
+/* Style                              */
+/**************************************/
+
+body {
+    padding: 1rem;
+}
+
+h1 {
+    font-family: Arial;
+    font-size: 2rem;
+}
+
+h1 img {
+    height: 1.5rem;
+    vertical-align: baseline;
+}
+
+button {
+    font-family: Arial;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    padding: 0.2rem 1rem;
+}
+
+button:disabled {
+    display: none;
+}
+
+/**************************************/
