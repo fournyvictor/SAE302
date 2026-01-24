@@ -125,7 +125,8 @@ function onLikeButtonClick() {
     request.onsuccess = (event) => {
         db = event.target.result;
     };
+    console.debug("HIHIHIH")
 }
 function onReviewButtonClick() {
-
+    console.debug("AHAHAHA")
 }
