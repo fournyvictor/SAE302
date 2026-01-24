@@ -1,6 +1,8 @@
 const PARAMS = new URLSearchParams(document.location.search);
 const FILM_ID = PARAMS.get("id");
 const FILM_CONTAINER = document.getElementById("film-container");
+const LIKE_BUTTON = document.getElementById("like-button");
+const REVIEW_BUTTON = document.getElementById("review-button");
 
 main();
 
@@ -69,10 +71,10 @@ function makeFilmDisplayHtml(DATA, CAST) {
                         <span class="text-secondary fw-light display-5">${YEAR}</span>
                         
                         <div class="d-flex gap-2">
-                            <button class="btn btn-sm btn-outline-secondary action-btn" data-type="like">
+                            <button class="btn btn-sm btn-outline-secondary action-btn" id="like-button">
                                 <img src="../Misc/icon_heart.svg" width="20" height="20">
                             </button>
-                            <button class="btn btn-sm btn-outline-secondary action-btn" data-type="watchlist">
+                            <button class="btn btn-sm btn-outline-secondary action-btn" id="review-button">
                                 <img src="../Misc/icon_book.svg" width="20" height="20">
                             </button>
                         </div>
