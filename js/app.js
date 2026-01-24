@@ -14,6 +14,8 @@ const SEARCHBAR_DROPDOWN = bootstrap.Dropdown.getOrCreateInstance(SEARCHBAR);
 INSTALL_BUTTON.addEventListener("click", installPwa);
 RELOAD_BUTTON.addEventListener("click", reloadPwa);
 SEARCHBAR.addEventListener("input", updateSearchBar);
+SEARCHBAR.addEventListener("focus", updateSearchBar);
+SEARCHBAR.addEventListener("blur", deselectSearchBar);
 
 /******************************************************************************/
 /* Global Variable                                                            */
@@ -152,6 +154,10 @@ function updateSearchBar() {
     } else {
         SEARCHBAR_DROPDOWN.hide();
     }
+}
+
+function deselectSearchBar() {
+    SEARCHBAR_DROPDOWN.hide();
 }
 
 function searchTmdb(SEARCHSTRING) {
