@@ -4,6 +4,7 @@
 
 const INSTALL_BUTTON = document.getElementById("install_button");
 const RELOAD_BUTTON = document.getElementById("reload_button");
+const SEARCHBAR = document.getElementById("searchbar");
 
 /******************************************************************************/
 /* Listeners                                                                  */
@@ -11,6 +12,7 @@ const RELOAD_BUTTON = document.getElementById("reload_button");
 
 INSTALL_BUTTON.addEventListener("click", installPwa);
 RELOAD_BUTTON.addEventListener("click", reloadPwa);
+SEARCHBAR.addEventListener("change", searchTmdb(SEARCHBAR.value));
 
 /******************************************************************************/
 /* Global Variable                                                            */
@@ -135,3 +137,22 @@ function reloadPwa() {
 }
 
 /******************************************************************************/
+
+/******************************************************************************/
+/* TEST TMDB                                                    */
+/******************************************************************************/
+
+function searchTmdb(string) {
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YzAwODk3NTQ0ZTUwZTg5N2Y4ZGZhNzlkNzY4YjcxNyIsIm5iZiI6MTY1NjI3ODM4NC4xNTYsInN1YiI6IjYyYjhjZDcwMTdjNDQzMDA2MDRiMjEwOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZNZGW6-VnxqWAMDfqYZYtNRxbdZfLgqcMu3mysVMv-c'
+        }
+    };
+
+    fetch('https://api.themoviedb.org/3/search/movie?query=' + string + '&include_adult=false&language=en-US&page=1', options)
+        .then(res => res.json())
+        .then(res => console.log(res))
+        .catch(err => console.error(err));
+}
