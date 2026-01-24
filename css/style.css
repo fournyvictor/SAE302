@@ -230,4 +230,26 @@ button:disabled {
     /* Important : le haut de l'image reste fixe */
 }
 
+/* On s'assure que le conteneur de liens prend toute la place */
+.logo-actions {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    /* Pour empiler proprement */
+    flex-direction: column;
+    z-index: 92;
+    /* Au-dessus de l'image et de la bordure */
+}
+
+/* Chaque lien prend 1/3 de la hauteur */
+.logo-actions a {
+    flex: 1;
+    /* Prend 1 part égale (donc 33%) */
+    display: block;
+    /* border: 1px solid red;  <-- Décommenter pour visualiser les zones pendant le dev */
+}
+
 /**************************************/
