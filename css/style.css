@@ -185,6 +185,9 @@ button:disabled {
     left: 0;
     margin-top: 10px;
     margin-left: 10px;
+    border-style: solid;
+    border-color: #14181c;
+    border-width: 5px;
     border-radius: 5px;
     /* Petit arrondi pour garder la forme rectangulaire si besoin */
     overflow: hidden;
