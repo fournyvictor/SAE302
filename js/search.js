@@ -23,10 +23,12 @@ function updateSearchBar() {
 }
 function selectSearchBar() {
     updateSearchBar();
+    SEARCHBAR.width = "75vh";
     SEARCHBAR.placeholder = "Rechercher...";
 }
 function deselectSearchBar() {
     //SEARCHBAR_DROPDOWN.hide();
+    SEARCHBAR.width = "36px";
     SEARCHBAR.placeholder = "⌕";
 
 }
