@@ -433,9 +433,14 @@ body {
 
 
     .dropdown-search-card img {
-        max-width: 25%;
+        /* On fixe une taille stable */
+        width: 95px;
         min-width: 95px;
-        /* IMPORTANT: Empêche flexbox d'écraser l'image en dessous de 60px */
-        /* Retire object-fit et max-height si tu veux l'image entière */
+        /* Empêche l'écrasement par le texte */
+        flex-shrink: 0;
+        /* Interdit au flexbox de réduire l'image */
+
+        height: auto;
+        /* Garde le ratio */
     }
 }
