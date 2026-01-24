@@ -3,7 +3,7 @@ const SEARCHBAR_DROPDOWN = bootstrap.Dropdown.getOrCreateInstance(SEARCHBAR);
 const SEARCHBAR_DROPDOWN_LIST = document.getElementById("searchbar-dropdown-menu-list");
 
 SEARCHBAR.addEventListener("input", updateSearchBar);
-SEARCHBAR.addEventListener("focus", updateSearchBar);
+SEARCHBAR.addEventListener("focus", selectSearchBar);
 SEARCHBAR.addEventListener("blur", deselectSearchBar);
 
 
@@ -21,9 +21,14 @@ function updateSearchBar() {
         SEARCHBAR_DROPDOWN.hide();
     }
 }
-
+function selectSearchBar() {
+    updateSearchBar();
+    SEARCHBAR.placeholder = "Rechercher...";
+}
 function deselectSearchBar() {
     //SEARCHBAR_DROPDOWN.hide();
+    SEARCHBAR.placeholder = "⌕";
+
 }
 
 async function searchTmdb(SEARCHSTRING) {
