@@ -11,7 +11,7 @@ async function main() {
         const CAST = await getMovieCast(FILM_ID);
         console.debug(CAST[0]);
         console.debug(await getFilmData(FILM_ID, CAST));
-        makeFilmDisplayHtml(await getFilmData(FILM_ID, CAST));
+        makeFilmDisplayHtml(await getFilmData(FILM_ID), CAST);
     }
 }
 
