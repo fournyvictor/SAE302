@@ -75,6 +75,11 @@ button:disabled {
     transition-duration: 200ms;
 }
 
+.dropdown-search-card img {
+    max-width: 154px;
+    max-height: 231px;
+}
+
 .dropdown-menu a {
     width: 100%;
     text-decoration: none;
