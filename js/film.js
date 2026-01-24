@@ -4,6 +4,11 @@ const FILM_CONTAINER = document.getElementById("film-container");
 const LIKE_BUTTON = document.getElementById("like-button");
 const REVIEW_BUTTON = document.getElementById("review-button");
 
+
+LIKE_BUTTON.addEventListener("click", onLikeButtonClick);
+REVIEW_BUTTON.addEventListener("click", onReviewButtonClick);
+
+
 main();
 
 async function main() {
@@ -109,4 +114,15 @@ function makeFilmDisplayHtml(DATA, CAST) {
         </div>`;
     FILM_CONTAINER.innerHTML = html;
 
+}
+
+function onLikeButtonClick() {
+    let db;
+    const request = indexedDB.open("MyTestDatabase");
+    request.onerror = (event) => {
+        console.error("Why didn't you allow my web app to use IndexedDB?!");
+    };
+    request.onsuccess = (event) => {
+        db = event.target.result;
+    };
 }
