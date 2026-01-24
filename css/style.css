@@ -425,7 +425,6 @@ body {
         width: 60px;
         min-width: 60px;
         /* IMPORTANT: Empêche flexbox d'écraser l'image en dessous de 60px */
-        height: auto;
         /* Retire object-fit et max-height si tu veux l'image entière */
     }
 }
