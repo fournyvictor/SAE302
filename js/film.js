@@ -24,6 +24,5 @@ async function getFilmData(ID) {
 
     const RESPONSE = await fetch(`https://api.themoviedb.org/3/movie/${ID}?language=en-US`, options);
     const RESPONSE_JSON = await RESPONSE.json();
-    console.debug(RESPONSE_JSON.homepage);
-    return RESPONSE_JSON.homepage;
+    console.debug(RESPONSE_JSON);
 }
