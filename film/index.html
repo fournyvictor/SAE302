@@ -50,13 +50,52 @@
         </div>
     </div>
     <div id="film-container">
-        <div class="d-flex gap-2">
-            <button class="btn btn-sm btn-outline-secondary action-btn" id="like-button">
-                <img src="../Misc/icon_heart.svg" width="20" height="20" id="like-button-image">
-            </button>
-            <button class="btn btn-sm btn-outline-secondary action-btn" id="review-button">
-                <img src="../Misc/icon_book.svg" width="20" height="20">
-            </button>
+        <div class="banner-wrapper position-relative">
+            <div class="backdrop-image" id="data-backdrop-image"></div>
+            <div class="backdrop-overlay"></div>
+        </div>
+
+        <div class="container content-overlay">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="poster-container">
+                        <img class="img-fluid rounded border border-secondary shadow-lg" alt="Poster"
+                            id="data-image-poster">
+                    </div>
+                </div>
+
+                <div class="col-md-6 text-white pt-4">
+                    <h1 class="fw-bold display-5 mb-2" id="data-film-title"></h1>
+
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <span class="text-secondary fw-light display-5" id="data-film-year"></span>
+
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-sm btn-outline-secondary action-btn" id="like-button">
+                                <img src="../Misc/icon_heart.svg" width="20" height="20">
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary action-btn" id="review-button">
+                                <img src="../Misc/icon_book.svg" width="20" height="20">
+                            </button>
+                        </div>
+                    </div>
+
+                    <p class="text-secondary" id="data-original-title"></p>
+                    <p class="mt-4 small-caps tracking-widest text-secondary" id="data-film-tagline"></p>
+                    <p class="lead" id="data-film-overview"></p>
+                </div>
+
+                <div class="col-md-3 pt-4">
+                    <div class="cast-wrapper">
+                        <h6
+                            class="text-uppercase text-white border-bottom border-secondary pb-2 mb-3 tracking-widest small">
+                            Cast</h6>
+
+                        <div class="cast-scroll-container" id="cast-list">`
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

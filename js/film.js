@@ -1,7 +1,15 @@
 const PARAMS = new URLSearchParams(document.location.search);
 const FILM_ID = PARAMS.get("id");
 const FILM_CONTAINER = document.getElementById("film-container");
-const LIKE_BUTTON_IMAGE = document.getElementById("like-button-image");
+const DATA_BACKDROP_IMAGE = document.getElementById("data-backdrop-image");
+const DATA_IMAGE_POSTER = document.getElementById("data-image-poster");
+const DATA_FILM_TITLE = document.getElementById("data-film-title");
+const DATA_FILM_YEAR = document.getElementById("data-film-year");
+const DATA_ORIGINAL_TITLE = document.getElementById("data-original-title");
+const DATA_FILM_TAGLINE = document.getElementById("data-film-tagline");
+const DATA_FILM_OVERVIEW = document.getElementById("data-film-overview");
+const CAST_LIST = document.getElementById("cast-list");
+
 let is_movie_liked = false;
 
 
@@ -19,6 +27,7 @@ async function main() {
 
         const LIKE_BUTTON = document.getElementById("like-button");
         const REVIEW_BUTTON = document.getElementById("review-button");
+
 
 
         LIKE_BUTTON.addEventListener("click", onLikeButtonClick);
@@ -58,64 +67,27 @@ async function getMovieCast(ID) {
 
 function makeFilmDisplayHtml(DATA, CAST) {
     const YEAR = DATA.release_date.substring(0, 4);
-
-    let html = `<div class="banner-wrapper position-relative">
-        <div class="backdrop-image" style="background-image: url('https://image.tmdb.org/t/p/original${DATA.backdrop_path}');"></div>
-            <div class="backdrop-overlay"></div>
-        </div>
-
-        <div class="container content-overlay">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="poster-container">
-                        <img src="https://image.tmdb.org/t/p/original${DATA.poster_path}" class="img-fluid rounded border border-secondary shadow-lg" alt="Poster">
-                    </div>
-                </div>
-        
-                <div class="col-md-6 text-white pt-4">
-                    <h1 class="fw-bold display-5 mb-2">${DATA.title}</h1>
-                    
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <span class="text-secondary fw-light display-5">${YEAR}</span>
-                        
-                        <div class="d-flex gap-2">
-                            <button class="btn btn-sm btn-outline-secondary action-btn" id="like-button">
-                                <img src="../Misc/icon_heart.svg" width="20" height="20">
-                            </button>
-                            <button class="btn btn-sm btn-outline-secondary action-btn" id="review-button">
-                                <img src="../Misc/icon_book.svg" width="20" height="20">
-                            </button>
-                        </div>
-                    </div>
-
-                    <p class="text-secondary">${DATA.original_title}</p>
-                    <p class="mt-4 small-caps tracking-widest text-secondary">${DATA.tagline}</p>
-                    <p class="lead">${DATA.overview}</p>
-                </div>
-
-                <div class="col-md-3 pt-4">
-                    <div class="cast-wrapper">
-                        <h6 class="text-uppercase text-white border-bottom border-secondary pb-2 mb-3 tracking-widest small">Cast</h6>
-        
-                        <div class="cast-scroll-container">`
-
+    DATA_BACKDROP_IMAGE.style = `background-image: url('https://image.tmdb.org/t/p/original${DATA.backdrop_path}');`;
+    DATA_IMAGE_POSTER.src = `https://image.tmdb.org/t/p/original${DATA.poster_path}`;
+    DATA_FILM_TITLE.innerHTML = DATA.title;
+    DATA_FILM_YEAR.innerHTML = YEAR;
+    DATA_ORIGINAL_TITLE.innerHTML = DATA.original_title;
+    DATA_FILM_TAGLINE.innerHTML = DATA.tagline;
+    DATA_FILM_OVERVIEW.innerHTML = DATA.overview;
+    let casthtml = ""
     for (let element of CAST.slice(0, 10)) {
-        html += `<div class="cast-item d-flex align-items-center mb-2">
-                    <div class="cast-photo-wrapper me-3">
-                        <img src="https://image.tmdb.org/t/p/w45${element.profile_path}" alt="${element.name}" class="cast-img">
-                    </div>
-                    <div class="cast-info">
-                        <div class="cast-name fw-bold text-white mb-0">${element.name}</div>
-                        <div class="cast-role text-secondary small">${element.character}</div>
-                    </div>
-                </div>`
+        casthtml += `<div class="cast-item d-flex align-items-center mb-2">
+                                <div class="cast-photo-wrapper me-3">
+                                    <img src="https://image.tmdb.org/t/p/w45${element.profile_path}"
+                                        alt="${element.name}" class="cast-img">
+                                </div>
+                                <div class="cast-info">
+                                    <div class="cast-name fw-bold text-white mb-0">${element.name}</div>
+                                    <div class="cast-role text-secondary small">${element.character}</div>
+                                </div>
+                            </div>`
     };
-    html += `</div>
-                        </div>
-                </div>
-            </div>
-        </div>`;
-    FILM_CONTAINER.innerHTML = html;
+    CAST_LIST.innerHTML = casthtml;
 
 }
 
