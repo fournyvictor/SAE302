@@ -30,6 +30,7 @@ async function getFilmData(ID) {
 }
 
 function makeFilmDisplayHtml(DATA) {
+    const YEAR = DATA.release_date.substring(0, 4);
     const HTML = `<div class="banner-wrapper position-relative">
         <div class="backdrop-image" style="background-image: url('https://image.tmdb.org/t/p/original${DATA.backdrop_path}');"></div>
             <div class="backdrop-overlay"></div>
@@ -45,7 +46,7 @@ function makeFilmDisplayHtml(DATA) {
         
                 <div class="col-md-6 text-white pt-4">
                     <h1 class="fw-bold display-5">${DATA.title}<span class="text-secondary fw-light"> ${DATA.release_date}</span></h1>
-                    <p class="text-secondary">Directed by <span class="text-white border-bottom">${DATA.title.substring(0, 3)}</span></p>
+                    <p class="text-secondary">Directed by <span class="text-white border-bottom">${YEAR}</span></p>
                     <p class="mt-4 small-caps text-uppercase tracking-widest text-secondary">${DATA.original_title}</p>
                     <p class="lead">${DATA.overview}</p>
                 </div>
