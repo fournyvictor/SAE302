@@ -179,6 +179,7 @@ button:disabled {
 
 .logo {
     position: absolute;
+    z-index: 90;
 }
 
 /**************************************/
