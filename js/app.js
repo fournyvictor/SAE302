@@ -190,7 +190,7 @@ function createSeachDropdownHtmlList(array) {
         html += `<li><a>
                 <div class="card mb-3" style="max-width: 800px;">
                     <div class="row g-0">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <img src="https://image.tmdb.org/t/p/w154${element.poster_path}" class="img-fluid rounded-start" alt="${element.title} poster">
                         </div>
                         <div class="col-md-8">
