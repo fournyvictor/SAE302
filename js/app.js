@@ -158,7 +158,7 @@ function updateSearchBar() {
 }
 
 function deselectSearchBar() {
-    SEARCHBAR_DROPDOWN.hide();
+    //SEARCHBAR_DROPDOWN.hide();
 }
 
 async function searchTmdb(SEARCHSTRING) {
