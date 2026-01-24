@@ -1,8 +1,7 @@
 const PARAMS = new URLSearchParams(document.location.search);
 const FILM_ID = PARAMS.get("id");
 const FILM_CONTAINER = document.getElementById("film-container");
-const LIKE_BUTTON = document.getElementById("like-button");
-const REVIEW_BUTTON = document.getElementById("review-button");
+
 
 
 main();
@@ -15,6 +14,11 @@ async function main() {
         console.debug(CAST[0]);
         console.debug(await getFilmData(FILM_ID, CAST));
         makeFilmDisplayHtml(await getFilmData(FILM_ID), CAST);
+
+        const LIKE_BUTTON = document.getElementById("like-button");
+        const REVIEW_BUTTON = document.getElementById("review-button");
+
+
         LIKE_BUTTON.addEventListener("click", onLikeButtonClick);
         REVIEW_BUTTON.addEventListener("click", onReviewButtonClick);
     }
@@ -123,8 +127,8 @@ function onLikeButtonClick() {
     request.onsuccess = (event) => {
         db = event.target.result;
     };
-    console.debug("HIHIHIH")
+    console.debug("HIHIHIH");
 }
 function onReviewButtonClick() {
-    console.debug("AHAHAHA")
+    console.debug("AHAHAHA");
 }
