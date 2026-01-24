@@ -12,7 +12,7 @@ const SEARCHBAR = document.getElementById("searchbar");
 
 INSTALL_BUTTON.addEventListener("click", installPwa);
 RELOAD_BUTTON.addEventListener("click", reloadPwa);
-SEARCHBAR.addEventListener("input", searchTmdb(SEARCHBAR.value));
+SEARCHBAR.addEventListener("input", searchTmdb);
 
 /******************************************************************************/
 /* Global Variable                                                            */
@@ -142,8 +142,9 @@ function reloadPwa() {
 /* TEST TMDB                                                    */
 /******************************************************************************/
 
-function searchTmdb(string) {
-    console.log("recherche tmdb : ", string);
+function searchTmdb() {
+    const SEARCHSTRING = SEARCHBAR.value;
+    console.log("recherche tmdb : ", SEARCHSTRING);
     const options = {
         method: 'GET',
         headers: {
@@ -152,7 +153,7 @@ function searchTmdb(string) {
         }
     };
 
-    fetch('https://api.themoviedb.org/3/search/movie?query=' + string + '&include_adult=false&language=en-US&page=1', options)
+    fetch('https://api.themoviedb.org/3/search/movie?query=' + SEARCHSTRING + '&include_adult=false&language=en-US&page=1', options)
         .then(res => res.json())
         .then(res => console.log(res))
         .catch(err => console.error(err));
