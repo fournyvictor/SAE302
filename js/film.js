@@ -127,7 +127,7 @@ function onLikeButtonClick() {
     const REQUEST = indexedDB.open(DB, 1);
 
     REQUEST.onerror = onDBError;
-    checkIfMovieLiked();
+
     if (is_movie_liked) {
         REQUEST.onsuccess = onDBSuccessLikeRemove;
     } else {
@@ -206,9 +206,11 @@ function dbTransactionError(event) {
 }
 function successfullyLiked() {
     console.log(`Film ${FILM_ID} ajouté aux likes !`);
+    is_movie_liked = true;
 }
 function successfullyUnLiked() {
     console.log(`Film ${FILM_ID} retiré des likes !`)
+    is_movie_liked = false;
 }
 function onCheckLikedResult(event) {
     const RESULT = event.target.result;
