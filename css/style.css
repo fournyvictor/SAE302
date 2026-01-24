@@ -261,7 +261,7 @@ button:disabled {
     /* Invisible par défaut */
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 40%;
+    background-size: 30%;
     /* Taille du picto relative au bouton (réduit de 20%) */
 }
 
