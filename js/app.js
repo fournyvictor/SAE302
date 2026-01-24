@@ -5,6 +5,7 @@
 const INSTALL_BUTTON = document.getElementById("install_button");
 const RELOAD_BUTTON = document.getElementById("reload_button");
 const SEARCHBAR = document.getElementById("searchbar");
+const SEARCHBAR_DROPDOWN = bootstrap.Dropdown.getOrCreateInstance(SEARCHBAR);
 
 /******************************************************************************/
 /* Listeners                                                                  */
@@ -144,6 +145,7 @@ function reloadPwa() {
 
 function searchTmdb() {
     const SEARCHSTRING = SEARCHBAR.value;
+    SEARCHBAR_DROPDOWN.show();
     console.log("recherche tmdb : ", SEARCHSTRING);
     const options = {
         method: 'GET',
