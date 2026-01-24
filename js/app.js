@@ -184,6 +184,7 @@ async function searchTmdb(SEARCHSTRING) {
 
     for (let element of RESPONSE_JSON.results) {
         array += element.original_title;
+        console.debug(element.original_title);
     }
     createSeachDropdownHtmlList(array);
 }
