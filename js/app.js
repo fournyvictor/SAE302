@@ -5,6 +5,7 @@
 const INSTALL_BUTTON = document.getElementById("install_button");
 const RELOAD_BUTTON = document.getElementById("reload_button");
 const SEARCHBAR = document.getElementById("searchbar");
+const SEARCH_BUTTON = document.getElementById("searchbtn");
 
 /******************************************************************************/
 /* Listeners                                                                  */
@@ -12,7 +13,7 @@ const SEARCHBAR = document.getElementById("searchbar");
 
 INSTALL_BUTTON.addEventListener("click", installPwa);
 RELOAD_BUTTON.addEventListener("click", reloadPwa);
-SEARCHBAR.addEventListener("input", searchTmdb(SEARCHBAR.value));
+SEARCH_BUTTON.addEventListener("click", searchTmdb(SEARCHBAR.value));
 
 /******************************************************************************/
 /* Global Variable                                                            */
