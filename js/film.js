@@ -127,6 +127,7 @@ function onLikeButtonClick() {
     const REQUEST = indexedDB.open(DB, 1);
 
     REQUEST.onerror = onDBError;
+    checkIfMovieLiked();
     if (is_movie_liked) {
         REQUEST.onsuccess = onDBSuccessLikeRemove;
     } else {
