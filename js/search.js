@@ -62,17 +62,17 @@ function createSeachDropdownHtmlList(array) {
     let html = '';
     for (let element of array) {
         html += `<li><a href="https://webdev.fourny.org/victor/SAE302/film/?id=${element.id}">
-                <div class="card mb-3 dropdown-search-card">
-                    <div class="row g-0">
-                        <div class="col-md-3">
+                <div class="card dropdown-search-card">
+                    <div class="d-flex">
+                        
                             <img src="https://image.tmdb.org/t/p/w154${element.poster_path}" class="img-fluid rounded-start" alt="${element.title} poster">
-                        </div>
-                        <div class="col-md-8">
+                        
+                        
                             <div class="card-body">
                                 <h5 class="card-title">${element.title}</h5>
                                     <p class="card-text"><small class="text-muted">${element.release_date}</small></p>
                                     <p class="card-text card-text-truncate">${element.overview}</p>
-                            </div>
+                            
                         </div>
                     </div>
                 </div></a></li>`;
