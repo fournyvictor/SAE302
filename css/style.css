@@ -355,3 +355,7 @@ body {
     box-shadow: none;
     outline: none;
 }
+
+#bouton-recherche {
+    background-image: url("../Misc/icon_search.svg");
+}
