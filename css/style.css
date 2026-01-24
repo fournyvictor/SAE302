@@ -185,9 +185,6 @@ button:disabled {
     left: 0;
     margin-top: 10px;
     margin-left: 10px;
-    border-style: solid;
-    border-color: #5b7692;
-    border-width: 5px;
     border-radius: 5px;
     /* Petit arrondi pour garder la forme rectangulaire si besoin */
     overflow: hidden;
@@ -199,6 +196,24 @@ button:disabled {
 
     transition: height 0.3s ease-in-out;
     /* Animation fluide */
+}
+
+/* Bordure par-dessus l'image via pseudo-élément */
+.logo::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 5px solid #5b7692;
+    border-radius: 5px;
+    /* Doit correspondre à celui du parent */
+    pointer-events: none;
+    /* Ignore les clics */
+    box-sizing: border-box;
+    z-index: 91;
+    /* Au-dessus de l'image */
 }
 
 /* Au survol, on "déploie" vers le bas */
