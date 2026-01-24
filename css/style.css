@@ -423,7 +423,12 @@ body {
     /* Limite la taille de l'image sur mobile */
     .dropdown-search-card img {
         width: 60px;
-        /* Force une largeur petite */
+        /* Force la largeur */
         height: auto;
+        /* Laisse la hauteur s'adapter PROPORTIONNELLEMENT */
+        object-fit: cover;
+        /* Coupe l'image si jamais les dimensions forcent un autre ratio */
+        max-height: 100%;
+        /* Evite qu'elle ne dépasse si le parent est plus petit */
     }
 }
