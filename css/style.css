@@ -180,6 +180,9 @@ button:disabled {
 .logo {
     position: absolute;
     z-index: 90;
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 50px;
 }
 
 /**************************************/
