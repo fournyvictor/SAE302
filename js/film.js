@@ -1,5 +1,6 @@
 const PARAMS = new URLSearchParams(document.location.search);
 const FILM_ID = PARAMS.get("id");
+const FILM_CONTAINER = document.getElementById("film-container");
 
 main();
 
@@ -8,6 +9,7 @@ async function main() {
     if (FILM_ID) {
         console.debug(FILM_ID);
         console.debug(await getFilmData(FILM_ID));
+        makeFilmDisplayHtml(await getFilmData(FILM_ID));
     }
 }
 
@@ -25,4 +27,33 @@ async function getFilmData(ID) {
     const RESPONSE = await fetch(`https://api.themoviedb.org/3/movie/${ID}?language=en-US`, options);
     const RESPONSE_JSON = await RESPONSE.json();
     return RESPONSE_JSON;
+}
+
+function makeFilmDisplayHtml(DATA) {
+    const HTML = `<div class="banner-wrapper position-relative">
+        <div class="backdrop-image" style="background-image: url('https://image.tmdb.org/t/p/w154${DATA.backdrop_path}');"></div>
+            <div class="backdrop-overlay"></div>
+        </div>
+
+        <div class="container content-overlay">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="poster-container">
+                        <img src="poster.jpg" class="img-fluid rounded border border-secondary shadow-lg" alt="Poster">
+                    </div>
+                </div>
+        
+                <div class="col-md-6 text-white pt-4">
+                    <h1 class="fw-bold display-5">Marty Supreme <span class="text-secondary fw-light">2025</span></h1>
+                    <p class="text-secondary">Directed by <span class="text-white border-bottom">Josh Safdie</span></p>
+                    <p class="mt-4 small-caps text-uppercase tracking-widest text-secondary">Dream Big.</p>
+                    <p class="lead">In 1950s New York, Marty Mauser...</p>
+                </div>
+
+                <div class="col-md-3 pt-4">
+                </div>
+            </div>
+        </div>`;
+    FILM_CONTAINER.innerHTML = HTML;
+
 }
