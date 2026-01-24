@@ -43,6 +43,8 @@ button:disabled {
     display: none;
 }
 
-
+.card-text-truncate {
+    line-clamp: 4;
+}
 
 /**************************************/
