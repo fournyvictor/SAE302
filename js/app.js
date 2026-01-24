@@ -155,6 +155,6 @@ function searchTmdb() {
 
     fetch('https://api.themoviedb.org/3/search/movie?query=' + SEARCHSTRING + '&include_adult=false&language=en-US&page=1', options)
         .then(res => res.json())
-        .then(res => console.log(res.results[0].original_title))
+        .then(res => console.log(res.results))
         .catch(err => console.error(err));
 }
