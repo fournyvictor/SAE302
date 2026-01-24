@@ -13,7 +13,7 @@ const SEARCHBAR_DROPDOWN = bootstrap.Dropdown.getOrCreateInstance(SEARCHBAR);
 
 INSTALL_BUTTON.addEventListener("click", installPwa);
 RELOAD_BUTTON.addEventListener("click", reloadPwa);
-SEARCHBAR.addEventListener("input", searchTmdb);
+SEARCHBAR.addEventListener("input", updateSearchBar);
 
 /******************************************************************************/
 /* Global Variable                                                            */
@@ -143,9 +143,18 @@ function reloadPwa() {
 /* TEST TMDB                                                    */
 /******************************************************************************/
 
-function searchTmdb() {
-    const SEARCHSTRING = SEARCHBAR.value;
-    SEARCHBAR_DROPDOWN.show();
+function updateSearchBar() {
+    const SEARCHBAR_STRING = SEARCHBAR.value;
+    if (SEARCHBAR_STRING != '') {
+        searchTmdb(SEARCHBAR_STRING);
+        SEARCHBAR_DROPDOWN.show();
+
+    } else {
+        SEARCHBAR_DROPDOWN.hide();
+    }
+}
+
+function searchTmdb(SEARCHSTRING) {
     console.log("recherche tmdb : ", SEARCHSTRING);
     const options = {
         method: 'GET',
