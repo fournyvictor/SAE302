@@ -5,7 +5,6 @@
 const INSTALL_BUTTON = document.getElementById("install_button");
 const RELOAD_BUTTON = document.getElementById("reload_button");
 const SEARCHBAR = document.getElementById("searchbar");
-const SEARCH_BUTTON = document.getElementById("searchbtn");
 
 /******************************************************************************/
 /* Listeners                                                                  */
@@ -13,7 +12,7 @@ const SEARCH_BUTTON = document.getElementById("searchbtn");
 
 INSTALL_BUTTON.addEventListener("click", installPwa);
 RELOAD_BUTTON.addEventListener("click", reloadPwa);
-SEARCH_BUTTON.addEventListener("click", searchbutton);
+SEARCHBAR.addEventListener("change", searchTmdb(SEARCHBAR.value));
 
 /******************************************************************************/
 /* Global Variable                                                            */
@@ -157,7 +156,4 @@ function searchTmdb(string) {
         .then(res => res.json())
         .then(res => console.log(res))
         .catch(err => console.error(err));
-}
-function searchbutton() {
-    console.debug("searchbutton pressed", searchTmdb(SEARCHBAR.value));
 }
