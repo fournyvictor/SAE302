@@ -29,6 +29,8 @@ function selectSearchBar() {
     SEARCHBAR.placeholder = "Rechercher...";
 }
 function deselectSearchBar() {
+    LOGO.style.display = "block";
+
     setTimeout(resetSearchBar, 200);
 
 }
