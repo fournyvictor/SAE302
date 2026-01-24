@@ -332,6 +332,8 @@ body {
     transform: translateX(-50%);
     width: 75vw;
     z-index: 1000;
+    display: flex;
+    justify-content: center;
 }
 
 .search-container input {
