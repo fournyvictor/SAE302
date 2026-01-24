@@ -107,6 +107,7 @@ button:disabled {
 
 #film-body {
     background-color: #14181c;
+    padding: 0;
 }
 
 .cast-scroll-container {
