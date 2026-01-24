@@ -66,4 +66,9 @@ button:disabled {
     transition-duration: 200ms;
 }
 
+.dropdown-menu a {
+    text-decoration: none;
+    color: inherit;
+}
+
 /**************************************/
