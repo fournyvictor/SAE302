@@ -429,6 +429,7 @@ body {
 
     .dropdown-search-card img {
         max-width: 25%;
+        aspect-ratio: 1;
         /* IMPORTANT: Empêche flexbox d'écraser l'image en dessous de 60px */
         /* Retire object-fit et max-height si tu veux l'image entière */
     }
