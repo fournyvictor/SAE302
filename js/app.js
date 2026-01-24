@@ -194,6 +194,6 @@ function createSeachDropdownHtmlList(array) {
     for (let element of array) {
         html += '<li><a class="dropdown-item" href="#">' + element + '</a></li>';
     }
-
-    SEARCHBAR_DROPDOWN_LIST.innerHTML = html;
+    console.debug(SEARCHBAR_DROPDOWN_LIST.innerHTML());
+    SEARCHBAR_DROPDOWN_LIST.innerHTML() = html;
 }
