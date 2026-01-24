@@ -268,14 +268,12 @@ button:disabled {
 /* Apparition au survol du parent (.logo) */
 .logo:hover #bouton2 {
     opacity: 1;
-    transition-delay: 0.2s;
-    background-image: url('../Misc/icon_heart_full.svg');
+    transition-delay: 0.15s;
 }
 
 .logo:hover #bouton3 {
     opacity: 1;
-    transition-delay: 0.2s;
-    background-image: url('../Misc/icon_book_full.svg');
+    transition-delay: 0.15s;
 
 }
 
@@ -284,9 +282,18 @@ button:disabled {
     background-image: url('../Misc/icon_heart.svg');
 }
 
+#bouton2:hover {
+    background-image: url('../Misc/icon_heart_full.svg');
+}
+
 /* Picto Livre */
 #bouton3 {
     background-image: url('../Misc/icon_book.svg');
+}
+
+#bouton3:hover {
+    background-image: url('../Misc/icon_book_full.svg');
+
 }
 
 /**************************************/
