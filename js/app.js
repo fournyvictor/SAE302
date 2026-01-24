@@ -7,6 +7,8 @@ const RELOAD_BUTTON = document.getElementById("reload_button");
 const SEARCHBAR = document.getElementById("searchbar");
 const SEARCHBAR_DROPDOWN = bootstrap.Dropdown.getOrCreateInstance(SEARCHBAR);
 const SEARCHBAR_DROPDOWN_LIST = document.getElementById("searchbar-dropdown-menu-list");
+const INSTALL_MODAL = document.getElementById("install-modal");
+const INSTALL_MODAL_OBJ = bootstrap.Modal.getOrCreateInstance(INSTALL_MODAL);
 
 /******************************************************************************/
 /* Listeners                                                                  */
@@ -54,7 +56,7 @@ function onBeforeInstallPrompt(event) {
     console.debug("onBeforeInstallPrompt()");
 
     event.preventDefault();
-    INSTALL_BUTTON.disabled = false;
+    showInstallModal();
     beforeInstallPromptEvent = event;
 }
 
@@ -70,7 +72,7 @@ async function installPwa() {
         case "dismissed": console.log("PWA Install dismissed"); break;
     }
 
-    INSTALL_BUTTON.disabled = true;
+    hideInstallModal();
     window.removeEventListener("beforeinstallprompt", onBeforeInstallPrompt);
 }
 
@@ -80,6 +82,14 @@ function onAppInstalled() {
     console.debug("onAppInstalled()");
 
     registerServiceWorker();
+}
+
+function showInstallModal() {
+    INSTALL_MODAL_OBJ.show();
+}
+
+function hideInstallModal() {
+    INSTALL_MODAL_OBJ.hide();
 }
 
 /******************************************************************************/
