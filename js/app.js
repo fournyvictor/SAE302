@@ -187,7 +187,22 @@ function createSeachDropdownHtmlList(array) {
     let html = '';
     console.debug(array);
     for (let element of array) {
-        html += '<li><img href="https://image.tmdb.org/t/p/w92' + element.poster_path + '"><a class="dropdown-item" href="#">' + element.title + '</a></li>';
+        html += `<li>
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img href="https://image.tmdb.org/t/p/w92` + element.poster_path + `" class="img-fluid rounded-start" alt="` + element.title + `poster">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">`+ element.title + `</h5>
+                                    <p class="card-text"><small class="text-muted">`+ element.release_date + `</small></p>
+                                    <p class="card-text">`+ element.overview + `</p>
+                            </div>
+                        </div>
+                    </div>
+                </div></li>`
+        // html += '<li><img href="https://image.tmdb.org/t/p/w92' + element.poster_path + '"><a class="dropdown-item" href="#">' + element.title + '</a></li>';
     }
     console.debug(SEARCHBAR_DROPDOWN_LIST.innerHTML);
     SEARCHBAR_DROPDOWN_LIST.innerHTML = html;
