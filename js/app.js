@@ -178,14 +178,12 @@ async function searchTmdb(SEARCHSTRING) {
     //    .then(res => console.log(res.results))
     //    .catch(err => console.error(err));
 
-    console.debug(RESPONSE_JSON);
 
     createSeachDropdownHtmlList(RESPONSE_JSON.results);
 }
 
 function createSeachDropdownHtmlList(array) {
     let html = '';
-    console.debug(array);
     for (let element of array) {
         html += `<li><a href="https://google.com">
                 <div class="card mb-3 dropdown-search-card" style="max-width: 800px;">
@@ -204,6 +202,5 @@ function createSeachDropdownHtmlList(array) {
                 </div></a></li>`;
         // html += '<li><img href="https://image.tmdb.org/t/p/w92' + element.poster_path + '"><a class="dropdown-item" href="#">' + element.title + '</a></li>';
     }
-    console.debug(SEARCHBAR_DROPDOWN_LIST.innerHTML);
     SEARCHBAR_DROPDOWN_LIST.innerHTML = html;
 }
