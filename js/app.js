@@ -191,7 +191,7 @@ async function searchTmdb(SEARCHSTRING) {
 
 function createSeachDropdownHtmlList(array) {
     let html = '';
-
+    console.debug(array);
     for (let element of array) {
         html += '<li><a class="dropdown-item" href="#">' + element + '</a></li>';
     }
