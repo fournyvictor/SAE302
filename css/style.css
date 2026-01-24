@@ -394,3 +394,36 @@ body {
 .search-container input::-webkit-search-results-decoration {
     display: none;
 }
+
+
+
+
+/* ------------ MOBILE ----------------*/
+
+/* Uniquement pour les écrans de moins de 768px de large (mobiles) */
+@media (max-width: 768px) {
+
+    /* Réduit le titre */
+    .dropdown-search-card .card-title {
+        font-size: 0.9rem;
+        margin-bottom: 0.2rem;
+    }
+
+    /* Réduit le texte (date, description) */
+    .dropdown-search-card .card-text {
+        font-size: 0.75rem;
+        margin-bottom: 0;
+    }
+
+    /* Réduit la marge interne de la carte */
+    .dropdown-search-card .card-body {
+        padding: 0.5rem;
+    }
+
+    /* Limite la taille de l'image sur mobile */
+    .dropdown-search-card img {
+        width: 60px;
+        /* Force une largeur petite */
+        height: auto;
+    }
+}
