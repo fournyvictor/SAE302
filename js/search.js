@@ -65,7 +65,7 @@ function createSeachDropdownHtmlList(array) {
                 <div class="card dropdown-search-card">
                     <div class="d-flex">
                         
-                            <img src="https://image.tmdb.org/t/p/w342${element.poster_path}" class="rounded-start" alt="${element.title} poster">
+                            <img src="https://image.tmdb.org/t/p/w154${element.poster_path}" class="rounded-start" alt="${element.title} poster">
                         
                         
                             <div class="card-body">
