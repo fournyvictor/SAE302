@@ -4,6 +4,7 @@
 
 const INSTALL_BUTTON = document.getElementById("install_button");
 const RELOAD_BUTTON = document.getElementById("reload_button");
+const IGNORE_BUTTON = document.getElementById("ignore-button");
 const SEARCHBAR = document.getElementById("searchbar");
 const SEARCHBAR_DROPDOWN = bootstrap.Dropdown.getOrCreateInstance(SEARCHBAR);
 const SEARCHBAR_DROPDOWN_LIST = document.getElementById("searchbar-dropdown-menu-list");
@@ -16,6 +17,7 @@ const INSTALL_MODAL_OBJ = bootstrap.Modal.getOrCreateInstance(INSTALL_MODAL);
 
 INSTALL_BUTTON.addEventListener("click", installPwa);
 RELOAD_BUTTON.addEventListener("click", reloadPwa);
+IGNORE_BUTTON.addEventListener("click", hideInstallModal);
 SEARCHBAR.addEventListener("input", updateSearchBar);
 SEARCHBAR.addEventListener("focus", updateSearchBar);
 SEARCHBAR.addEventListener("blur", deselectSearchBar);
