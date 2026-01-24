@@ -73,14 +73,8 @@ button:disabled {
     width: 100%;
     transition: ease-in-out;
     transition-duration: 200ms;
-
-}
-
-.dropdown-search-card img {
-    width: 60px !important;
-    max-width: none;
-    object-fit: cover;
-    height: auto;
+    height: 100px;
+    overflow: hidden;
 }
 
 .dropdown-menu a {
