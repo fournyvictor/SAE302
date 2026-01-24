@@ -13,7 +13,7 @@ const SEARCH_BUTTON = document.getElementById("searchbtn");
 
 INSTALL_BUTTON.addEventListener("click", installPwa);
 RELOAD_BUTTON.addEventListener("click", reloadPwa);
-SEARCH_BUTTON.addEventListener("click", searchTmdb(SEARCHBAR.value));
+SEARCH_BUTTON.addEventListener("click", searchbutton);
 
 /******************************************************************************/
 /* Global Variable                                                            */
@@ -157,4 +157,7 @@ function searchTmdb(string) {
         .then(res => res.json())
         .then(res => console.log(res))
         .catch(err => console.error(err));
+}
+function searchbutton() {
+    console.log("searchbutton pressed", searchTmdb(SEARCHBAR.value));
 }
