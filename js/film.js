@@ -5,10 +5,6 @@ const LIKE_BUTTON = document.getElementById("like-button");
 const REVIEW_BUTTON = document.getElementById("review-button");
 
 
-LIKE_BUTTON.addEventListener("click", onLikeButtonClick);
-REVIEW_BUTTON.addEventListener("click", onReviewButtonClick);
-
-
 main();
 
 async function main() {
@@ -19,6 +15,8 @@ async function main() {
         console.debug(CAST[0]);
         console.debug(await getFilmData(FILM_ID, CAST));
         makeFilmDisplayHtml(await getFilmData(FILM_ID), CAST);
+        LIKE_BUTTON.addEventListener("click", onLikeButtonClick);
+        REVIEW_BUTTON.addEventListener("click", onReviewButtonClick);
     }
 }
 
