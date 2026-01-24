@@ -159,5 +159,5 @@ function searchTmdb(string) {
         .catch(err => console.error(err));
 }
 function searchbutton() {
-    console.log("searchbutton pressed", searchTmdb(SEARCHBAR.value));
+    console.debug("searchbutton pressed", searchTmdb(SEARCHBAR.value));
 }
