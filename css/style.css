@@ -298,7 +298,7 @@ button:disabled {
     background-image: url('../Misc/icon_book_full.svg');
     transition: ease-in;
     transition-duration: 0.15s;
-
+    cursor: crosshair;
 }
 
 /**************************************/
