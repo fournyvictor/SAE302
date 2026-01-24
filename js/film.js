@@ -31,7 +31,7 @@ async function getFilmData(ID) {
 
 function makeFilmDisplayHtml(DATA) {
     const HTML = `<div class="banner-wrapper position-relative">
-        <div class="backdrop-image" style="background-image: url('https://image.tmdb.org/t/p/w154${DATA.backdrop_path}');"></div>
+        <div class="backdrop-image" style="background-image: url('https://image.tmdb.org/t/p/original${DATA.backdrop_path}');"></div>
             <div class="backdrop-overlay"></div>
         </div>
 
