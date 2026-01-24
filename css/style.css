@@ -286,6 +286,7 @@ button:disabled {
     background-image: url('../Misc/icon_heart_full.svg');
     transition: ease-in;
     transition-duration: 0.15s;
+    cursor: pointer;
 }
 
 /* Picto Livre */
@@ -298,7 +299,7 @@ button:disabled {
     background-image: url('../Misc/icon_book_full.svg');
     transition: ease-in;
     transition-duration: 0.15s;
-    cursor: crosshair;
+    cursor: pointer;
 }
 
 /**************************************/
