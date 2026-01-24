@@ -77,11 +77,11 @@ function makeFilmDisplayHtml(DATA, CAST) {
 
     for (let element of CAST) {
         console.debug("iterating on cast: ", element.name);
-        html = + `<div class="cast-item d-flex align-items-center mb-2">
+        html += `<div class="cast-item d-flex align-items-center mb-2">
                     <span class="cast-name">${CAST.name}</span>
                 </div>`
-    }
-    html = +`</div>
+    };
+    html += `</div>
                         </div>
                 </div>
             </div>
