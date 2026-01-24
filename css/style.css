@@ -289,12 +289,14 @@ button:disabled {
 /* Picto Livre */
 #bouton3 {
     background-image: url('../Misc/icon_book.svg');
-    transition-duration: 0.15s;
+    transition: ease-in;
+    transition-duration: 0.5;
 }
 
 #bouton3:hover {
     background-image: url('../Misc/icon_book_full.svg');
-    transition-duration: 0.15s;
+    transition: ease-in;
+    transition-duration: 0.5;
 
 }
 
