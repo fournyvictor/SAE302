@@ -328,10 +328,17 @@ body {
 .search-container {
     position: absolute;
     top: 25px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 75vw;
+    left: calc(10vh + 70px);
+    width: 0;
+    opacity: 0;
     z-index: 1000;
+    overflow: hidden;
+    transition: width 0.4s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+#search-toggle:checked~.search-container {
+    width: 60vw;
+    opacity: 1;
 }
 
 .search-container input {
@@ -342,6 +349,7 @@ body {
     padding: 5px 15px;
     width: 100%;
     transition: background-color 0.2s, border-color 0.2s;
+    white-space: nowrap;
 }
 
 .search-container input::placeholder {
@@ -357,5 +365,22 @@ body {
 }
 
 #bouton-recherche {
+    position: absolute;
+    top: 15px;
+    left: calc(10vh + 20px);
+    width: 40px;
+    height: 40px;
     background-image: url("../Misc/icon_search.svg");
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 101;
+    transition: background-color 0.2s;
+}
+
+#bouton-recherche:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
