@@ -218,8 +218,8 @@ button:disabled {
 
 /* Au survol, on "déploie" vers le bas */
 .logo:hover {
-    height: 30vh;
-    /* Ajustez selon la hauteur de votre logo long */
+    height: 22.5vh;
+    /* Réduit de 25% (30vh -> 22.5vh) */
 }
 
 .logo img {
