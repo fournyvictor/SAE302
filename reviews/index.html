@@ -26,6 +26,7 @@
     <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
     <script defer src="../bootstrap-5.3.8-dist/js/bootstrap.js"></script>
     <script defer src="../js/reviews.js"></script>
+    <script defer src="../js/search.js"></script>
 </head>
 
 <body id="reviews-body">
@@ -40,6 +41,15 @@
         </div>
         <h1>Mes Critiques</h1>
     </header>
+
+    <div class="search-container">
+        <div class="dropdown">
+            <input type="search" class="form-control" id="searchbar" placeholder="Rechercher..." name="q"
+                autocomplete="off" />
+            <ul class="dropdown-menu" id="searchbar-dropdown-menu-list">
+            </ul>
+        </div>
+    </div>
 
 
 </body>

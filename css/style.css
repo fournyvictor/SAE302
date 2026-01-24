@@ -324,3 +324,34 @@ button:disabled {
 body {
     background-color: #14181c;
 }
+
+.search-container {
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    z-index: 1000;
+}
+
+.search-container input {
+    background-color: #2c3440;
+    color: #aeobc0;
+    border: 1px solid #456;
+    border-radius: 20px;
+    padding: 5px 15px;
+    width: 100%;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.search-container input::placeholder {
+    color: #678;
+}
+
+.search-container input:focus {
+    background-color: #3b4657;
+    color: #fff;
+    border-color: #fff;
+    box-shadow: none;
+    outline: none;
+}
