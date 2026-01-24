@@ -195,8 +195,7 @@ button:disabled {
 .logo {
     opacity: 1;
     position: absolute;
-    transition-duration: 0.2s;
-    transition: ease;
+    transition: opacity 0.3s ease-in-out;
     z-index: 90;
     top: 0;
     /* Coincide avec le haut */

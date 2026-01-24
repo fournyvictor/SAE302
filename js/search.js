@@ -30,8 +30,7 @@ function selectSearchBar() {
     SEARCHBAR.placeholder = "Rechercher...";
 }
 function deselectSearchBar() {
-    LOGO.style.opacity = "1";
-    LOGO.style.pointerEvents = "auto";
+
     setTimeout(resetSearchBar, 200);
 
 }
@@ -40,6 +39,8 @@ function resetSearchBar() {
     SEARCHBAR.style.width = "36px";
     SEARCHBAR.placeholder = "⌕";
     SEARCHBAR.value = "";
+    LOGO.style.opacity = "1";
+    LOGO.style.pointerEvents = "auto";
 }
 
 async function searchTmdb(SEARCHSTRING) {
