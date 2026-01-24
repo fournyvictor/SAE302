@@ -64,12 +64,13 @@ button:disabled {
 }
 
 .dropdown-search-card {
-    width: 75vw;
+    width: 100%;
     transition: ease-in-out;
     transition-duration: 200ms;
 }
 
 .dropdown-menu a {
+    width: 100%;
     text-decoration: none;
     color: inherit;
 }
