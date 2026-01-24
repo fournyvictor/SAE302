@@ -9,7 +9,7 @@
       "purpose": "any maskable"
     },
     {
-      "src": "/favicon/web-app-manifest-512x512.png",
+      "src": "https://webdev.fourny.org/victor/SAE302/favicon/web-app-manifest-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
