@@ -6,6 +6,7 @@ const INSTALL_BUTTON = document.getElementById("install_button");
 const RELOAD_BUTTON = document.getElementById("reload_button");
 const SEARCHBAR = document.getElementById("searchbar");
 const SEARCHBAR_DROPDOWN = bootstrap.Dropdown.getOrCreateInstance(SEARCHBAR);
+const SEARCHBAR_DROPDOWN_LIST = document.getElementById("searchbar-dropdown-menu-list");
 
 /******************************************************************************/
 /* Listeners                                                                  */
@@ -174,4 +175,21 @@ function searchTmdb(SEARCHSTRING) {
         .then(res => res.json())
         .then(res => console.log(res.results))
         .catch(err => console.error(err));
+
+    let array = [];
+
+    for (let element of res.results) {
+        array += element.original_title;
+    }
+    createSeachDropdownHtmlList(array);
+}
+
+function createSeachDropdownHtmlList(array) {
+    let html = '';
+
+    for (let element of array) {
+        html += '<li><a class="dropdown-item" href="#">' + element + '</a></li>';
+    }
+
+    SEARCHBAR_DROPDOWN_LIST.innerHTML = html;
 }
