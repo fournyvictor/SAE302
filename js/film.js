@@ -9,6 +9,14 @@ const DATA_ORIGINAL_TITLE = document.getElementById("data-original-title");
 const DATA_FILM_TAGLINE = document.getElementById("data-film-tagline");
 const DATA_FILM_OVERVIEW = document.getElementById("data-film-overview");
 const CAST_LIST = document.getElementById("cast-list");
+const LIKE_BUTTON = document.getElementById("like-button");
+const REVIEW_BUTTON = document.getElementById("review-button");
+const LIKE_BUTTON_IMAGE = document.getElementById("like-button-image");
+
+
+
+LIKE_BUTTON.addEventListener("click", onLikeButtonClick);
+REVIEW_BUTTON.addEventListener("click", onReviewButtonClick);
 
 let is_movie_liked = false;
 
@@ -24,14 +32,6 @@ async function main() {
         console.debug(CAST[0]);
         console.debug(await getFilmData(FILM_ID, CAST));
         makeFilmDisplayHtml(await getFilmData(FILM_ID), CAST);
-
-        const LIKE_BUTTON = document.getElementById("like-button");
-        const REVIEW_BUTTON = document.getElementById("review-button");
-
-
-
-        LIKE_BUTTON.addEventListener("click", onLikeButtonClick);
-        REVIEW_BUTTON.addEventListener("click", onReviewButtonClick);
     }
 }
 
