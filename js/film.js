@@ -126,3 +126,6 @@ function onLikeButtonClick() {
         db = event.target.result;
     };
 }
+function onReviewButtonClick() {
+
+}
