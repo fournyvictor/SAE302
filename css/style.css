@@ -96,7 +96,7 @@ button:disabled {
 }
 
 .content-overlay {
-    margin-top: -1vh;
+    margin-top: -2vh;
     position: relative;
     z-index: 10;
 }
