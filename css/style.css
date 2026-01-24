@@ -50,4 +50,9 @@ button:disabled {
     overflow: hidden;
 }
 
+.dropdown-menu {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
 /**************************************/
