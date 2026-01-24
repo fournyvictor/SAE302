@@ -1,4 +1,5 @@
-const FILM_ID = get(id);
+const PARAMS = new URLSearchParams(document.location.search);
+const FILM_ID = PARAMS.get("id");
 
 main();
 
