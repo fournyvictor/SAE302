@@ -187,7 +187,7 @@ function createSeachDropdownHtmlList(array) {
     let html = '';
     console.debug(array);
     for (let element of array) {
-        html += `<li>
+        html += `<li><a>
                 <div class="card mb-3" style="max-width: 540px;">
                     <div class="row g-0">
                         <div class="col-md-4">
@@ -201,7 +201,7 @@ function createSeachDropdownHtmlList(array) {
                             </div>
                         </div>
                     </div>
-                </div></li>`
+                </div></a></li>`
         // html += '<li><img href="https://image.tmdb.org/t/p/w92' + element.poster_path + '"><a class="dropdown-item" href="#">' + element.title + '</a></li>';
     }
     console.debug(SEARCHBAR_DROPDOWN_LIST.innerHTML);
