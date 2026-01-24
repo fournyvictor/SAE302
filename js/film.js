@@ -179,10 +179,12 @@ function dbTransactionError(event) {
 }
 function successfullyLiked() {
     console.log(`Film ${FILM_ID} ajouté aux likes !`);
+    LIKE_BUTTON_IMAGE.src = "../Misc/icon_heart_full.svg"
     is_movie_liked = true;
 }
 function successfullyUnLiked() {
     console.log(`Film ${FILM_ID} retiré des likes !`)
+    LIKE_BUTTON_IMAGE.src = "../Misc/icon_heart.svg"
     is_movie_liked = false;
 }
 function onCheckLikedResult(event) {
