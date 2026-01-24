@@ -27,11 +27,14 @@ function selectSearchBar() {
     SEARCHBAR.placeholder = "Rechercher...";
 }
 function deselectSearchBar() {
+    setTimeout(resetSearchBar(), 100);
+
+}
+function resetSearchBar() {
     SEARCHBAR_DROPDOWN.hide();
     SEARCHBAR.style.width = "36px";
     SEARCHBAR.placeholder = "⌕";
     SEARCHBAR.value = "";
-
 }
 
 async function searchTmdb(SEARCHSTRING) {
