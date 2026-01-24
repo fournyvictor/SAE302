@@ -75,7 +75,7 @@ function makeFilmDisplayHtml(DATA, CAST) {
         
                         <div class="cast-scroll-container">`
 
-    for (let element of CAST) {
+    for (let element of CAST.slice(0, 10)) {
         html += `<div class="cast-item d-flex align-items-center mb-2">
                     <span class="cast-name">${element.name}</span>
                 </div>`
