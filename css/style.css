@@ -54,6 +54,7 @@ button:disabled {
     max-height: 80vh;
     width: 75vw;
     overflow-y: auto;
+    background-color: #14181c;
 }
 
 .dropdown-search-card:hover {
@@ -63,6 +64,7 @@ button:disabled {
 }
 
 .dropdown-search-card {
+    width: 100%;
     transition: ease-in-out;
     transition-duration: 200ms;
 }
