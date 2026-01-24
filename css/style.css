@@ -183,6 +183,7 @@ button:disabled {
     margin-top: 10px;
     margin-left: 10px;
     border-radius: 50px;
+    overflow: hidden;
 }
 
 /**************************************/
