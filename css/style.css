@@ -43,6 +43,10 @@ button:disabled {
     display: none;
 }
 
+.annee-card {
+    color: #aeaeae;
+}
+
 .card-text-truncate {
     display: -webkit-box;
     -webkit-line-clamp: 5;

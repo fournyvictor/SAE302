@@ -70,7 +70,7 @@ function createSeachDropdownHtmlList(array) {
                         
                             <div class="card-body">
                                 <h5 class="card-title">${element.title}</h5>
-                                    <p class="card-text"><small class="text-muted">${element.release_date.substring(0, 4)}</small></p>
+                                    <p class="card-text"><small class="anee-card">${element.release_date.substring(0, 4)}</small></p>
                                     <p class="card-text card-text-truncate">${element.overview}</p>
                             
                         </div>
