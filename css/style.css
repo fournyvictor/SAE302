@@ -43,4 +43,8 @@ button:disabled {
     display: none;
 }
 
+.dropdown-list-card:hover {
+    background-color: grey;
+}
+
 /**************************************/
