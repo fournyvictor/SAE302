@@ -39,15 +39,15 @@ function makeFilmDisplayHtml(DATA) {
             <div class="row">
                 <div class="col-md-3">
                     <div class="poster-container">
-                        <img src="poster.jpg" class="img-fluid rounded border border-secondary shadow-lg" alt="Poster">
+                        <img src="https://image.tmdb.org/t/p/w154${DATA.poster_path}" class="img-fluid rounded border border-secondary shadow-lg" alt="Poster">
                     </div>
                 </div>
         
                 <div class="col-md-6 text-white pt-4">
-                    <h1 class="fw-bold display-5">Marty Supreme <span class="text-secondary fw-light">2025</span></h1>
-                    <p class="text-secondary">Directed by <span class="text-white border-bottom">Josh Safdie</span></p>
-                    <p class="mt-4 small-caps text-uppercase tracking-widest text-secondary">Dream Big.</p>
-                    <p class="lead">In 1950s New York, Marty Mauser...</p>
+                    <h1 class="fw-bold display-5">${DATA.title}<span class="text-secondary fw-light">2025</span></h1>
+                    <p class="text-secondary">Directed by <span class="text-white border-bottom">${DATA.title}</span></p>
+                    <p class="mt-4 small-caps text-uppercase tracking-widest text-secondary">${DATA.original_title}</p>
+                    <p class="lead">${DATA.overview}</p>
                 </div>
 
                 <div class="col-md-3 pt-4">
