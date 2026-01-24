@@ -55,4 +55,8 @@ button:disabled {
     overflow-y: auto;
 }
 
+.dropdown-search-card:hover {
+    background-color: grey;
+}
+
 /**************************************/

@@ -188,7 +188,7 @@ function createSeachDropdownHtmlList(array) {
     console.debug(array);
     for (let element of array) {
         html += `<li><a>
-                <div class="card mb-3" style="max-width: 800px;">
+                <div class="card mb-3 dropdown-search-card" style="max-width: 800px;">
                     <div class="row g-0">
                         <div class="col-md-3">
                             <img src="https://image.tmdb.org/t/p/w154${element.poster_path}" class="img-fluid rounded-start" alt="${element.title} poster">
