@@ -19,7 +19,8 @@ const RESSOURCES = [
     "./favicon/site.webmanifest",
     "./favicon/web-app-manifest-192x192.png",
     "./favicon/web-app-manifest-512x512.png",
-    "./js/app.js"
+    "./js/app.js",
+    "./bootstrap-5.3.8-dist"
 ];
 
 /******************************************************************************/
