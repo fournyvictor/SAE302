@@ -273,7 +273,7 @@ button:disabled {
 
 .logo:hover #bouton3 {
     opacity: 1;
-    transition-delay: 0.15s;
+    transition-duration: 0.1s;
 
 }
 
@@ -285,8 +285,7 @@ button:disabled {
 #bouton2:hover {
     background-image: url('../Misc/icon_heart_full.svg');
     transition: ease-in;
-    transition-delay: 0s;
-    transition-duration: 0.15s;
+    transition-duration: 0.1s;
     cursor: pointer;
 }
 
@@ -299,8 +298,7 @@ button:disabled {
 #bouton3:hover {
     background-image: url('../Misc/icon_book_full.svg');
     transition: ease-in;
-    transition-delay: 0s;
-    transition-duration: 0.15s;
+    transition-duration: 0.1s;
     cursor: pointer;
 }
 
