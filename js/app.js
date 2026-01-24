@@ -187,7 +187,7 @@ function createSeachDropdownHtmlList(array) {
     let html = '';
     console.debug(array);
     for (let element of array) {
-        html += `<li><a>
+        html += `<li><a href="https://google.com">
                 <div class="card mb-3 dropdown-search-card" style="max-width: 800px;">
                     <div class="row g-0">
                         <div class="col-md-3">
