@@ -44,7 +44,9 @@ button:disabled {
 }
 
 .card-text-truncate {
-    line-clamp: 4;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
 /**************************************/
