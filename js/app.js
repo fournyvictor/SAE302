@@ -85,6 +85,7 @@ function onAppInstalled() {
 }
 
 function showInstallModal() {
+    console.debug("showing install modal");
     INSTALL_MODAL_OBJ.show();
 }
 
