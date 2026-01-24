@@ -39,7 +39,7 @@ function makeFilmDisplayHtml(DATA) {
             <div class="row">
                 <div class="col-md-3">
                     <div class="poster-container">
-                        <img src="https://image.tmdb.org/t/p/w154${DATA.poster_path}" class="img-fluid rounded border border-secondary shadow-lg" alt="Poster">
+                        <img src="https://image.tmdb.org/t/p/original${DATA.poster_path}" class="img-fluid rounded border border-secondary shadow-lg" alt="Poster">
                     </div>
                 </div>
         
