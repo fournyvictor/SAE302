@@ -58,7 +58,7 @@ button:disabled {
 .dropdown-search-card:hover {
     background-color: grey;
     transition: ease-in-out;
-    transition-duration: 50ms;
+    transition-duration: 200ms;
 }
 
 /**************************************/
