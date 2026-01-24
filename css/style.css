@@ -180,20 +180,36 @@ button:disabled {
 .logo {
     position: absolute;
     z-index: 90;
+    top: 0;
+    /* Coincide avec le haut */
+    left: 0;
     margin-top: 10px;
     margin-left: 10px;
     border-radius: 5px;
+    /* Petit arrondi pour garder la forme rectangulaire si besoin */
     overflow: hidden;
-    max-width: 10vh;
-    max-height: 10vh;
+
     width: 10vh;
+    /* Largeur fixe */
     height: 10vh;
+    /* Hauteur initiale */
+
+    transition: height 0.3s ease-in-out;
+    /* Animation fluide */
+}
+
+/* Au survol, on "déploie" vers le bas */
+.logo:hover {
+    height: 30vh;
+    /* Ajustez selon la hauteur de votre logo long */
 }
 
 .logo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top;
+    /* Important : le haut de l'image reste fixe */
 }
 
 /**************************************/
