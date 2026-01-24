@@ -64,6 +64,8 @@ button:disabled {
 }
 
 .dropdown-search-card {
+    color: white;
+    background-color: #2c3440;
     width: 100%;
     transition: ease-in-out;
     transition-duration: 200ms;
