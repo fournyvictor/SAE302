@@ -66,7 +66,7 @@ function makeFilmDisplayHtml(DATA, CAST) {
                     <h1 class="fw-bold display-5 mb-2">${DATA.title}</h1>
                     
                     <div class="d-flex justify-content-between align-items-center mb-4">
-                        <span class="text-secondary fw-light fs-4">${YEAR}</span>
+                        <span class="text-secondary fw-light display-5">${YEAR}</span>
                         
                         <div class="d-flex gap-2">
                             <button class="btn btn-sm btn-outline-secondary action-btn" data-type="like">
