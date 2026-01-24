@@ -185,7 +185,7 @@ async function searchTmdb(SEARCHSTRING) {
 function createSeachDropdownHtmlList(array) {
     let html = '';
     for (let element of array) {
-        html += `<li><a href="https://google.com">
+        html += `<li><a href="https://webdev.fourny.org/victor/SAE302/film/?id=${element.id}">
                 <div class="card mb-3 dropdown-search-card" style="max-width: 800px;">
                     <div class="row g-0">
                         <div class="col-md-3">
