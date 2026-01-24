@@ -3,11 +3,11 @@ const FILM_ID = PARAMS.get("id");
 
 main();
 
-function main() {
+async function main() {
 
     if (FILM_ID) {
         console.debug(FILM_ID);
-        console.debug(getFilmData(FILM_ID));
+        console.debug(await getFilmData(FILM_ID));
     }
 }
 
@@ -24,5 +24,5 @@ async function getFilmData(ID) {
 
     const RESPONSE = await fetch(`https://api.themoviedb.org/3/movie/${ID}?language=en-US`, options);
     const RESPONSE_JSON = await RESPONSE.json();
-    return await RESPONSE_JSON;
+    return RESPONSE_JSON;
 }
