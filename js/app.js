@@ -8,6 +8,7 @@ const IGNORE_BUTTON = document.getElementById("ignore-button");
 const INSTALL_MODAL = document.getElementById("install-modal");
 const INSTALL_MODAL_OBJ = bootstrap.Modal.getOrCreateInstance(INSTALL_MODAL);
 
+
 /******************************************************************************/
 /* Listeners                                                                  */
 /******************************************************************************/
@@ -15,6 +16,7 @@ const INSTALL_MODAL_OBJ = bootstrap.Modal.getOrCreateInstance(INSTALL_MODAL);
 INSTALL_BUTTON.addEventListener("click", installPwa);
 RELOAD_BUTTON.addEventListener("click", reloadPwa);
 IGNORE_BUTTON.addEventListener("click", hideInstallModal);
+
 
 /******************************************************************************/
 /* Global Variable                                                            */
