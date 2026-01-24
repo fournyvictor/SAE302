@@ -12,7 +12,7 @@ const SEARCHBAR = document.getElementById("searchbar");
 
 INSTALL_BUTTON.addEventListener("click", installPwa);
 RELOAD_BUTTON.addEventListener("click", reloadPwa);
-SEARCHBAR.addEventListener("change", searchTmdb(SEARCHBAR.value));
+SEARCHBAR.addEventListener("keypress", searchTmdb(SEARCHBAR.value));
 
 /******************************************************************************/
 /* Global Variable                                                            */
