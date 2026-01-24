@@ -177,4 +177,8 @@ button:disabled {
     margin-top: 2px;
 }
 
+.logo {
+    position: absolute;
+}
+
 /**************************************/
