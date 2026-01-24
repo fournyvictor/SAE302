@@ -109,4 +109,38 @@ button:disabled {
     background-color: #14181c;
 }
 
+.cast-scroll-container {
+    max-height: 350px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.cast-scroll-container::-webkit-scrollbar {
+    width: 4px;
+}
+
+.cast-scroll-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.cast-scroll-container::-webkit-scrollbar-thumb {
+    background: #445566;
+    border-radius: 10px;
+}
+
+.cast-name {
+    color: #9ab;
+    background: rgba(153, 170, 187, 0.1);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.cast-name:hover {
+    background: rgba(153, 170, 187, 0.2);
+    color: #fff;
+}
+
 /**************************************/
