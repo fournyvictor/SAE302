@@ -285,7 +285,7 @@ button:disabled {
 #bouton2:hover {
     background-image: url('../Misc/icon_heart_full.svg');
     transition: ease-in;
-    transition-duration: 0.5;
+    transition-duration: 0.5s;
 }
 
 /* Picto Livre */
@@ -297,7 +297,7 @@ button:disabled {
 #bouton3:hover {
     background-image: url('../Misc/icon_book_full.svg');
     transition: ease-in;
-    transition-duration: 0.5;
+    transition-duration: 0.5s;
 
 }
 
