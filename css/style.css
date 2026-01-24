@@ -193,6 +193,7 @@ button:disabled {
 }
 
 .logo {
+    display: block;
     position: absolute;
     z-index: 90;
     top: 0;

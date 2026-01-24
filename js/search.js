@@ -1,6 +1,7 @@
 const SEARCHBAR = document.getElementById("searchbar");
 const SEARCHBAR_DROPDOWN = bootstrap.Dropdown.getOrCreateInstance(SEARCHBAR);
 const SEARCHBAR_DROPDOWN_LIST = document.getElementById("searchbar-dropdown-menu-list");
+const LOGO = document.getElementById("logo");
 
 SEARCHBAR.addEventListener("input", updateSearchBar);
 SEARCHBAR.addEventListener("focus", selectSearchBar);
@@ -22,6 +23,7 @@ function updateSearchBar() {
     }
 }
 function selectSearchBar() {
+    LOGO.style.display = "none";
     updateSearchBar();
     SEARCHBAR.style.width = "75vw";
     SEARCHBAR.placeholder = "Rechercher...";
@@ -31,7 +33,7 @@ function deselectSearchBar() {
 
 }
 function resetSearchBar() {
-    //SEARCHBAR_DROPDOWN.hide();
+    SEARCHBAR_DROPDOWN.hide();
     SEARCHBAR.style.width = "36px";
     SEARCHBAR.placeholder = "⌕";
     SEARCHBAR.value = "";
