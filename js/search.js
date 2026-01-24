@@ -27,7 +27,7 @@ function selectSearchBar() {
     SEARCHBAR.placeholder = "Rechercher...";
 }
 function deselectSearchBar() {
-    setTimeout(resetSearchBar(), 100);
+    setTimeout(resetSearchBar(), 1000);
 
 }
 function resetSearchBar() {
