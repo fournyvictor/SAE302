@@ -8,8 +8,9 @@ async function main() {
 
     if (FILM_ID) {
         console.debug(FILM_ID);
-        console.debug(await getFilmData(FILM_ID));
-        makeFilmDisplayHtml(await getFilmData(FILM_ID));
+        const CAST = await getMovieCast(FILM_ID);
+        console.debug(await getFilmData(FILM_ID, CAST));
+        makeFilmDisplayHtml(await getFilmData(FILM_ID, CAST));
     }
 }
 
@@ -29,10 +30,25 @@ async function getFilmData(ID) {
     return RESPONSE_JSON;
 }
 
-function makeFilmDisplayHtml(DATA) {
+async function getMovieCast(ID) {
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YzAwODk3NTQ0ZTUwZTg5N2Y4ZGZhNzlkNzY4YjcxNyIsIm5iZiI6MTY1NjI3ODM4NC4xNTYsInN1YiI6IjYyYjhjZDcwMTdjNDQzMDA2MDRiMjEwOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZNZGW6-VnxqWAMDfqYZYtNRxbdZfLgqcMu3mysVMv-c'
+        }
+    };
+
+    const RESPONSE = await fetch(`https://api.themoviedb.org/3/movie/${ID}/credits?language=en-US`, options);
+    const RESPONSE_JSON = await RESPONSE.json();
+    return RESPONSE_JSON;
+}
+
+function makeFilmDisplayHtml(DATA, CAST) {
     const YEAR = DATA.release_date.substring(0, 4);
     console.debug('year : ', YEAR);
-    const HTML = `<div class="banner-wrapper position-relative">
+
+    let html = `<div class="banner-wrapper position-relative">
         <div class="backdrop-image" style="background-image: url('https://image.tmdb.org/t/p/original${DATA.backdrop_path}');"></div>
             <div class="backdrop-overlay"></div>
         </div>
@@ -56,21 +72,18 @@ function makeFilmDisplayHtml(DATA) {
                     <div class="cast-wrapper">
                         <h6 class="text-uppercase text-secondary border-bottom border-secondary pb-2 mb-3 tracking-widest small">Cast</h6>
         
-                        <div class="cast-scroll-container">
-                            <div class="cast-item d-flex align-items-center mb-2">
-                                <span class="cast-name">Timothée Chalamet</span>
-                            </div>
-                            <div class="cast-item d-flex align-items-center mb-2">
-                                <span class="cast-name">Gwyneth Paltrow</span>
-                            </div>
-                            <div class="cast-item d-flex align-items-center mb-2">
-                                <span class="cast-name">Tyler the Creator</span>
-                            </div>
-                            </div>
+                        <div class="cast-scroll-container">`
+
+    for (let element of CAST) {
+        html = + `<div class="cast-item d-flex align-items-center mb-2">
+                    <span class="cast-name">${CAST.name}</span>
+                </div>`
+    }
+    html = +`</div>
                         </div>
                 </div>
             </div>
         </div>`;
-    FILM_CONTAINER.innerHTML = HTML;
+    FILM_CONTAINER.innerHTML = html;
 
 }
