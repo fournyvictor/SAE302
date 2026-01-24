@@ -23,14 +23,15 @@ function updateSearchBar() {
     }
 }
 function selectSearchBar() {
-    LOGO.style.display = "none";
+    LOGO.style.opacity = "0";
+    LOGO.style.pointerEvents = "none";
     updateSearchBar();
     SEARCHBAR.style.width = "75vw";
     SEARCHBAR.placeholder = "Rechercher...";
 }
 function deselectSearchBar() {
-    LOGO.style.display = "block";
-
+    LOGO.style.opacity = "1";
+    LOGO.style.pointerEvents = "auto";
     setTimeout(resetSearchBar, 200);
 
 }
