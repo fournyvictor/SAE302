@@ -71,8 +71,9 @@ function onCheckLikedResult(resolve, event) {
 }
 
 async function onLikeButtonClick(MOVIE_ID) {
+    const LIKED = await checkIfMovieLiked(MOVIE_ID);
     const REQUEST = indexedDB.open(DB, 1);
-    const LIKED = await checkIfMovieLiked(MOVIE_ID)
+
     REQUEST.onerror = onDBError;
 
     if (LIKED) {
