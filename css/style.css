@@ -451,7 +451,7 @@ body {
     }
 
     .content-overlay {
-        margin-top: -50vh;
+        margin-top: -40vh;
         position: relative;
         z-index: 10;
     }
