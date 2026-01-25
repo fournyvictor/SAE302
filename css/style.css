@@ -445,4 +445,8 @@ body {
         height: auto;
         /* Garde le ratio */
     }
+
+    .backdrop-image {
+        display: none;
+    }
 }
