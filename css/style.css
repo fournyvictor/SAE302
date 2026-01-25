@@ -447,6 +447,12 @@ body {
     }
 
     .backdrop-image {
-        display: none;
+        margin-top: -15vh;
+    }
+
+    .content-overlay {
+        margin-top: -50vh;
+        position: relative;
+        z-index: 10;
     }
 }
