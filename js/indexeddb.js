@@ -142,3 +142,10 @@ function onGetAllLikedMoviesResult(resolve, event) {
 
     resolve(RESULT);
 }
+
+
+/////////// FONCTIONS REVIEW ///////////
+
+function onReviewButtonClick() {
+
+}
