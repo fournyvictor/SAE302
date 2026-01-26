@@ -402,7 +402,9 @@ body {
     display: none;
 }
 
-
+.movie-list-container {
+    margin-top: 20vh;
+}
 
 
 /* ------------ MOBILE ----------------*/
@@ -455,8 +457,4 @@ body {
         position: relative;
         z-index: 10;
     }
-}
-
-.movie-list-container {
-    margin-top: 20vh;
 }
