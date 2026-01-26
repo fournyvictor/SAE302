@@ -32,6 +32,8 @@ async function createMovieListHtml() {
                 </div>
             </div>
         </div>
+        <div class="row g-0 align-items-center">
+        </div>
     </div>`
     }
 
