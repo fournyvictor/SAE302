@@ -47,7 +47,7 @@ function makeFilmDisplayHtml(DATA, CAST) {
         text: `Write a review on FullBoxd about ${DATA.title}`,
         url: `https://webdev.fourny.org/victor/SAE302/film/?id=${DATA.id}`,
     };
-    SHARE_BUTTON.addEventListener("click", shareMovie(shareData));
+    SHARE_BUTTON.addEventListener("click", shareMovie.bind(null, shareData));
     let casthtml = ""
     for (let element of CAST.slice(0, 10)) {
         casthtml += `<div class="cast-item d-flex align-items-center mb-2">
