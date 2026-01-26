@@ -17,11 +17,13 @@ function onDBUgradeNeeded(event) {
     const BDD = event.target.result;
     //creation de likes si non existant
     if (!BDD.objectStoreNames.contains("likes")) {
+        console.debug("Creation db likes");
         BDD.createObjectStore("likes", { keyPath: "filmId" });
     }
     //creation de reviews si non existant
     if (!BDD.objectStoreNames.contains("reviews")) {
         BDD.createObjectStore("reviews", { keyPath: "filmId" });
+        console.debug("creation db reviews");
     }
 }
 function dbTransactionError(resolve, event) {
@@ -49,6 +51,7 @@ function checkIfMovieLiked(MOVIE_ID) {
     });
 }
 function onDBSuccessCheckLike(resolve, MOVIE_ID, event) {
+    console.debug("checklikesuccess");
     const BDD = event.target.result;
 
     const TRANSACTION = BDD.transaction(["likes"], "readonly");
