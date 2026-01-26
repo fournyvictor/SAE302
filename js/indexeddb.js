@@ -153,3 +153,29 @@ function onGetAllLikedMoviesResult(resolve, event) {
 function onReviewButtonClick() {
 
 }
+function getMovieReview(MOVIE_ID) {
+    return new Promise(function (resolve) { //promesse pour pouvoir attendre la fin
+        const REQUEST = indexedDB.open(DB, 2);
+
+        REQUEST.onupgradeneeded = onDBUgradeNeeded;
+        REQUEST.onerror = onDBError;
+        REQUEST.onsuccess = onDBSuccessGetReview.bind(this, resolve, MOVIE_ID);
+
+    });
+}
+function onDBSuccessGetReview(resolve, MOVIE_ID, event) {
+    console.debug("getMovieReview");
+    const BDD = event.target.result;
+
+    const TRANSACTION = BDD.transaction(["reviews"], "readonly");
+    const OBJECTSTORE = TRANSACTION.objectStore("reviews");
+
+    const REQUEST = OBJECTSTORE.get(MOVIE_ID);
+
+    REQUEST.onsuccess = onGetMovieReview.bind(this, resolve);
+    REQUEST.onerror = dbTransactionErrorResolve.bind(this, resolve);
+}
+function onGetMovieReview(resolve, event) {
+    console.debug(event.target.result);
+    resolve(event.target.result);
+}

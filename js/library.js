@@ -30,6 +30,8 @@ async function createMovieListHtml() {
                     <a href="https://webdev.fourny.org/victor/SAE302/film/?id=${element['filmId']}">
                     <button class="btn btn-outline-light btn-sm mt-2" >Voir détails</button></a>
                     <hr class="my-4">
+                    <h5 class="card-title fw-bold">Your review on ${DATA.title}</h5>
+
                     <p class="card-text d-none d-sm-block text-truncate">BONJOUR TEST OVERVIEW REVIEW PAR UTILISATEUR</p>
                 </div>
             </div>
