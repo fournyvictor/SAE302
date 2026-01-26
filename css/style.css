@@ -406,6 +406,14 @@ body {
     margin-top: 20vh;
 }
 
+#share-button {
+    padding-left: -1px;
+}
+
+#like-button {
+    padding-bottom: -1px;
+}
+
 
 /* ------------ MOBILE ----------------*/
 
