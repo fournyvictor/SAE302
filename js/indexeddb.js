@@ -41,7 +41,7 @@ function dbTransactionErrorResolve(resolve, event) {
 
 function checkIfMovieLiked(MOVIE_ID) {
     return new Promise(function (resolve) { //promesse pour pouvoir attendre la fin
-        const REQUEST = indexedDB.open(DB, 2);
+        const REQUEST = indexedDB.open(DB, 3);
 
         REQUEST.onupgradeneeded = onDBUgradeNeeded;
         REQUEST.onerror = onDBError;
@@ -75,7 +75,7 @@ function onCheckLikedResult(resolve, event) {
 
 async function onLikeButtonClick(MOVIE_ID) {
     const LIKED = await checkIfMovieLiked(MOVIE_ID);
-    const REQUEST = indexedDB.open(DB, 2);
+    const REQUEST = indexedDB.open(DB, 3);
 
     REQUEST.onerror = onDBError;
 
@@ -122,7 +122,7 @@ function updateLikePicto(LIKE, MOVIE_ID) {
 }
 function getAllLikedMovies() {
     return new Promise(function (resolve) {
-        const REQUEST = indexedDB.open(DB, 2);
+        const REQUEST = indexedDB.open(DB, 3);
 
         REQUEST.onerror = onDBError;
         REQUEST.onsuccess = onDBSuccessGetAllLikedMovies.bind(this, resolve);
@@ -155,7 +155,7 @@ function onReviewButtonClick() {
 }
 function getMovieReview(MOVIE_ID) {
     return new Promise(function (resolve) { //promesse pour pouvoir attendre la fin
-        const REQUEST = indexedDB.open(DB, 2);
+        const REQUEST = indexedDB.open(DB, 3);
 
         REQUEST.onupgradeneeded = onDBUgradeNeeded;
         REQUEST.onerror = onDBError;
