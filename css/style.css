@@ -402,7 +402,7 @@ body {
     display: none;
 }
 
-.movie-list-container {
+#movie-list-container {
     margin-top: 20vh;
 }
 
