@@ -13,8 +13,7 @@ async function createMovieListHtml() {
     console.debug(ARRAY);
     let html = "";
     for (element of ARRAY) {
-
-        const DATA = getFilmData(element['filmId']);
+        const DATA = await getFilmData(element['filmId']);
         console.debug(DATA);
         const YEAR = DATA.release_date.substring(0, 4);
         html += `<div class="card mb-3 w-100 border-0 bg-transparent text-white">
