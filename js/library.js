@@ -8,8 +8,8 @@ function main() {
 }
 
 
-function createMovieListHtml() {
-
+async function createMovieListHtml() {
+    console.log(await getAllLikedMovies());
 }
 
 
