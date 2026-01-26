@@ -457,6 +457,6 @@ body {
     }
 }
 
-.library-spacer {
-    height: 20vh;
+.movie-list-container {
+    margin-top: 20vh;
 }
