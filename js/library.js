@@ -19,7 +19,7 @@ async function createMovieListHtml() {
         html += `<div class="card mb-3 w-100 border-0 bg-transparent text-white">
         <div class="row g-0 align-items-center">
             <div class="col-4 col-md-2">
-                <img src="https://image.tmdb.org/t/p/w342${DATA.poster_url}..." class="img-fluid rounded" alt="${DATA.title}">
+                <img src="https://image.tmdb.org/t/p/original${DATA.poster_path}..." class="img-fluid rounded" alt="${DATA.title}">
             </div>
 
             <div class="col-8 col-md-10">
