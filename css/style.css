@@ -456,3 +456,7 @@ body {
         z-index: 10;
     }
 }
+
+.library-spacer {
+    height: 20vh;
+}
