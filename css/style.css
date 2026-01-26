@@ -407,11 +407,11 @@ body {
 }
 
 #share-button img {
-    padding-left: -1px;
+    margin-right: 10px;
 }
 
 #like-button img {
-    padding-bottom: -1px;
+    margin-top: 10px;
 }
 
 
