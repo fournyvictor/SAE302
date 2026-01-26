@@ -41,7 +41,7 @@ function dbTransactionErrorResolve(resolve, event) {
 
 function checkIfMovieLiked(MOVIE_ID) {
     return new Promise(function (resolve) { //promesse pour pouvoir attendre la fin
-        const REQUEST = indexedDB.open(DB, 1);
+        const REQUEST = indexedDB.open(DB, 2);
 
         REQUEST.onupgradeneeded = onDBUgradeNeeded;
         REQUEST.onerror = onDBError;
