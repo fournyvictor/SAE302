@@ -12,7 +12,7 @@ async function createMovieListHtml() {
     const ARRAY = await getAllLikedMovies();
     console.debug(ARRAY);
     let html = "";
-    for (element of ARRAY) {
+    for (element of ARRAY.reverse()) {
         const DATA = await getFilmData(element['filmId']);
         console.debug(DATA);
         const YEAR = DATA.release_date.substring(0, 4);
