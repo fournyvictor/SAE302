@@ -15,6 +15,7 @@ async function createMovieListHtml() {
     for (element of ARRAY) {
 
         const DATA = getFilmData(element['filmId']);
+        console.debug(DATA);
         const YEAR = DATA.release_date.substring(0, 4);
         html += `<div class="card mb-3 w-100 border-0 bg-transparent text-white">
         <div class="row g-0 align-items-center">
