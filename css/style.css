@@ -406,11 +406,11 @@ body {
     margin-top: 20vh;
 }
 
-#share-button {
+#share-button img {
     padding-left: -1px;
 }
 
-#like-button {
+#like-button img {
     padding-bottom: -1px;
 }
 
