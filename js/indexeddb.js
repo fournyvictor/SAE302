@@ -75,7 +75,7 @@ function onCheckLikedResult(resolve, event) {
 
 async function onLikeButtonClick(MOVIE_ID) {
     const LIKED = await checkIfMovieLiked(MOVIE_ID);
-    const REQUEST = indexedDB.open(DB, 1);
+    const REQUEST = indexedDB.open(DB, 2);
 
     REQUEST.onerror = onDBError;
 
@@ -122,7 +122,7 @@ function updateLikePicto(LIKE, MOVIE_ID) {
 }
 function getAllLikedMovies() {
     return new Promise(function (resolve) {
-        const REQUEST = indexedDB.open(DB, 1);
+        const REQUEST = indexedDB.open(DB, 2);
 
         REQUEST.onerror = onDBError;
         REQUEST.onsuccess = onDBSuccessGetAllLikedMovies.bind(this, resolve);
