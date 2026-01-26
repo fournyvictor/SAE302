@@ -12,6 +12,7 @@ const CAST_LIST = document.getElementById("cast-list");
 const LIKE_BUTTON = document.getElementById("like-button");
 const REVIEW_BUTTON = document.getElementById("review-button");
 const LIKE_BUTTON_IMAGE = document.getElementById("like-button-image");
+const SHARE_BUTTON = document.getElementById("share-button");
 
 
 LIKE_BUTTON.addEventListener("click", onLikeButtonClick.bind(null, FILM_ID));
@@ -41,6 +42,12 @@ function makeFilmDisplayHtml(DATA, CAST) {
     DATA_ORIGINAL_TITLE.innerHTML = DATA.original_title;
     DATA_FILM_TAGLINE.innerHTML = DATA.tagline;
     DATA_FILM_OVERVIEW.innerHTML = DATA.overview;
+    const shareData = {
+        title: `FullBoxd - ${DATA.title}`,
+        text: `Write a review on FullBoxd about ${DATA.title}`,
+        url: `https://webdev.fourny.org/victor/SAE302/film/?id=${DATA.id}`,
+    };
+    SHARE_BUTTON.addEventListener("click", shareMovie(shareData));
     let casthtml = ""
     for (let element of CAST.slice(0, 10)) {
         casthtml += `<div class="cast-item d-flex align-items-center mb-2">
@@ -56,4 +63,12 @@ function makeFilmDisplayHtml(DATA, CAST) {
     };
     CAST_LIST.innerHTML = casthtml;
 
+}
+async function shareMovie(shareData) {
+    try {
+        await navigator.share(shareData);
+        console.debug("MDN shared successfully");
+    } catch (err) {
+        console.debug(`Error: ${err}`);
+    }
 }
