@@ -9,24 +9,29 @@ function main() {
 
 
 async function createMovieListHtml() {
-    console.log(await getAllLikedMovies());
-}
+    const ARRAY = await getAllLikedMovies();
+    console.debug(ARRAY);
+    let html = "";
+    for (element of ARRAY) {
 
-
-
-`<div class="card mb-3 w-100 border-0 bg-transparent text-white">
+        const DATA = getFilmData(element['filmId']);
+        html += `<div class="card mb-3 w-100 border-0 bg-transparent text-white">
         <div class="row g-0 align-items-center">
             <div class="col-4 col-md-2">
-                <img src="https://image.tmdb.org/t/p/w342/URL_IMAGE..." class="img-fluid rounded" alt="Titre du film">
+                <img src="https://image.tmdb.org/t/p/w342${DATA.poster_url}..." class="img-fluid rounded" alt="${DATA.title}">
             </div>
 
             <div class="col-8 col-md-10">
                 <div class="card-body">
-                    <h5 class="card-title fw-bold">Titre du Film</h5>
-                    <p class="card-text text-secondary mb-1">Année</p>
-                    <p class="card-text d-none d-sm-block text-truncate">Description courte ou synopsis...</p>
+                    <h5 class="card-title fw-bold">${DATA.title}</h5>
+                    <p class="card-text text-secondary mb-1">${DATA.release_date.substring(0, 4)}</p>
+                    <p class="card-text d-none d-sm-block text-truncate">${DATA.overview}</p>
                     <button class="btn btn-outline-light btn-sm mt-2">Voir détails</button>
                 </div>
             </div>
         </div>
     </div>`
+    }
+
+    MOVIE_LIST_CONTAINER.innerHTML = html;
+}
