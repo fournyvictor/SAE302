@@ -519,7 +519,16 @@ body {
 
 /* Review Page Styling Refactor */
 .review-container {
-    max-width: 800px;
+    max-width: 1200px;
+    /* Wider for PC */
+}
+
+/* Force equal height for input group elements */
+.input-group .btn,
+.input-group .form-control {
+    height: 100%;
+    min-height: 38px;
+    /* Bootstrap default fallback */
 }
 
 .review-poster-wrapper {
