@@ -22,7 +22,7 @@ main();
 
 async function main() {
 
-    const IS_LIKED = await checkIfMovieLiked(FILM_ID);
+    const IS_LIKED = await checkIfMovieLiked(parseInt(FILM_ID));
     let FILM;
     console.debug(IS_LIKED);
     if (IS_LIKED) {
