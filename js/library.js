@@ -13,7 +13,7 @@ async function createMovieListHtml() {
     console.debug(ARRAY);
     let html = "";
     //TEMPORAIRE
-    submitMovieReview(268, "BONJOUR CECI EST UNE REVIEW DE BATMAN");
+    //submitMovieReview(268, "BONJOUR CECI EST UNE REVIEW DE BATMAN");
     //TEMPORAIRE
 
     for (element of ARRAY.reverse()) {
@@ -22,7 +22,7 @@ async function createMovieListHtml() {
         const DATA = element['filmData'];
         console.debug(DATA);
         const YEAR = DATA.release_date.substring(0, 4);
-        const REVIEW = await getMovieReview(DATA.id);
+        const REVIEW = await getMovieReview(DATA.id).review;
         if (!REVIEW) {
             reviewHtml = `<p class="card-text d-none d-sm-block text-truncate">You did not write a review about ${DATA.title} yet. </p>
                     <a class="write-review-button" href="https://webdev.fourny.org/victor/SAE302/review/?id=${DATA.id}"><button class="btn btn-outline-light btn-sm mt-2" >Write a review</button></a>`
