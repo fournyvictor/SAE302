@@ -156,11 +156,14 @@ function prepareEditValues(REVIEW) {
     setRating(REVIEW.review.rating);
 }
 async function geoLocation() {
-    const LOCATION = navigator.geolocation.getCurrentPosition();
-    console.debug(LOCATION.coords.latitute);
-    console.debug(LOCATION.coords.longitude);
+    navigator.geolocation.getCurrentPosition(convertCoordinates(pos));
+
 
     //const COORDINATES = 
 
     //LOCATION_INPUT.value = 
+}
+function convertCoordinates(pos) {
+    console.debug(pos.coords.latitute);
+    console.debug(pos.coords.longitude);
 }
