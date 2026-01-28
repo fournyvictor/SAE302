@@ -35,6 +35,7 @@ async function main() {
         REVIEW_BUTTON_IMAGE.id = `${FILM.id}-review-picto`;
         LIKE_BUTTON_IMAGE.id = `${FILM.id}-like-picto`;
         updateLikePicto(IS_LIKED, FILM.id);
+        updateReviewPicto(FILM.id);
         const CAST = await getMovieCast(FILM.id);
         makeFilmDisplayHtml(FILM, CAST);
     }
@@ -78,5 +79,19 @@ async function shareMovie(shareData) {
         console.debug("MDN shared successfully");
     } catch (err) {
         console.debug(`Error: ${err}`);
+    }
+}
+async function updateReviewPicto(FILM_ID) {
+    REVIEW = await getMovieReview(FILM_ID);
+    const ID = MOVIE_ID + "-review-picto";
+    let chemin = "../Misc/icon_book.svg";
+
+    if (REVIEW) {
+        chemin = "../Misc/icon_book_full.svg";
+    }
+    const REVIEWPICTO = document.getElementById(ID);
+    if (REVIEWPICTO) {
+        REVIEWPICTO.src = chemin;
+
     }
 }
