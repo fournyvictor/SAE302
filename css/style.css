@@ -610,3 +610,7 @@ body {
     overflow: hidden;
     max-width: 600px;
 }
+
+.review-movie-card:hover {
+    background-color: #2c3440;
+}

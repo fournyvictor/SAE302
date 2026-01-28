@@ -86,4 +86,5 @@ function createMovieCard(FILM) {
     MOVIE_POSTER.src = `https://image.tmdb.org/t/p/original${FILM.poster_path}`;
     MOVIE_YEAR.innerHTML = YEAR;
     MOVIE_OVERVIEW.innerHTML = FILM.overview;
+
 }
