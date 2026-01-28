@@ -8,7 +8,9 @@ async function main() {
     createTrendingCaroussel();
 }
 async function createTrendingCaroussel() {
+    console.debug("createTrendingCaroussel");
     const MOVIES = await getTrendingMovies();
+    console.debug(MOVIES);
     let html = "";
     for (element of MOVIES) {
         html = + `<a href="./film/?id=${element.id}" class="trending-card">
