@@ -37,11 +37,13 @@ function main() {
 
     if (window.matchMedia("(display-mode: standalone)").matches) {
         console.log("Running as PWA");
+        INSTALL_APP_BTN.classList.add("d-none");
 
         registerServiceWorker();
     }
     else {
         console.log("Running as Web page");
+        INSTALL_APP_BTN.classList.remove("d-none");
 
         window.addEventListener("beforeinstallprompt", onBeforeInstallPrompt);
         window.addEventListener("appinstalled", onAppInstalled);
@@ -80,6 +82,7 @@ async function installPwa() {
 
 function onAppInstalled() {
     console.debug("onAppInstalled()");
+    INSTALL_APP_BTN.classList.add("d-none");
 
     registerServiceWorker();
 }
@@ -143,7 +146,7 @@ function onStateChange(event) {
     if (SERVICE_WORKER.state == "installed" && navigator.serviceWorker.controller) {
         console.log("PWA Updated");
         RELOAD_BUTTON.disabled = false;
-        UPDATE_APP_BTN.disabled = false;
+        UPDATE_APP_BTN.classList.remove("d-none");
     }
 }
 
