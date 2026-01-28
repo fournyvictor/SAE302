@@ -17,6 +17,7 @@ const READ_TEXT = document.getElementById("read-text");
 const READ_STARS = document.getElementById("read-stars");
 const READ_LOCATION = document.getElementById("read-location");
 const LOCATION_INPUT = document.getElementById("location-input");
+const GEO_BUTTON = document.getElementById("geo-button");
 const STAR_1 = document.getElementById("star1");
 const STAR_2 = document.getElementById("star2");
 const STAR_3 = document.getElementById("star3");
@@ -28,6 +29,7 @@ SUBMIT_BUTTON.addEventListener("click", saveReview);
 START_CAM_BUTTON.addEventListener("click", startCamera);
 EDIT_BUTTON.addEventListener("click", toggleEditMode);
 CANCEL_BUTTON.addEventListener("click", toggleEditMode);
+GEO_BUTTON.addEventListener("click", geoLocation);
 
 async function toggleEditMode() {
     console.debug("toggleEditMode");
@@ -152,4 +154,13 @@ function prepareEditValues(REVIEW) {
     REVIEW_TEXT_INPUT.value = REVIEW.review.text;
     LOCATION_INPUT.value = REVIEW.review.location;
     setRating(REVIEW.review.rating);
+}
+async function geoLocation() {
+    const LOCATION = navigator.geolocation.getCurrentPosition();
+    console.debug(LOCATION.coords.latitute);
+    console.debug(LOCATION.coords.longitude);
+
+    //const COORDINATES = 
+
+    //LOCATION_INPUT.value = 
 }
