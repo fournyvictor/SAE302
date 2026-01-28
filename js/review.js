@@ -161,5 +161,7 @@ async function geoLocation() {
 async function convertCoordinates(pos) {
     console.debug(pos.coords.latitude);
     console.debug(pos.coords.longitude);
-    console.debug(await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}`))
+    const RESPONSE = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}`);
+    const RESPONSE_JSON = await RESPONSE.json();
+    console.debug(RESPONSE_JSON);
 }
