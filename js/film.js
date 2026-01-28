@@ -16,7 +16,6 @@ const REVIEW_BUTTON_IMAGE = document.getElementById("review-button-image");
 const SHARE_BUTTON = document.getElementById("share-button");
 
 
-REVIEW_BUTTON.addEventListener("click", onReviewButtonClick);
 
 main();
 
@@ -40,6 +39,7 @@ async function main() {
         updateLikePicto(IS_LIKED, FILM.id);
         const CAST = await getMovieCast(FILM.id);
         makeFilmDisplayHtml(FILM, CAST);
+        REVIEW_BUTTON.href = `https://webdev.fourny.org/victor/SAE302/review/?id=${DATA.id}`
     }
 }
 
