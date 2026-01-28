@@ -14,6 +14,7 @@ const MOVIE_POSTER = document.getElementById("review-movie-poster");
 const MOVIE_YEAR = document.getElementById("review-movie-year");
 const MOVIE_OVERVIEW = document.getElementById("review-movie-overview");
 const READ_TEXT = document.getElementById("read-text");
+const READ_STARS = document.getElementById("read-stars");
 const STAR_1 = document.getElementById("star1");
 const STAR_2 = document.getElementById("star2");
 const STAR_3 = document.getElementById("star3");
@@ -92,10 +93,9 @@ function createMovieCard(FILM) {
 }
 function createReviewReadCard(REVIEW) {
     const RATING = REVIEW.rating;
-
     review_text = REVIEW.review;
     READ_TEXT.innerHTML = review_text
-
+    let starsHtml;
     for (let i = 1; i <= 5; i++) {
         if (i <= RATING) {
             starsHtml += "★";
@@ -103,6 +103,7 @@ function createReviewReadCard(REVIEW) {
             starsHtml += "☆";
         }
     }
+    READ_STARS.innerHTML = starsHtml;
 
 }
 function saveReview() {
