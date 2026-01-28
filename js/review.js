@@ -64,7 +64,7 @@ async function main() {
     if (REVIEW) {
         console.debug("review existante");
 
-        createReviewReadCard(REVIEW);
+        createReviewReadCard(REVIEW.review);
 
         REVIEW_EditView.classList.add("d-none");
         REVIEW_ReadView.classList.remove("d-none");
@@ -96,8 +96,8 @@ function createMovieCard(FILM) {
 }
 function createReviewReadCard(REVIEW) {
     console.debug(REVIEW);
-    const RATING = REVIEW.review.rating;
-    review_text = REVIEW.review.text;
+    const RATING = REVIEW.rating;
+    review_text = REVIEW.text;
     READ_TEXT.innerHTML = review_text
     let starsHtml = "";
     for (let i = 1; i <= 5; i++) {
@@ -113,6 +113,8 @@ function createReviewReadCard(REVIEW) {
 function saveReview() {
     const REVIEW = { rating: getRating(), text: REVIEW_TEXT_INPUT.value, location: LOCATION_INPUT.value, mfw: `${FILM_ID}-mfw` };
     submitMovieReview(FILM_ID, REVIEW);
+    createReviewReadCard(REVIEW);
+    toggleEditMode();
 }
 function getRating() {
     if (STAR_5.checked) { return 5; }
