@@ -414,13 +414,44 @@ body {
 /* ------------ MOBILE ----------------*/
 
 /* Uniquement pour les écrans de moins de 768px de large (mobiles) */
+/* Page Title Styling */
+#page-title {
+    position: absolute;
+    top: 30px;
+    left: 15vh;
+    /* To the right of the logo */
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    z-index: 100;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    /* Let clicks pass through if needed */
+}
+
+/* Mobile adjustments */
 @media (max-width: 768px) {
+
+    /* Existing mobile styles... */
     .dropdown-menu {
         max-height: 40vh;
         width: 100vw;
         overflow-y: auto;
         background-color: #2c3440;
     }
+
+    #page-title {
+        top: 70px;
+        /* Below search bar */
+        left: 0;
+        width: 100%;
+        text-align: center;
+        font-size: 1.2rem;
+    }
+
+    /* ... rest of existing mobile styles */
+
 
     /* Réduit le titre */
     .dropdown-search-card .card-title {

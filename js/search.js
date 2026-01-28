@@ -2,6 +2,7 @@ const SEARCHBAR = document.getElementById("searchbar");
 const SEARCHBAR_DROPDOWN = bootstrap.Dropdown.getOrCreateInstance(SEARCHBAR);
 const SEARCHBAR_DROPDOWN_LIST = document.getElementById("searchbar-dropdown-menu-list");
 const LOGO = document.getElementById("logo");
+const PAGE_TITLE = document.getElementById("page-title");
 
 SEARCHBAR.addEventListener("input", updateSearchBar);
 SEARCHBAR.addEventListener("focus", selectSearchBar);
@@ -25,6 +26,7 @@ function updateSearchBar() {
 function selectSearchBar() {
     LOGO.style.opacity = "0";
     LOGO.style.pointerEvents = "none";
+    if (PAGE_TITLE) PAGE_TITLE.style.opacity = "0";
     updateSearchBar();
     SEARCHBAR.style.width = "75vw";
     SEARCHBAR.placeholder = "Rechercher...";
@@ -41,6 +43,7 @@ function resetSearchBar() {
     SEARCHBAR.value = "";
     LOGO.style.opacity = "1";
     LOGO.style.pointerEvents = "auto";
+    if (PAGE_TITLE) PAGE_TITLE.style.opacity = "1";
 }
 
 async function searchTmdb(SEARCHSTRING) {
