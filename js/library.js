@@ -51,11 +51,12 @@ async function createMovieListHtml() {
                     <h5 class="card-title fw-bold">Your review on ${DATA.title}</h5>
                     ${reviewHtml}
                 </div>
-                <hr class="my-4">
+                
 
             </div>
         </div>
-    </div>`
+    </div>
+    <hr class="my-4">`
     }
 
     MOVIE_LIST_CONTAINER.innerHTML = html;
