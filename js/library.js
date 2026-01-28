@@ -31,7 +31,8 @@ async function createMovieListHtml() {
                     <button class="btn btn-outline-light btn-sm mt-2" >See details</button></a>
                     <hr class="my-4">
                     <h5 class="card-title fw-bold">Your review on ${DATA.title}</h5>
-                    <p class="card-text d-none d-sm-block text-truncate">You did not write a review aubout ${DATA.title} yet. <a class="write-review-button" href="https://webdev.fourny.org/victor/SAE302/review/?id=${element.id}"><button class="btn btn-outline-light btn-sm mt-2" >Write a review</button></a></p>
+                    <p class="card-text d-none d-sm-block text-truncate">You did not write a review aubout ${DATA.title} yet. </p>
+                    <a class="write-review-button" href="https://webdev.fourny.org/victor/SAE302/review/?id=${element.id}"><button class="btn btn-outline-light btn-sm mt-2" >Write a review</button></a>
                 </div>
             </div>
         </div>
