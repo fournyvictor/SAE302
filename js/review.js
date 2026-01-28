@@ -143,7 +143,7 @@ async function getMFWImageFromCache(FILM_ID) {
 
     if (RESPONSE) {
         const IMG = await RESPONSE.blob();
-        IMG_TAG = URL.createObjectURL(IMG);
+        IMG_TAG.src = URL.createObjectURL(IMG);
         IMG_CONTAINER.classList.remove("d-none");
 
     } else { IMG_CONTAINER.classList.add("d-none"); }
