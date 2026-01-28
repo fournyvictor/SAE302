@@ -163,5 +163,5 @@ async function convertCoordinates(pos) {
     console.debug(pos.coords.longitude);
     const RESPONSE = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&format=json`);
     const RESPONSE_JSON = await RESPONSE.json();
-    console.debug(RESPONSE_JSON);
+    LOCATION_INPUT.value = `${RESPONSE_JSON.address.house_number} ${RESPONSE_JSON.address.road}, ${RESPONSE_JSON.address.postcode} ${RESPONSE_JSON.address.municipality}`;
 }
