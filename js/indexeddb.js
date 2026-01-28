@@ -67,9 +67,11 @@ function onCheckLikedResult(resolve, event) {
     const RESULT = event.target.result;
     console.debug("RESULT : ", RESULT);
     if (RESULT) {
+        console.debug("result vaut quelque chose");
         resolve(RESULT.filmData);
     } else {
         resolve(false);
+        console.debug("result ne vaut rien");
     }
 }
 
