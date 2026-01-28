@@ -183,6 +183,7 @@ function onGetMovieReview(resolve, event) {
 // AJOUT D'UNE REVIEW
 
 function submitMovieReview(MOVIE_ID, REVIEW) {
+    console.debug("submitMovieReview");
     return new Promise(function (resolve) {
         const REQUEST = indexedDB.open(DB, DB_VERSION);
 
@@ -193,6 +194,8 @@ function submitMovieReview(MOVIE_ID, REVIEW) {
     })
 }
 function onDBSuccessSubmitReview(resolve, MOVIE_ID, REVIEW, event) {
+    console.debug("onDBSuccessSubmitReview");
+
     const BDD = event.target.result;
 
     const TRANSACTION = BDD.transaction(["reviews"], "readwrite");
@@ -205,6 +208,7 @@ function onDBSuccessSubmitReview(resolve, MOVIE_ID, REVIEW, event) {
     REQUEST.onerror = dbTransactionErrorResolve;
 }
 function onSubmitReview(resolve, MOVIE_ID, event) {
+    console.debug("onDBSuccessSubmitReview");
     console.debug("Succes : ", event.target.result, MOVIE_ID);
     resolve(event.target.result);
 }
