@@ -152,7 +152,7 @@ function onGetAllLikedMoviesResult(resolve, event) {
     resolve(RESULT);
 }
 function trierParDate(a, b) {
-    return new Date(b.addedAt) - new Date(a.addedAt); // delta de temps
+    return new Date(a.addedAt) - new Date(b.addedAt); // delta de temps
 }
 /////////// FONCTIONS REVIEW ///////////
 
