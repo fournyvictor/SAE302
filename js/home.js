@@ -17,5 +17,6 @@ async function createTrendingCaroussel() {
     <img src="https://image.tmdb.org/t/p/w342${element.poster_path}" class="img-fluid" alt="${element.title}">
     </a>`;
     }
+    TRENDING_CONTAINER.innerHTML = html;
 
 }
