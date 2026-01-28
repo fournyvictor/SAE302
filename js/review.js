@@ -3,7 +3,7 @@ const FILM_ID = PARAMS.get("id");
 const INPUT_FIELD = document.getElementById("input-field");
 const SUBMIT_BUTTON = document.getElementById("submit-button");
 
-SUBMIT_BUTTON.addEventListener("click", submitMovieReview.bind(FILM_ID, INPUT_FIELD.value));
+SUBMIT_BUTTON.addEventListener("click", sendReviewToDB);
 
 main();
 async function main() {
@@ -19,5 +19,7 @@ async function main() {
     }
     console.debug(review_text);
 
-
+}
+function sendReviewToDB() {
+    submitMovieReview.bind(FILM_ID, INPUT_FIELD.value);
 }
