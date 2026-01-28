@@ -24,9 +24,17 @@ async function createMovieListHtml() {
         const YEAR = DATA.release_date.substring(0, 4);
         const REVIEW = await getMovieReview(DATA.id);
         let review_text;
+        let starsHtml = "";
         console.debug("REVIEW : ", DATA.id, REVIEW);
         if (REVIEW) {
             review_text = REVIEW.review.text;
+            for (let i = 1; i <= 5; i++) {
+                if (i <= REVIEW.review.rating) {
+                    starsHtml += "★";
+                } else {
+                    starsHtml += "☆";
+                }
+            }
         } else { review_text = false; }
         if (!review_text) {
             reviewHtml = `<p class="card-text card-text-truncate-3">You did not write a review about ${DATA.title} yet. </p>
@@ -59,7 +67,7 @@ async function createMovieListHtml() {
                     
                     <hr class="my-4 d-none d-md-block"> <!-- Separator hidden on mobile if content above is hidden -->
                     
-                    <h5 class="card-title fw-bold">Your review</h5>
+                    <h5 class="card-title fw-bold">Your review <span id="stars-${DATA.id}" class="text-warning ms-2 fs-6">${starsHtml}</span></h5>
                     ${reviewHtml}
                 </div>
             </div>
