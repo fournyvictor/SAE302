@@ -84,7 +84,7 @@ async function shareMovie(shareData) {
 async function updateReviewPicto(FILM_ID) {
     console.debug("updating review picto");
     REVIEW = await getMovieReview(FILM_ID);
-    const ID = MOVIE_ID + "-review-picto";
+    const ID = FILM_ID + "-review-picto";
     let chemin = "../Misc/icon_book.svg";
 
     if (REVIEW) {
