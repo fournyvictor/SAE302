@@ -1,21 +1,67 @@
 const PARAMS = new URLSearchParams(document.location.search);
 const FILM_ID = PARAMS.get("id");
-const INPUT_FIELD = document.getElementById("input-field");
-const SUBMIT_BUTTON = document.getElementById("submit-button");
+const INPUT_FIELD = document.getElementById("review-text-input");
+const SUBMIT_BUTTON = document.getElementById("save-button");
+const START_CAM_BUTTON = document.getElementById("start-cam-button");
+const REVIEW_ReadView = document.getElementById("review-read-view");
+const REVIEW_EditView = document.getElementById("review-edit-view");
+const EDIT_BUTTON = document.getElementById("edit-button");
+const CANCEL_BUTTON = document.getElementById("cancel-button");
+const SNAP_BUTTON = document.getElementById("snap-button");
+const RETAKE_BUTTON = document.getElementById("retake-button");
 
 SUBMIT_BUTTON.addEventListener("click", sendReviewToDB);
+START_CAM_BUTTON.addEventListener("click", startCamera);
+EDIT_BUTTON.addEventListener("click", toggleEditMode);
+CANCEL_BUTTON.addEventListener("click", toggleEditMode);
+
+function toggleEditMode() {
+    console.debug("toggleEditMode");
+    if (REVIEW_EditView.classList.contains("d-none")) {
+        // En mode Lecture -> Passage en mode Edition
+        REVIEW_EditView.classList.remove("d-none");
+        REVIEW_ReadView.classList.add("d-none");
+    } else {
+        // En mode Edition -> Passage en mode Lecture
+        REVIEW_EditView.classList.add("d-none");
+        REVIEW_ReadView.classList.remove("d-none");
+    }
+}
 
 main();
 async function main() {
+    const IS_LIKED = await checkIfMovieLiked(parseInt(FILM_ID));
+    let FILM;
+    console.debug(IS_LIKED);
+    if (IS_LIKED) {
+        FILM = IS_LIKED;
+        console.debug("Données du film lues en DB");
+    } else {
+        console.debug("Données du film lues depuis l'api");
+        FILM = await getFilmData(FILM_ID);
+    }
+
     REVIEW = await getMovieReview(FILM_ID);
     console.debug(REVIEW);
     let review_text;
     if (REVIEW) {
         console.debug("review existante");
         review_text = REVIEW.review;
+
+        // Populate Read View
+        document.getElementById("read-text").innerText = REVIEW.review || "";
+        // TODO: Populate stars, location, mfw
+
+        // Switch to Read Mode
+        REVIEW_EditView.classList.add("d-none");
+        REVIEW_ReadView.classList.remove("d-none");
+
     } else {
         console.debug("review inexistante");
         review_text = null;
+        // Default to Edit Mode (already set in HTML)
+        REVIEW_EditView.classList.remove("d-none");
+        REVIEW_ReadView.classList.add("d-none");
     }
     console.debug(review_text);
 
@@ -23,4 +69,7 @@ async function main() {
 function sendReviewToDB() {
     console.debug("envoi de la review");
     submitMovieReview(FILM_ID, INPUT_FIELD.value);
+}
+function startCamera() {
+    console.debug("starting camera");
 }
