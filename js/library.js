@@ -25,7 +25,7 @@ async function createMovieListHtml() {
         const REVIEW = await getMovieReview(DATA.id);
         let review_text;
         if (REVIEW) {
-            review_text = REVIEW.review;
+            review_text = REVIEW.review.text;
         } else { review_text = false; }
         if (!review_text) {
             reviewHtml = `<p class="card-text card-text-truncate">You did not write a review about ${DATA.title} yet. </p>
@@ -36,23 +36,32 @@ async function createMovieListHtml() {
         }
         html += `<div class="card mb-3 w-100 border-0 bg-transparent text-white">
         <div class="row g-0 align-items-center">
+            
+            <!-- Mobile Title (Visible only on mobile) -->
+            <div class="col-12 d-md-none mb-2">
+                <h5 class="fw-bold">${DATA.title}</h5>
+            </div>
+
             <div class="col-4 col-md-2">
-                <img src="https://image.tmdb.org/t/p/original${DATA.poster_path}..." class="img-fluid rounded" alt="${DATA.title}">
+                <img src="https://image.tmdb.org/t/p/original${DATA.poster_path}" class="img-fluid rounded" alt="${DATA.title}">
             </div>
 
             <div class="col-8 col-md-10">
                 <div class="card-body">
-                    <h5 class="card-title fw-bold">${DATA.title}</h5>
-                    <p class="card-text text-secondary mb-1">${YEAR}</p>
-                    <p class="card-text card-text-truncate-2">${DATA.overview}</p>
-                    <a href="https://webdev.fourny.org/victor/SAE302/film/?id=${DATA.id}">
-                    <button class="btn btn-outline-light btn-sm mt-2" >See details</button></a>
-                    <hr class="my-4">
-                    <h5 class="card-title fw-bold">Your review on ${DATA.title}</h5>
+                    <!-- Desktop Title (Hidden on mobile) -->
+                    <h5 class="card-title fw-bold d-none d-md-block">${DATA.title}</h5>
+                    
+                    <p class="card-text text-secondary mb-1 d-none d-md-block">${YEAR}</p>
+                    <p class="card-text card-text-truncate-2 d-none d-md-block">${DATA.overview}</p>
+                    <a href="../film/?id=${DATA.id}" class="d-none d-md-inline-block">
+                        <button class="btn btn-outline-light btn-sm mt-2">See details</button>
+                    </a>
+                    
+                    <hr class="my-4 d-none d-md-block"> <!-- Separator hidden on mobile if content above is hidden -->
+                    
+                    <h5 class="card-title fw-bold">Your review</h5>
                     ${reviewHtml}
                 </div>
-                
-
             </div>
         </div>
     </div>
