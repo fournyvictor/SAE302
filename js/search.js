@@ -129,7 +129,7 @@ async function getTrendingMovies() {
         }
     };
 
-    const RESPONSE = fetch('https://api.themoviedb.org/3/trending/movie/week?language=en-US', options);
+    const RESPONSE = await fetch('https://api.themoviedb.org/3/trending/movie/week?language=en-US', options);
     const RESPONSE_JSON = await RESPONSE.json();
-    return RESPONSE_JSON;
+    return RESPONSE_JSON.results;
 }
