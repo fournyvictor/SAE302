@@ -7,7 +7,8 @@ const RELOAD_BUTTON = document.getElementById("reload_button");
 const IGNORE_BUTTON = document.getElementById("ignore-button");
 const INSTALL_MODAL = document.getElementById("install-modal");
 const INSTALL_MODAL_OBJ = bootstrap.Modal.getOrCreateInstance(INSTALL_MODAL);
-
+const INSTALL_APP_BTN = document.getElementById("install-app-btn");
+const UPDATE_APP_BTN = document.getElementById("update-app-btn");
 
 /******************************************************************************/
 /* Listeners                                                                  */
@@ -16,7 +17,8 @@ const INSTALL_MODAL_OBJ = bootstrap.Modal.getOrCreateInstance(INSTALL_MODAL);
 INSTALL_BUTTON.addEventListener("click", installPwa);
 RELOAD_BUTTON.addEventListener("click", reloadPwa);
 IGNORE_BUTTON.addEventListener("click", hideInstallModal);
-
+INSTALL_APP_BTN.addEventListener("click", installPwa);
+UPDATE_APP_BTN.addEventListener("click", reloadPwa);
 
 /******************************************************************************/
 /* Global Variable                                                            */
@@ -141,6 +143,7 @@ function onStateChange(event) {
     if (SERVICE_WORKER.state == "installed" && navigator.serviceWorker.controller) {
         console.log("PWA Updated");
         RELOAD_BUTTON.disabled = false;
+        UPDATE_APP_BTN.disabled = false;
     }
 }
 
