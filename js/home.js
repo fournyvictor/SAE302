@@ -5,6 +5,7 @@ const TRENDING_CONTAINER_TODAY = document.getElementById("trending-container-tod
 main();
 
 async function main() {
+    createTrendingCarousselDay();
     createTrendingCaroussel();
 }
 async function createTrendingCaroussel() {
