@@ -126,6 +126,7 @@ function getAllLikedMovies() {
         const REQUEST = indexedDB.open(DB, DB_VERSION);
 
         REQUEST.onerror = onDBError;
+        REQUEST.onupgradeneeded = onDBUgradeNeeded;
         REQUEST.onsuccess = onDBSuccessGetAllLikedMovies.bind(this, resolve);
     }
     );
