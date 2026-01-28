@@ -44,7 +44,7 @@ async function createMovieListHtml() {
                 <div class="card-body">
                     <h5 class="card-title fw-bold">${DATA.title}</h5>
                     <p class="card-text text-secondary mb-1">${YEAR}</p>
-                    <p class="card-text d-none d-sm-block text-truncate">${DATA.overview}</p>
+                    <p class="card-text d-none d-sm-block card-text-truncate">${DATA.overview}</p>
                     <a href="https://webdev.fourny.org/victor/SAE302/film/?id=${DATA.id}">
                     <button class="btn btn-outline-light btn-sm mt-2" >See details</button></a>
                     <hr class="my-4">
