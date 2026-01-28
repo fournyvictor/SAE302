@@ -23,12 +23,14 @@ main();
 async function main() {
 
     const IS_LIKED = await checkIfMovieLiked(FILM_ID);
+    let FILM;
+
     if (IS_LIKED) {
-        const FILM = IS_LIKED;
+        FILM = IS_LIKED;
         console.debug("Données du film lues en DB");
     } else {
         console.debug("Données du film lues depuis l'api");
-        const FILM = await getFilmData(FILM_ID);
+        FILM = await getFilmData(FILM_ID);
     }
 
     LIKE_BUTTON.addEventListener("click", onLikeButtonClick.bind(null, FILM));
