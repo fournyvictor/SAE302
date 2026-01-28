@@ -12,6 +12,7 @@ const RETAKE_BUTTON = document.getElementById("retake-button");
 const MOVIE_TITLE = document.getElementById("review-movie-title");
 const MOVIE_POSTER = document.getElementById("review-movie-poster");
 const MOVIE_YEAR = document.getElementById("review-movie-year");
+const MOVIE_OVERVIEW = document.getElementById("review-movie-overview");
 
 
 SUBMIT_BUTTON.addEventListener("click", sendReviewToDB);
@@ -84,4 +85,5 @@ function createMovieCard(FILM) {
     MOVIE_TITLE.innerHTML = FILM.title;
     MOVIE_POSTER.src = `https://image.tmdb.org/t/p/original${FILM.poster_path}`;
     MOVIE_YEAR.innerHTML = YEAR;
+    MOVIE_OVERVIEW.innerHTML = FILM.overview;
 }
