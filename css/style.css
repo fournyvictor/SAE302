@@ -523,12 +523,18 @@ body {
     /* Wider for PC */
 }
 
-/* Force equal height for input group elements */
+/* Force equal height and remove offsets for input group elements */
+.input-group {
+    align-items: center;
+}
+
 .input-group .btn,
 .input-group .form-control {
     height: 100%;
     min-height: 38px;
     /* Bootstrap default fallback */
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
 }
 
 .review-poster-wrapper {
