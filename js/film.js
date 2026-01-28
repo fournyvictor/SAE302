@@ -12,24 +12,26 @@ const CAST_LIST = document.getElementById("cast-list");
 const LIKE_BUTTON = document.getElementById("like-button");
 const REVIEW_BUTTON = document.getElementById("review-button");
 const LIKE_BUTTON_IMAGE = document.getElementById("like-button-image");
+const REVIEW_BUTTON_IMAGE = document.getElementById("review-button-image");
 const SHARE_BUTTON = document.getElementById("share-button");
 
 
-LIKE_BUTTON.addEventListener("click", onLikeButtonClick.bind(null, FILM_ID));
 REVIEW_BUTTON.addEventListener("click", onReviewButtonClick);
 
 main();
 
 async function main() {
-
-    if (FILM_ID) {
-        LIKE_BUTTON_IMAGE.id = `${FILM_ID}-like-picto`;
-        console.debug(FILM_ID);
-        const IS_LIKED = await checkIfMovieLiked(FILM_ID);
-        updateLikePicto(IS_LIKED, FILM_ID);
-        const CAST = await getMovieCast(FILM_ID);
+    const FILM = await getFilmData(FILM_ID);
+    LIKE_BUTTON.addEventListener("click", onLikeButtonClick.bind(null, FILM));
+    if (FILM) {
+        REVIEW_BUTTON_IMAGE.id = `${FILM.id}-review-picto`;
+        LIKE_BUTTON_IMAGE.id = `${FILM.id}-like-picto`;
+        console.debug(FILM.id);
+        const IS_LIKED = await checkIfMovieLiked(FILM.id);
+        updateLikePicto(IS_LIKED, FILM.id);
+        const CAST = await getMovieCast(FILM.id);
         console.debug(CAST[0]);
-        makeFilmDisplayHtml(await getFilmData(FILM_ID), CAST);
+        makeFilmDisplayHtml(await getFilmData(FILM.id), CAST);
     }
 }
 

@@ -73,41 +73,41 @@ function onCheckLikedResult(resolve, event) {
     }
 }
 
-async function onLikeButtonClick(MOVIE_ID) {
-    const LIKED = await checkIfMovieLiked(MOVIE_ID);
+async function onLikeButtonClick(MOVIE) {
+    const LIKED = await checkIfMovieLiked(MOVIE.id);
     const REQUEST = indexedDB.open(DB, 3);
 
     REQUEST.onerror = onDBError;
 
     if (LIKED) {
-        REQUEST.onsuccess = onDBSuccessLikeRemove.bind(this, MOVIE_ID);
+        REQUEST.onsuccess = onDBSuccessLikeRemove.bind(this, MOVIE);
     } else {
-        REQUEST.onsuccess = onDBSuccessLikeAdd.bind(this, MOVIE_ID);
+        REQUEST.onsuccess = onDBSuccessLikeAdd.bind(this, MOVIE);
     }
 }
-function onDBSuccessLikeAdd(MOVIE_ID, event) {
+function onDBSuccessLikeAdd(MOVIE, event) {
     const BDD = event.target.result;
 
     const TRANSACTION = BDD.transaction(["likes"], "readwrite");
     const OBJECTSTORE = TRANSACTION.objectStore("likes");
 
     // ajout du film aux likes
-    const ENTRY = { filmId: MOVIE_ID, addedAt: new Date() };
+    const ENTRY = { filmId: MOVIE.id, filmData: MOVIE, addedAt: new Date() };
     const REQUEST = OBJECTSTORE.add(ENTRY);
 
-    REQUEST.onsuccess = updateLikePicto.bind(null, true, MOVIE_ID);
+    REQUEST.onsuccess = updateLikePicto.bind(null, true, MOVIE.id);
     REQUEST.onerror = dbTransactionError;
 }
-function onDBSuccessLikeRemove(MOVIE_ID, event) {
+function onDBSuccessLikeRemove(MOVIE, event) {
     const BDD = event.target.result;
 
     const TRANSACTION = BDD.transaction(["likes"], "readwrite");
     const OBJECTSTORE = TRANSACTION.objectStore("likes");
 
     // retirer le film des likes
-    const REQUEST = OBJECTSTORE.delete(MOVIE_ID);
+    const REQUEST = OBJECTSTORE.delete(MOVIE.id);
 
-    REQUEST.onsuccess = updateLikePicto.bind(null, false, MOVIE_ID); //bind plutot que d'executer une fonction a la con vide
+    REQUEST.onsuccess = updateLikePicto.bind(null, false, MOVIE.id); //bind plutot que d'executer une fonction a la con vide
     REQUEST.onerror = dbTransactionError;
 }
 function updateLikePicto(LIKE, MOVIE_ID) {
@@ -147,7 +147,6 @@ function onGetAllLikedMoviesResult(resolve, event) {
     resolve(RESULT);
 }
 
-
 /////////// FONCTIONS REVIEW ///////////
 
 function onReviewButtonClick() {
@@ -178,4 +177,59 @@ function onDBSuccessGetReview(resolve, MOVIE_ID, event) {
 function onGetMovieReview(resolve, event) {
     console.debug(event.target.result);
     resolve(event.target.result);
+}
+
+// AJOUT D'UNE REVIEW
+
+function submitMovieReview(MOVIE_ID, REVIEW) {
+    return new Promise(function (resolve) {
+        const REQUEST = indexedDB.open(DB, 3);
+
+        REQUEST.onupgradeneeded = onDBUgradeNeeded;
+        REQUEST.onerror = onDBError;
+        REQUEST.onsuccess = onDBSuccessSubmitReview.bind(this, resolve, MOVIE_ID, REVIEW);
+
+    })
+}
+function onDBSuccessSubmitReview(resolve, MOVIE_ID, REVIEW, event) {
+    const BDD = event.target.result;
+
+    const TRANSACTION = BDD.transaction(["reviews"], "readwrite");
+    const OBJECTSTORE = TRANSACTION.objectStore("reviews");
+
+    const ENTRY = { filmId: MOVIE_ID, addedAt: new Date(), review: REVIEW };
+    const REQUEST = OBJECTSTORE.add(ENTRY);
+
+    REQUEST.onsuccess = onSubmitReview.bind(this, resolve, MOVIE_ID);
+    REQUEST.onerror = dbTransactionErrorResolve;
+}
+function onSubmitReview(resolve, MOVIE_ID, event) {
+    console.debug("Succes : ", event.target.result, MOVIE_ID);
+    resolve(event.target.result);
+}
+
+// CHECK EXISTENCE REVIEW
+
+function doesReviewExist(MOVIE_ID) {
+    return new Promise(function (resolve) {
+        const REQUEST = indexedDB.open(DB, 3);
+
+        REQUEST.onupgradeneeded = onDBUgradeNeeded;
+        REQUEST.onerror = onDBError;
+        REQUEST.onsuccess = onDBSuccessDoesReviewExist.bind(this, resolve, MOVIE_ID);
+    })
+}
+function onDBSuccessDoesReviewExist(resolve, MOVIE_ID, event) {
+    const BDD = event.target.result;
+
+    const TRANSACTION = BDD.transaction(["reviews"], "readonly");
+    const OBJECTSTORE = TRANSACTION.objectStore("reviews");
+    const REQUEST = OBJECTSTORE.get(MOVIE_ID);
+
+    REQUEST.onsuccess = onReviewExist.bind(this, resolve);
+    REQUEST.onerror = dbTransactionErrorResolve.bind(this, resolve);
+}
+function onReviewExist(resolve, event) {
+    RESULT = event.target.result;
+    if (RESULT) { resolve(true); } else { resolve(false); }
 }
