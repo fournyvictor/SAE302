@@ -13,9 +13,18 @@ async function createMovieListHtml() {
     console.debug(ARRAY);
     let html = "";
     for (element of ARRAY.reverse()) {
-        const DATA = await getFilmData(element['filmId']);
+        let reviewHtml = "";
+        const DATA = element['filmData'];
         console.debug(DATA);
         const YEAR = DATA.release_date.substring(0, 4);
+        const REVIEW = await getMovieReview(DATA.id);
+        if (!REVIEW) {
+            reviewHtml = `<p class="card-text d-none d-sm-block text-truncate">You did not write a review about ${DATA.title} yet. </p>
+                    <a class="write-review-button" href="https://webdev.fourny.org/victor/SAE302/review/?id=${DATA.id}"><button class="btn btn-outline-light btn-sm mt-2" >Write a review</button></a>`
+        } else {
+            reviewHtml = `<p class="card-text d-none d-sm-block text-truncate">${REVIEW}</p>
+                    <a class="write-review-button" href="https://webdev.fourny.org/victor/SAE302/review/?id=${DATA.id}"><button class="btn btn-outline-light btn-sm mt-2" >Edit your review</button></a>`
+        }
         html += `<div class="card mb-3 w-100 border-0 bg-transparent text-white">
         <div class="row g-0 align-items-center">
             <div class="col-4 col-md-2">
@@ -27,12 +36,11 @@ async function createMovieListHtml() {
                     <h5 class="card-title fw-bold">${DATA.title}</h5>
                     <p class="card-text text-secondary mb-1">${YEAR}</p>
                     <p class="card-text d-none d-sm-block text-truncate">${DATA.overview}</p>
-                    <a href="https://webdev.fourny.org/victor/SAE302/film/?id=${element['filmId']}">
+                    <a href="https://webdev.fourny.org/victor/SAE302/film/?id=${DATA.id}">
                     <button class="btn btn-outline-light btn-sm mt-2" >See details</button></a>
                     <hr class="my-4">
                     <h5 class="card-title fw-bold">Your review on ${DATA.title}</h5>
-                    <p class="card-text d-none d-sm-block text-truncate">You did not write a review aubout ${DATA.title} yet. </p>
-                    <a class="write-review-button" href="https://webdev.fourny.org/victor/SAE302/review/?id=${element.id}"><button class="btn btn-outline-light btn-sm mt-2" >Write a review</button></a>
+                    ${reviewHtml}
                 </div>
             </div>
         </div>
