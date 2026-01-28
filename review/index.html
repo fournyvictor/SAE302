@@ -136,13 +136,8 @@
 
                 <div class="card bg-dark border-secondary p-2">
 
-                    <div id="camera-container"
-                        class="position-relative text-center bg-black rounded overflow-hidden camera-container">
-                        <video id="mfw-video" autoplay playsinline class="mfw-video"></video>
-                        <button id="snap-button"
-                            class="btn btn-light rounded-circle position-absolute bottom-0 start-50 translate-middle-x mb-3 snap-button">
-                        </button>
-                    </div>
+                    <!-- Hidden File Input for Native Camera -->
+                    <input type="file" id="mfw-file-input" accept="image/*" capture="user" class="d-none">
 
                     <div id="result-container" class="position-relative text-center d-none">
                         <img id="mfw-preview" src="" class="img-fluid rounded mfw-preview">
@@ -156,8 +151,6 @@
                             a selfie
                         </button>
                     </div>
-
-                    <canvas id="mfw-canvas" class="d-none"></canvas>
                 </div>
             </div>
 

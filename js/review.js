@@ -2,7 +2,6 @@ const PARAMS = new URLSearchParams(document.location.search);
 const FILM_ID = PARAMS.get("id");
 const REVIEW_TEXT_INPUT = document.getElementById("review-text-input");
 const SUBMIT_BUTTON = document.getElementById("save-button");
-const START_CAM_BUTTON = document.getElementById("start-cam-button");
 const REVIEW_ReadView = document.getElementById("review-read-view");
 const REVIEW_EditView = document.getElementById("review-edit-view");
 const EDIT_BUTTON = document.getElementById("edit-button");
@@ -23,13 +22,38 @@ const STAR_2 = document.getElementById("star2");
 const STAR_3 = document.getElementById("star3");
 const STAR_4 = document.getElementById("star4");
 const STAR_5 = document.getElementById("star5");
+const INPUT_CAMERA = document.getElementById("mfw-file-input");
+const PREVIEW_IMG = document.getElementById("mfw-preview");
+const BTN_SELFIE = document.getElementById("start-cam-button");
+const CONTAINER_START = document.getElementById("start-cam-container");
+const CONTAINER_RESULT = document.getElementById("result-container");
 
+let photoToSave = null;
 
 SUBMIT_BUTTON.addEventListener("click", saveReview);
-START_CAM_BUTTON.addEventListener("click", startCamera);
 EDIT_BUTTON.addEventListener("click", toggleEditMode);
 CANCEL_BUTTON.addEventListener("click", toggleEditMode);
 GEO_BUTTON.addEventListener("click", geoLocation);
+BTN_SELFIE.addEventListener("click", openCamera);
+INPUT_CAMERA.addEventListener("change", selectedFile);
+
+
+function openCamera() {
+    INPUT_CAMERA.click();
+}
+
+function selectedFile(event) {
+    const file = event.target.files[0];
+
+    if (file) {
+        photoToSave = file;
+
+        PREVIEW_IMG.src = URL.createObjectURL(file);
+
+        CONTAINER_START.classList.add("d-none");
+        CONTAINER_RESULT.classList.remove("d-none");
+    }
+}
 
 async function toggleEditMode() {
     console.debug("toggleEditMode");
@@ -82,10 +106,6 @@ async function main() {
     createMovieCard(FILM);
     console.debug(review_text);
 
-}
-
-function startCamera() {
-    console.debug("starting camera");
 }
 function createMovieCard(FILM) {
     const YEAR = FILM.release_date.substring(0, 4);
