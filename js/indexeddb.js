@@ -118,8 +118,11 @@ function updateLikePicto(LIKE, MOVIE_ID) {
     if (LIKE) {
         chemin = "../Misc/icon_heart_full.svg";
     }
+    const LIKEPICTO = document.getElementById(ID);
+    if (LIKEPICTO) {
+        LIKEPICTO.src = chemin;
 
-    document.getElementById(ID).src = chemin;
+    }
 }
 function getAllLikedMovies() {
     return new Promise(function (resolve) {
