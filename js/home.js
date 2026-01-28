@@ -5,6 +5,12 @@ const TRENDING_CONTAINER_TODAY = document.getElementById("trending-container-tod
 main();
 
 async function main() {
+    if (!navigator.onLine) {
+        const message = '<p class="text-secondary small italic px-3">Trending movies will be updated once you are back online</p>';
+        TRENDING_CONTAINER.innerHTML = message;
+        TRENDING_CONTAINER_TODAY.innerHTML = message;
+        return;
+    }
     createTrendingCarousselDay();
     createTrendingCaroussel();
 }

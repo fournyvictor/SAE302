@@ -36,8 +36,17 @@ async function main() {
         LIKE_BUTTON_IMAGE.id = `${FILM.id}-like-picto`;
         updateLikePicto(IS_LIKED, FILM.id);
         updateReviewPicto(FILM.id);
-        const CAST = await getMovieCast(FILM.id);
+
+        let CAST = [];
+        if (navigator.onLine) {
+            CAST = await getMovieCast(FILM.id);
+        }
+
         makeFilmDisplayHtml(FILM, CAST);
+
+        if (!navigator.onLine) {
+            CAST_LIST.innerHTML = '<p class="text-secondary small italic">Cast is only available online.</p>';
+        }
     }
 }
 

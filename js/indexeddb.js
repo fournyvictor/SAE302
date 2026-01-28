@@ -96,8 +96,19 @@ async function onDBSuccessLikeAdd(MOVIE, event) {
     const ENTRY = { filmId: MOVIE.id, filmData: MOVIE, addedAt: new Date() };
     const REQUEST = OBJECTSTORE.add(ENTRY);
 
-    REQUEST.onsuccess = updateLikePicto.bind(null, true, MOVIE.id);
+    REQUEST.onsuccess = successfullyAddedLike.bind(null, true, MOVIE);
     REQUEST.onerror = dbTransactionError;
+
+}
+async function successfullyAddedLike(LIKED, MOVIE) {
+    updateLikePicto(LIKED, MOVIE.id);
+    //ajout des images au cache
+    const cache = await caches.open('images-cache');
+
+    await cache.add(`https://image.tmdb.org/t/p/w342${MOVIE.poster_path}`);
+    await cache.add(`https://image.tmdb.org/t/p/original${MOVIE.poster_path}`);
+    await cache.add(`https://image.tmdb.org/t/p/original${MOVIE.backdrop_path}`);
+
 }
 function onDBSuccessLikeRemove(MOVIE, event) {
     const BDD = event.target.result;
@@ -108,8 +119,17 @@ function onDBSuccessLikeRemove(MOVIE, event) {
     // retirer le film des likes
     const REQUEST = OBJECTSTORE.delete(MOVIE.id);
 
-    REQUEST.onsuccess = updateLikePicto.bind(null, false, MOVIE.id); //bind plutot que d'executer une fonction a la con vide
+    REQUEST.onsuccess = successfullyRemovedLike.bind(null, false, MOVIE); //bind plutot que d'executer une fonction a la con vide
     REQUEST.onerror = dbTransactionError;
+}
+async function successfullyRemovedLike(LIKED, MOVIE) {
+    updateLikePicto(LIKED, MOVIE.id);
+    //suppression du cache
+    const cache = await caches.open('images-cache');
+
+    await cache.delete(`https://image.tmdb.org/t/p/w342${MOVIE.poster_path}`);
+    await cache.delete(`https://image.tmdb.org/t/p/original${MOVIE.poster_path}`);
+    await cache.delete(`https://image.tmdb.org/t/p/original${MOVIE.backdrop_path}`);
 }
 function updateLikePicto(LIKE, MOVIE_ID) {
     const ID = MOVIE_ID + "-like-picto";

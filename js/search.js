@@ -16,6 +16,11 @@ SEARCHBAR.addEventListener("blur", deselectSearchBar);
 function updateSearchBar() {
     const SEARCHBAR_STRING = SEARCHBAR.value;
     if (SEARCHBAR_STRING != '') {
+        if (!navigator.onLine) {
+            SEARCHBAR_DROPDOWN_LIST.innerHTML = '<li class="p-3 text-center text-secondary small">Research is only available online</li>';
+            SEARCHBAR_DROPDOWN.show();
+            return;
+        }
         searchTmdb(SEARCHBAR_STRING);
         SEARCHBAR_DROPDOWN.show();
 
