@@ -10,6 +10,7 @@ const CANCEL_BUTTON = document.getElementById("cancel-button");
 const SNAP_BUTTON = document.getElementById("snap-button");
 const RETAKE_BUTTON = document.getElementById("retake-button");
 const MOVIE_TITLE = document.getElementById("review-movie-title");
+const MOVIE_POSTER = document.getElementById("review-movie-poster");
 
 SUBMIT_BUTTON.addEventListener("click", sendReviewToDB);
 START_CAM_BUTTON.addEventListener("click", startCamera);
@@ -77,4 +78,5 @@ function startCamera() {
 }
 function createMovieCard(FILM) {
     MOVIE_TITLE.innerHTML = FILM.title;
+    MOVIE_POSTER.src = `https://image.tmdb.org/t/p/original${FILM.poster_path}`;
 }
