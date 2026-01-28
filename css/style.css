@@ -516,3 +516,49 @@ body {
     font-weight: bold;
     letter-spacing: 1px;
 }
+
+/* Review Page Styling Refactor */
+.review-container {
+    max-width: 800px;
+}
+
+.review-poster-wrapper {
+    width: 100px;
+    flex-shrink: 0;
+}
+
+.review-read-text {
+    white-space: pre-wrap;
+}
+
+.review-mfw-img {
+    max-height: 300px;
+}
+
+.camera-container {
+    height: 300px;
+    display: none;
+}
+
+.mfw-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1);
+}
+
+.snap-button {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(0, 0, 0, 0.2);
+}
+
+.mfw-preview {
+    max-height: 300px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.start-cam-icon {
+    width: 20px;
+}
