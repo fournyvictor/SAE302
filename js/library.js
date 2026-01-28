@@ -24,6 +24,7 @@ async function createMovieListHtml() {
         const YEAR = DATA.release_date.substring(0, 4);
         const REVIEW = await getMovieReview(DATA.id);
         let review_text;
+        console.debug("REVIEW : ", REVIEW);
         if (REVIEW) {
             review_text = REVIEW.review.text;
         } else { review_text = false; }
