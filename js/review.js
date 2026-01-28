@@ -23,7 +23,7 @@ const STAR_4 = document.getElementById("star4");
 const STAR_5 = document.getElementById("star5");
 
 
-SUBMIT_BUTTON.addEventListener("click", sendReviewToDB);
+SUBMIT_BUTTON.addEventListener("click", saveReview);
 START_CAM_BUTTON.addEventListener("click", startCamera);
 EDIT_BUTTON.addEventListener("click", toggleEditMode);
 CANCEL_BUTTON.addEventListener("click", toggleEditMode);
@@ -76,10 +76,7 @@ async function main() {
     console.debug(review_text);
 
 }
-function sendReviewToDB(REVIEW) {
-    console.debug("envoi de la review");
 
-}
 function startCamera() {
     console.debug("starting camera");
 }
