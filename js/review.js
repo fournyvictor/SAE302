@@ -1,6 +1,6 @@
 const PARAMS = new URLSearchParams(document.location.search);
 const FILM_ID = PARAMS.get("id");
-const INPUT_FIELD = document.getElementById("review-text-input");
+const REVIEW_TEXT_INPUT = document.getElementById("review-text-input");
 const SUBMIT_BUTTON = document.getElementById("save-button");
 const START_CAM_BUTTON = document.getElementById("start-cam-button");
 const REVIEW_ReadView = document.getElementById("review-read-view");
@@ -14,6 +14,11 @@ const MOVIE_POSTER = document.getElementById("review-movie-poster");
 const MOVIE_YEAR = document.getElementById("review-movie-year");
 const MOVIE_OVERVIEW = document.getElementById("review-movie-overview");
 const READ_TEXT = document.getElementById("read-text");
+const STAR_1 = document.getElementById("star1");
+const STAR_2 = document.getElementById("star2");
+const STAR_3 = document.getElementById("star3");
+const STAR_4 = document.getElementById("star4");
+const STAR_5 = document.getElementById("star5");
 
 
 SUBMIT_BUTTON.addEventListener("click", sendReviewToDB);
@@ -52,10 +57,9 @@ async function main() {
     let review_text;
     if (REVIEW) {
         console.debug("review existante");
-        review_text = REVIEW.review;
-        READ_TEXT.innerHTML = review_text
 
-        // Switch to Read Mode
+        createReviewReadCard(REVIEW);
+
         REVIEW_EditView.classList.add("d-none");
         REVIEW_ReadView.classList.remove("d-none");
 
@@ -70,9 +74,9 @@ async function main() {
     console.debug(review_text);
 
 }
-function sendReviewToDB() {
+function sendReviewToDB(REVIEW) {
     console.debug("envoi de la review");
-    submitMovieReview(FILM_ID, INPUT_FIELD.value);
+    submitMovieReview(FILM_ID, REVIEW);
 }
 function startCamera() {
     console.debug("starting camera");
@@ -85,4 +89,32 @@ function createMovieCard(FILM) {
     MOVIE_YEAR.innerHTML = YEAR;
     MOVIE_OVERVIEW.innerHTML = FILM.overview;
 
+}
+function createReviewReadCard(REVIEW) {
+    const RATING = REVIEW.rating;
+
+    review_text = REVIEW.review;
+    READ_TEXT.innerHTML = review_text
+
+    for (let i = 1; i <= 5; i++) {
+        if (i <= RATING) {
+            starsHtml += "★";
+        } else {
+            starsHtml += "☆";
+        }
+    }
+
+}
+function saveReview() {
+    const SUBMIT_REVIEW_TEXT = REVIEW_TEXT_INPUT.value;
+    const REVIEW_DATA = { rating: getRating() };
+    const REVIEW = { filmId: MOVIE_ID, addedAt: new Date(), review: REVIEW };
+}
+function getRating() {
+    if (STAR_5.checked) { return 5; }
+    if (STAR_4.checked) { return 4; }
+    if (STAR_3.checked) { return 3; }
+    if (STAR_2.checked) { return 2; }
+    if (STAR_1.checked) { return 1; }
+    return 0;
 }

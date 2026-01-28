@@ -113,10 +113,17 @@
                     placeholder="Write your thoughts here..."></textarea>
             </div>
 
-            <div class="form-check form-switch mb-4">
-                <input class="form-check-input" type="checkbox" id="location-toggle">
-                <label class="form-check-label text-secondary" for="location-toggle">Add my location</label>
-                <div id="location-display" class="small text-info fst-italic mt-1 d-none">Locating...</div>
+            <div class="mb-4">
+                <label for="location-input" class="form-label text-secondary small text-uppercase fw-bold">WATCHING
+                    PLACE</label>
+                <div class="input-group">
+                    <input type="text" class="form-control bg-dark text-white border-secondary" id="location-input"
+                        placeholder="e.g. Paris, France">
+                    <button class="btn btn-outline-secondary text-white" type="button" id="geo-button">
+                        <span class="small">Use my current location</span>
+                    </button>
+                </div>
+                <div id="location-status" class="small text-info fst-italic mt-1 d-none">Locating...</div>
             </div>
 
             <div class="mb-4">
