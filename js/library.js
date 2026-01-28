@@ -44,7 +44,9 @@ async function createMovieListHtml() {
             </div>
 
             <div class="col-4 col-md-2">
-                <img src="https://image.tmdb.org/t/p/original${DATA.poster_path}" class="img-fluid rounded" alt="${DATA.title}">
+                <a href="../film/?id=${DATA.id}">
+                    <img src="https://image.tmdb.org/t/p/original${DATA.poster_path}" class="img-fluid rounded" alt="${DATA.title}">
+                </a>
             </div>
 
             <div class="col-8 col-md-10">

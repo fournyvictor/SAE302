@@ -173,7 +173,7 @@ function onDBSuccessGetReview(resolve, MOVIE_ID, event) {
     const TRANSACTION = BDD.transaction(["reviews"], "readonly");
     const OBJECTSTORE = TRANSACTION.objectStore("reviews");
 
-    const REQUEST = OBJECTSTORE.get(MOVIE_ID);
+    const REQUEST = OBJECTSTORE.get(parseInt(MOVIE_ID));
 
     REQUEST.onsuccess = onGetMovieReview.bind(this, resolve);
     REQUEST.onerror = dbTransactionErrorResolve.bind(this, resolve);
@@ -214,30 +214,4 @@ function onSubmitReview(resolve, MOVIE_ID, event) {
     console.debug("onDBSuccessSubmitReview");
     console.debug("Succes : ", event.target.result, MOVIE_ID);
     resolve(event.target.result);
-}
-
-// CHECK EXISTENCE REVIEW OBSOLETE
-
-function doesReviewExist(MOVIE_ID) {
-    return new Promise(function (resolve) {
-        const REQUEST = indexedDB.open(DB, DB_VERSION);
-
-        REQUEST.onupgradeneeded = onDBUgradeNeeded;
-        REQUEST.onerror = onDBError;
-        REQUEST.onsuccess = onDBSuccessDoesReviewExist.bind(this, resolve, MOVIE_ID);
-    })
-}
-function onDBSuccessDoesReviewExist(resolve, MOVIE_ID, event) {
-    const BDD = event.target.result;
-
-    const TRANSACTION = BDD.transaction(["reviews"], "readonly");
-    const OBJECTSTORE = TRANSACTION.objectStore("reviews");
-    const REQUEST = OBJECTSTORE.get(MOVIE_ID);
-
-    REQUEST.onsuccess = onReviewExist.bind(this, resolve);
-    REQUEST.onerror = dbTransactionErrorResolve.bind(this, resolve);
-}
-function onReviewExist(resolve, event) {
-    RESULT = event.target.result;
-    if (RESULT) { resolve(true); } else { resolve(false); }
 }
