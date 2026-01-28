@@ -472,3 +472,9 @@ body {
         font-size: 0.75rem;
     }
 }
+
+/* Separator Visibility */
+#movie-list-container hr {
+    opacity: 1;
+    border-color: #445566;
+}
