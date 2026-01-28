@@ -6,7 +6,7 @@
 // CONSTANTES 
 
 const DB = "FullBoxdDB";
-
+const DB_VERSION = 4;
 
 // FONCTIONS GENERALES
 
@@ -41,7 +41,7 @@ function dbTransactionErrorResolve(resolve, event) {
 
 function checkIfMovieLiked(MOVIE_ID) {
     return new Promise(function (resolve) { //promesse pour pouvoir attendre la fin
-        const REQUEST = indexedDB.open(DB, 3);
+        const REQUEST = indexedDB.open(DB, DB_VERSION);
 
         REQUEST.onupgradeneeded = onDBUgradeNeeded;
         REQUEST.onerror = onDBError;
@@ -77,7 +77,7 @@ function onCheckLikedResult(resolve, event) {
 
 async function onLikeButtonClick(MOVIE) {
     const LIKED = await checkIfMovieLiked(MOVIE.id);
-    const REQUEST = indexedDB.open(DB, 3);
+    const REQUEST = indexedDB.open(DB, DB_VERSION);
 
     REQUEST.onerror = onDBError;
 
@@ -123,7 +123,7 @@ function updateLikePicto(LIKE, MOVIE_ID) {
 }
 function getAllLikedMovies() {
     return new Promise(function (resolve) {
-        const REQUEST = indexedDB.open(DB, 3);
+        const REQUEST = indexedDB.open(DB, DB_VERSION);
 
         REQUEST.onerror = onDBError;
         REQUEST.onsuccess = onDBSuccessGetAllLikedMovies.bind(this, resolve);
@@ -157,7 +157,7 @@ function onReviewButtonClick() {
 }
 function getMovieReview(MOVIE_ID) {
     return new Promise(function (resolve) { //promesse pour pouvoir attendre la fin
-        const REQUEST = indexedDB.open(DB, 3);
+        const REQUEST = indexedDB.open(DB, DB_VERSION);
 
         REQUEST.onupgradeneeded = onDBUgradeNeeded;
         REQUEST.onerror = onDBError;
@@ -186,7 +186,7 @@ function onGetMovieReview(resolve, event) {
 
 function submitMovieReview(MOVIE_ID, REVIEW) {
     return new Promise(function (resolve) {
-        const REQUEST = indexedDB.open(DB, 3);
+        const REQUEST = indexedDB.open(DB, DB_VERSION);
 
         REQUEST.onupgradeneeded = onDBUgradeNeeded;
         REQUEST.onerror = onDBError;
@@ -215,7 +215,7 @@ function onSubmitReview(resolve, MOVIE_ID, event) {
 
 function doesReviewExist(MOVIE_ID) {
     return new Promise(function (resolve) {
-        const REQUEST = indexedDB.open(DB, 3);
+        const REQUEST = indexedDB.open(DB, DB_VERSION);
 
         REQUEST.onupgradeneeded = onDBUgradeNeeded;
         REQUEST.onerror = onDBError;
