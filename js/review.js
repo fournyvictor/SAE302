@@ -78,7 +78,7 @@ async function main() {
 }
 function sendReviewToDB(REVIEW) {
     console.debug("envoi de la review");
-    submitMovieReview(FILM_ID, REVIEW);
+
 }
 function startCamera() {
     console.debug("starting camera");
@@ -109,8 +109,8 @@ function createReviewReadCard(REVIEW) {
 
 }
 function saveReview() {
-    const REVIEW_DATA = { rating: getRating(), text: REVIEW_TEXT_INPUT.value, location: LOCATION_INPUT.value };
-    const REVIEW = { filmId: MOVIE_ID, addedAt: new Date(), review: REVIEW_DATA };
+    const REVIEW = { rating: getRating(), text: REVIEW_TEXT_INPUT.value, location: LOCATION_INPUT.value, mfw: `${FILM_ID}-mfw` };
+    submitMovieReview(FILM_ID, REVIEW);
 }
 function getRating() {
     if (STAR_5.checked) { return 5; }
