@@ -32,7 +32,7 @@ async function createMovieListHtml() {
                     <hr class="my-4">
                     <h5 class="card-title fw-bold">Your review on ${DATA.title}</h5>
 
-                    <p class="card-text d-none d-sm-block text-truncate">BONJOUR TEST OVERVIEW REVIEW PAR UTILISATEUR</p>
+                    <p class="card-text d-none d-sm-block text-truncate">You did not write a review yet. <a>Write a review</a></p>
                 </div>
             </div>
         </div>
