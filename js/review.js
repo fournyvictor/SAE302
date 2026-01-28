@@ -15,6 +15,7 @@ const MOVIE_YEAR = document.getElementById("review-movie-year");
 const MOVIE_OVERVIEW = document.getElementById("review-movie-overview");
 const READ_TEXT = document.getElementById("read-text");
 const READ_STARS = document.getElementById("read-stars");
+const READ_LOCATION = document.getElementById("read-location");
 const LOCATION_INPUT = document.getElementById("location-input");
 const STAR_1 = document.getElementById("star1");
 const STAR_2 = document.getElementById("star2");
@@ -108,6 +109,7 @@ function createReviewReadCard(REVIEW) {
         }
     }
     READ_STARS.innerHTML = starsHtml;
+    READ_LOCATION.innerHTML = REVIEW.location;
 
 }
 function saveReview() {
