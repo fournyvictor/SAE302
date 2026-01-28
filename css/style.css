@@ -286,7 +286,6 @@ button:disabled {
     background-position: center;
     background-size: 40%;
     /* Taille du picto */
-    margin-top: 7vh;
 }
 
 /* Apparition au survol du parent (.logo) */
