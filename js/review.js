@@ -28,12 +28,16 @@ START_CAM_BUTTON.addEventListener("click", startCamera);
 EDIT_BUTTON.addEventListener("click", toggleEditMode);
 CANCEL_BUTTON.addEventListener("click", toggleEditMode);
 
-function toggleEditMode() {
+async function toggleEditMode() {
     console.debug("toggleEditMode");
     if (REVIEW_EditView.classList.contains("d-none")) {
         // En mode Lecture -> Passage en mode Edition
         REVIEW_EditView.classList.remove("d-none");
         REVIEW_ReadView.classList.add("d-none");
+        const REVIEW = await getMovieReview(FILM_ID);
+        if (REVIEW) {
+            prepareEditValues(REVIEW);
+        }
     } else {
         // En mode Edition -> Passage en mode Lecture
         REVIEW_EditView.classList.add("d-none");
@@ -117,4 +121,31 @@ function getRating() {
     if (STAR_2.checked) { return 2; }
     if (STAR_1.checked) { return 1; }
     return 0;
+}
+function setRating(VALUE) {
+    switch (VALUE) {
+        case 1:
+            STAR_1.checked = true;
+            break;
+        case 2:
+            STAR_2.checked = true;
+            break;
+        case 3:
+            STAR_3.checked = true;
+            break;
+        case 4:
+            STAR_4.checked = true;
+            break;
+        case 5:
+            STAR_5.checked = true;
+            break;
+        default:
+            break;
+    }
+
+}
+function prepareEditValues(REVIEW) {
+    REVIEW_TEXT_INPUT.value = REVIEW.review.text;
+    LOCATION_INPUT.value = REVIEW.review.location;
+    setRating(REVIEW.review.rating);
 }
