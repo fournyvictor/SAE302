@@ -202,10 +202,10 @@ function onDBSuccessSubmitReview(resolve, MOVIE_ID, REVIEW, event) {
     const OBJECTSTORE = TRANSACTION.objectStore("reviews");
 
     const ENTRY = { filmId: MOVIE_ID, addedAt: new Date(), review: REVIEW };
-    const REQUEST = OBJECTSTORE.add(ENTRY);
+    const REQUEST = OBJECTSTORE.put(ENTRY); //écraser si déjà existante
 
     REQUEST.onsuccess = onSubmitReview.bind(this, resolve, MOVIE_ID);
-    REQUEST.onerror = dbTransactionErrorResolve;
+    REQUEST.onerror = dbTransactionErrorResolve(resolve);
 }
 function onSubmitReview(resolve, MOVIE_ID, event) {
     console.debug("onDBSuccessSubmitReview");
