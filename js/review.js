@@ -79,7 +79,7 @@ function startCamera() {
     console.debug("starting camera");
 }
 function createMovieCard(FILM) {
-    const YEAR = DATA.release_date.substring(0, 4);
+    const YEAR = FILM.release_date.substring(0, 4);
 
     MOVIE_TITLE.innerHTML = FILM.title;
     MOVIE_POSTER.src = `https://image.tmdb.org/t/p/original${FILM.poster_path}`;
