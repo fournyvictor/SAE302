@@ -92,7 +92,7 @@ function onDBSuccessLikeAdd(MOVIE, event) {
     const OBJECTSTORE = TRANSACTION.objectStore("likes");
     const IMAGE = fetch("https://image.tmdb.org/t/p/original" + MOVIE.poster_path);
     console.debug("image : ", IMAGE);
-    const IMAGEB64 =
+    //const IMAGEB64 = 
     // ajout du film aux likes
     const ENTRY = { filmId: MOVIE.id, filmData: MOVIE, addedAt: new Date() };
     const REQUEST = OBJECTSTORE.add(ENTRY);
