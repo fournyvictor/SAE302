@@ -211,7 +211,7 @@ function onSubmitReview(resolve, MOVIE_ID, event) {
     resolve(event.target.result);
 }
 
-// CHECK EXISTENCE REVIEW
+// CHECK EXISTENCE REVIEW OBSOLETE
 
 function doesReviewExist(MOVIE_ID) {
     return new Promise(function (resolve) {

@@ -12,7 +12,12 @@ async function createMovieListHtml() {
     const ARRAY = await getAllLikedMovies();
     console.debug(ARRAY);
     let html = "";
+    //TEMPORAIRE
+    submitMovieReview(268, "BONJOUR CECI EST UNE REVIEW DE BATMAN");
+    //TEMPORAIRE
+
     for (element of ARRAY.reverse()) {
+
         let reviewHtml = "";
         const DATA = element['filmData'];
         console.debug(DATA);
