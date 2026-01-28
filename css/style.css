@@ -648,6 +648,48 @@ body {
     max-width: 600px;
 }
 
+/* Horizontal Scroll Container (Netflix Style) */
+.scrolling-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    /* Smooth scroll on iOS */
+    gap: 1rem;
+    padding-bottom: 1rem;
+    /* Space for scrollbar if visible */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrolling-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrolling-wrapper {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.trending-card {
+    flex: 0 0 auto;
+    /* Don't shrink */
+    width: 160px;
+    /* Fixed width for cards */
+    transition: transform 0.2s;
+}
+
+.trending-card:hover {
+    transform: scale(1.05);
+}
+
+.trending-card img {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
 .review-movie-card {
     background-color: #14181c;
     /* Couleur de fond de la page */
