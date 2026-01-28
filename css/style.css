@@ -486,3 +486,33 @@ body {
     opacity: 1;
     border-color: #445566;
 }
+
+/* Review Page Styles */
+.hidden {
+    display: none !important;
+}
+
+/* Star Rating System */
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    font-size: 2rem;
+    color: #444;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+/* Colorer l'étoile survolée ET toutes celles qui la suivent (grâce au flex-reverse) */
+.star-rating input:checked~label,
+.star-rating label:hover,
+.star-rating label:hover~label {
+    color: #ffc107;
+    /* Bootstrap warning color */
+}
+
+.action-btn-wide {
+    font-weight: bold;
+    letter-spacing: 1px;
+}
