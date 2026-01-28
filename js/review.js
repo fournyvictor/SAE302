@@ -22,5 +22,5 @@ async function main() {
 }
 function sendReviewToDB() {
     console.debug("envoi de la review");
-    submitMovieReview.bind(FILM_ID, INPUT_FIELD.value);
+    submitMovieReview(FILM_ID, INPUT_FIELD.value);
 }
