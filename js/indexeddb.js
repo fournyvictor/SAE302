@@ -6,7 +6,7 @@
 // CONSTANTES 
 
 const DB = "FullBoxdDB";
-const DB_VERSION = 5;
+const DB_VERSION = 6;
 
 // FONCTIONS GENERALES
 
