@@ -157,13 +157,9 @@ function prepareEditValues(REVIEW) {
 }
 async function geoLocation() {
     navigator.geolocation.getCurrentPosition(convertCoordinates);
-
-
-    //const COORDINATES = 
-
-    //LOCATION_INPUT.value = 
 }
-function convertCoordinates(pos) {
-    console.debug(pos.coords.latitute);
+async function convertCoordinates(pos) {
+    console.debug(pos.coords.latitude);
     console.debug(pos.coords.longitude);
+    console.debug(await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}`))
 }
