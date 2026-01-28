@@ -152,9 +152,6 @@ function trierParDate(a, b) {
 }
 /////////// FONCTIONS REVIEW ///////////
 
-function onReviewButtonClick() {
-
-}
 function getMovieReview(MOVIE_ID) {
     return new Promise(function (resolve) { //promesse pour pouvoir attendre la fin
         const REQUEST = indexedDB.open(DB, DB_VERSION);
