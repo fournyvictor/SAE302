@@ -228,13 +228,8 @@ button:disabled {
     height: 10vh;
     /* Hauteur initiale */
 
-    transition: height 0.3s ease-in-out, opacity 0.3s ease;
+    transition: height 0.3s ease-in-out;
     /* Animation fluide */
-}
-
-.logo.searching {
-    opacity: 0;
-    pointer-events: none;
 }
 
 /* Bordure par-dessus l'image via pseudo-élément */
@@ -364,11 +359,6 @@ body {
     z-index: 1000;
     display: flex;
     justify-content: center;
-    transition: width 0.3s ease-in-out;
-}
-
-.search-container.active {
-    width: 75vw;
 }
 
 .search-container input {
@@ -447,10 +437,6 @@ body {
     transition: opacity 0.3s ease;
     pointer-events: none;
     /* Let clicks pass through if needed */
-}
-
-#page-title.searching {
-    opacity: 0;
 }
 
 /* Mobile adjustments */

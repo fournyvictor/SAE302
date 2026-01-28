@@ -30,10 +30,11 @@ function updateSearchBar() {
     }
 }
 function selectSearchBar() {
-    LOGO.classList.add("searching");
-    if (PAGE_TITLE) PAGE_TITLE.classList.add("searching");
+    LOGO.style.opacity = "0";
+    LOGO.style.pointerEvents = "none";
+    if (PAGE_TITLE) PAGE_TITLE.style.opacity = "0";
     updateSearchBar();
-    SEARCHBAR.closest(".search-container").classList.add("active");
+    SEARCHBAR.style.width = "75vw";
     SEARCHBAR.placeholder = "Search...";
 }
 function deselectSearchBar() {
@@ -43,11 +44,12 @@ function deselectSearchBar() {
 }
 function resetSearchBar() {
     SEARCHBAR_DROPDOWN.hide();
-    SEARCHBAR.closest(".search-container").classList.remove("active");
+    SEARCHBAR.style.width = "36px";
     SEARCHBAR.placeholder = "⌕";
     SEARCHBAR.value = "";
-    LOGO.classList.remove("searching");
-    if (PAGE_TITLE) PAGE_TITLE.classList.remove("searching");
+    LOGO.style.opacity = "1";
+    LOGO.style.pointerEvents = "auto";
+    if (PAGE_TITLE) PAGE_TITLE.style.opacity = "1";
 }
 
 async function searchTmdb(SEARCHSTRING) {
