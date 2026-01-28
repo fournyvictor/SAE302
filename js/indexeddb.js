@@ -26,7 +26,7 @@ function onDBUgradeNeeded(event) {
         console.debug("creation db reviews");
     }
 }
-function dbTransactionError(resolve, event) {
+function dbTransactionError(event) {
 
     console.error("erreur de transaction db : ", event.target.error);
 }
@@ -90,7 +90,8 @@ function onDBSuccessLikeAdd(MOVIE, event) {
 
     const TRANSACTION = BDD.transaction(["likes"], "readwrite");
     const OBJECTSTORE = TRANSACTION.objectStore("likes");
-
+    const IMAGE = fetch("https://image.tmdb.org/t/p/original" + MOVIE.poster_path);
+    console.debug(IMAGE);
     // ajout du film aux likes
     const ENTRY = { filmId: MOVIE.id, filmData: MOVIE, addedAt: new Date() };
     const REQUEST = OBJECTSTORE.add(ENTRY);
