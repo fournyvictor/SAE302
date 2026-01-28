@@ -256,6 +256,11 @@ button:disabled {
     /* Réduit pour 2 boutons (Home + Heart) */
 }
 
+/* On réactive les clics une fois déployé */
+.logo:hover .logo-actions {
+    pointer-events: auto;
+}
+
 .logo img {
     width: 100%;
     height: 100%;
@@ -276,6 +281,8 @@ button:disabled {
     flex-direction: column;
     z-index: 92;
     /* Au-dessus de l'image et de la bordure */
+    pointer-events: none;
+    /* Désactive les clics par défaut (pour mobile) */
 }
 
 
@@ -716,9 +723,19 @@ body {
     mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 100%);
 }
 
-/* Fix visibility of placeholders in dark inputs */
-#review-text-input::placeholder,
 #location-input::placeholder {
     color: #abb !important;
     opacity: 0.8;
+}
+
+/* Modal Dark Theme */
+.modal-content {
+    background-color: #14181c;
+    color: white;
+    border: 1px solid #445566;
+}
+
+.modal-header,
+.modal-footer {
+    border-color: #445566;
 }
