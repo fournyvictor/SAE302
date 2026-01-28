@@ -92,8 +92,8 @@ function createMovieCard(FILM) {
 }
 function createReviewReadCard(REVIEW) {
     console.debug(REVIEW);
-    const RATING = REVIEW.rating;
-    review_text = REVIEW.review;
+    const RATING = REVIEW.review.rating;
+    review_text = REVIEW.review.text;
     READ_TEXT.innerHTML = review_text
     let starsHtml = "";
     for (let i = 1; i <= 5; i++) {
