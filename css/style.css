@@ -462,4 +462,13 @@ body {
         position: relative;
         z-index: 10;
     }
+
+    /* Library Page - Mobile Text Size */
+    #movie-list-container .card-title {
+        font-size: 0.9rem;
+    }
+
+    #movie-list-container .card-text {
+        font-size: 0.75rem;
+    }
 }
