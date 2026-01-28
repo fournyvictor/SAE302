@@ -132,7 +132,21 @@ function createReviewReadCard(REVIEW) {
     }
     READ_STARS.innerHTML = starsHtml;
     READ_LOCATION.innerHTML = REVIEW.location;
+    getMFWImageFromCache(FILM_ID);
 
+}
+async function getMFWImageFromCache(FILM_ID) {
+    const CACHE = await caches.open("mfw-cache");
+    const RESPONSE = await CACHE.match("/mfw/" + FILM_ID);
+    const IMG_TAG = document.getElementById("read-mfw-image");
+    const IMG_CONTAINER = document.getElementById("read-mfw-container");
+
+    if (RESPONSE) {
+        const IMG = await RESPONSE.blob();
+        IMG_TAG = URL.createObjectURL(IMG);
+        IMG_CONTAINER.classList.remove("d-none");
+
+    } else { IMG_CONTAINER.classList.add("d-none"); }
 }
 async function saveReview() {
     const REVIEW = { rating: getRating(), text: REVIEW_TEXT_INPUT.value, location: LOCATION_INPUT.value, mfw: `${FILM_ID}-mfw` };
