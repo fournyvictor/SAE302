@@ -86,6 +86,7 @@ function createSeachDropdownHtmlList(array) {
     }
     SEARCHBAR_DROPDOWN_LIST.innerHTML = html;
 }
+
 async function getFilmData(ID) {
 
     const options = {

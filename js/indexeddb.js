@@ -66,11 +66,7 @@ function onDBSuccessCheckLike(resolve, MOVIE_ID, event) {
 function onCheckLikedResult(resolve, event) {
     const RESULT = event.target.result;
 
-    if (RESULT) {
-        resolve(true);
-    } else {
-        resolve(false);
-    }
+    return RESULT.filmData;
 }
 
 async function onLikeButtonClick(MOVIE) {
@@ -142,11 +138,12 @@ function onDBSuccessGetAllLikedMovies(resolve, event) {
 }
 function onGetAllLikedMoviesResult(resolve, event) {
     const RESULT = event.target.result;
-    RESULT.sort((a, b) => new Date(b.addedAt) - new Date(a.addedAt));
-    RESULT.reverse();
+    RESULT.sort(trierParDate); //trier par date
     resolve(RESULT);
 }
-
+function trierParDate(a, b) {
+    return new Date(b.addedAt) - new Date(a.addedAt); // delta de temps
+}
 /////////// FONCTIONS REVIEW ///////////
 
 function onReviewButtonClick() {

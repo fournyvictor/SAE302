@@ -21,17 +21,23 @@ REVIEW_BUTTON.addEventListener("click", onReviewButtonClick);
 main();
 
 async function main() {
-    const FILM = await getFilmData(FILM_ID);
+
+    const IS_LIKED = await checkIfMovieLiked(FILM_ID);
+    if (IS_LIKED) {
+        const FILM = IS_LIKED;
+        console.debug("Données du film lues en DB");
+    } else {
+        console.debug("Données du film lues depuis l'api");
+        const FILM = await getFilmData(FILM_ID);
+    }
+
     LIKE_BUTTON.addEventListener("click", onLikeButtonClick.bind(null, FILM));
     if (FILM) {
         REVIEW_BUTTON_IMAGE.id = `${FILM.id}-review-picto`;
         LIKE_BUTTON_IMAGE.id = `${FILM.id}-like-picto`;
-        console.debug(FILM.id);
-        const IS_LIKED = await checkIfMovieLiked(FILM.id);
         updateLikePicto(IS_LIKED, FILM.id);
         const CAST = await getMovieCast(FILM.id);
-        console.debug(CAST[0]);
-        makeFilmDisplayHtml(await getFilmData(FILM.id), CAST);
+        makeFilmDisplayHtml(FILM, CAST);
     }
 }
 
