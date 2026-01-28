@@ -24,7 +24,7 @@ async function main() {
 
     const IS_LIKED = await checkIfMovieLiked(FILM_ID);
     let FILM;
-
+    console.debug(IS_LIKED);
     if (IS_LIKED) {
         FILM = IS_LIKED;
         console.debug("Données du film lues en DB");
