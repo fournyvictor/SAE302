@@ -134,11 +134,23 @@ function createReviewReadCard(REVIEW) {
     READ_LOCATION.innerHTML = REVIEW.location;
 
 }
-function saveReview() {
+async function saveReview() {
     const REVIEW = { rating: getRating(), text: REVIEW_TEXT_INPUT.value, location: LOCATION_INPUT.value, mfw: `${FILM_ID}-mfw` };
     submitMovieReview(FILM_ID, REVIEW);
+    if (photoToSave) {
+        const cache = await caches.open('mfw-cache');
+
+        const response = new Response(photoToSave, { //reponse http fictive pour que le cache autoriqe le stockage
+            headers: { 'Content-Type': photoToSave.type }
+        });
+        await cache.put(`/mfw/${FILM_ID}`, response); // fausse url de stockage
+    }
+
+
+
     createReviewReadCard(REVIEW);
     toggleEditMode();
+    onLikeButtonClick(await getFilmData(FILM_ID));
 }
 function getRating() {
     if (STAR_5.checked) { return 5; }
