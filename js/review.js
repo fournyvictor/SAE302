@@ -9,6 +9,7 @@ const EDIT_BUTTON = document.getElementById("edit-button");
 const CANCEL_BUTTON = document.getElementById("cancel-button");
 const SNAP_BUTTON = document.getElementById("snap-button");
 const RETAKE_BUTTON = document.getElementById("retake-button");
+const MOVIE_TITLE = document.getElementById("review-movie-title");
 
 SUBMIT_BUTTON.addEventListener("click", sendReviewToDB);
 START_CAM_BUTTON.addEventListener("click", startCamera);
@@ -63,6 +64,7 @@ async function main() {
         REVIEW_EditView.classList.remove("d-none");
         REVIEW_ReadView.classList.add("d-none");
     }
+    createMovieCard(FILM);
     console.debug(review_text);
 
 }
@@ -72,4 +74,7 @@ function sendReviewToDB() {
 }
 function startCamera() {
     console.debug("starting camera");
+}
+function createMovieCard(FILM) {
+    MOVIE_TITLE.innerHTML = FILM.title;
 }
