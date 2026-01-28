@@ -11,28 +11,26 @@ const DB_VERSION = 6;
 // FONCTIONS GENERALES
 
 function onDBError(event) {
-    console.error("Erreur IndexedDB:", event.target.error);
+    console.error("IndexedDB Error:", event.target.error);
 }
 function onDBUgradeNeeded(event) {
     const BDD = event.target.result;
     //creation de likes si non existant
     if (!BDD.objectStoreNames.contains("likes")) {
-        console.debug("Creation db likes");
         BDD.createObjectStore("likes", { keyPath: "filmId" });
     }
     //creation de reviews si non existant
     if (!BDD.objectStoreNames.contains("reviews")) {
         BDD.createObjectStore("reviews", { keyPath: "filmId" });
-        console.debug("creation db reviews");
     }
 }
 function dbTransactionError(event) {
 
-    console.error("erreur de transaction db : ", event.target.error);
+    console.error("DB transaction error: ", event.target.error);
 }
 function dbTransactionErrorResolve(resolve, event) {
     resolve(false);
-    console.error("erreur de transaction db : ", event.target.error);
+    console.error("DB transaction error: ", event.target.error);
 
 }
 
@@ -51,7 +49,6 @@ function checkIfMovieLiked(MOVIE_ID) {
     });
 }
 function onDBSuccessCheckLike(resolve, MOVIE_ID, event) {
-    console.debug("checklikesuccess");
     const BDD = event.target.result;
 
     const TRANSACTION = BDD.transaction(["likes"], "readonly");
@@ -65,13 +62,10 @@ function onDBSuccessCheckLike(resolve, MOVIE_ID, event) {
 }
 function onCheckLikedResult(resolve, event) {
     const RESULT = event.target.result;
-    console.debug("RESULT : ", RESULT);
     if (RESULT) {
-        console.debug("result vaut quelque chose");
         resolve(RESULT.filmData);
     } else {
         resolve(false);
-        console.debug("result ne vaut rien");
     }
 }
 
@@ -89,7 +83,6 @@ async function onLikeButtonClick(MOVIE) {
 }
 async function onDBSuccessLikeAdd(MOVIE, event) {
     const BDD = event.target.result;
-    console.debug("Film ajouté aux likes : ", MOVIE.title);
     const TRANSACTION = BDD.transaction(["likes"], "readwrite");
     const OBJECTSTORE = TRANSACTION.objectStore("likes");
 
@@ -103,11 +96,11 @@ async function onDBSuccessLikeAdd(MOVIE, event) {
 async function successfullyAddedLike(LIKED, MOVIE) {
     updateLikePicto(LIKED, MOVIE.id);
     //ajout des images au cache
-    const cache = await caches.open('images-cache');
+    const CACHE = await caches.open('images-cache');
 
-    await cache.add(`https://image.tmdb.org/t/p/w342${MOVIE.poster_path}`);
-    await cache.add(`https://image.tmdb.org/t/p/original${MOVIE.poster_path}`);
-    await cache.add(`https://image.tmdb.org/t/p/original${MOVIE.backdrop_path}`);
+    await CACHE.add(`https://image.tmdb.org/t/p/w342${MOVIE.poster_path}`);
+    await CACHE.add(`https://image.tmdb.org/t/p/original${MOVIE.poster_path}`);
+    await CACHE.add(`https://image.tmdb.org/t/p/original${MOVIE.backdrop_path}`);
 
 }
 function onDBSuccessLikeRemove(MOVIE, event) {
@@ -125,22 +118,22 @@ function onDBSuccessLikeRemove(MOVIE, event) {
 async function successfullyRemovedLike(LIKED, MOVIE) {
     updateLikePicto(LIKED, MOVIE.id);
     //suppression du cache
-    const cache = await caches.open('images-cache');
+    const CACHE = await caches.open('images-cache');
 
-    await cache.delete(`https://image.tmdb.org/t/p/w342${MOVIE.poster_path}`);
-    await cache.delete(`https://image.tmdb.org/t/p/original${MOVIE.poster_path}`);
-    await cache.delete(`https://image.tmdb.org/t/p/original${MOVIE.backdrop_path}`);
+    await CACHE.delete(`https://image.tmdb.org/t/p/w342${MOVIE.poster_path}`);
+    await CACHE.delete(`https://image.tmdb.org/t/p/original${MOVIE.poster_path}`);
+    await CACHE.delete(`https://image.tmdb.org/t/p/original${MOVIE.backdrop_path}`);
 }
 function updateLikePicto(LIKE, MOVIE_ID) {
     const ID = MOVIE_ID + "-like-picto";
-    let chemin = "../Misc/icon_heart.svg";
+    let path = "../Misc/icon_heart.svg";
 
     if (LIKE) {
-        chemin = "../Misc/icon_heart_full.svg";
+        path = "../Misc/icon_heart_full.svg";
     }
-    const LIKEPICTO = document.getElementById(ID);
-    if (LIKEPICTO) {
-        LIKEPICTO.src = chemin;
+    const LIKE_PICTO = document.getElementById(ID);
+    if (LIKE_PICTO) {
+        LIKE_PICTO.src = path;
 
     }
 }
@@ -187,7 +180,6 @@ function getMovieReview(MOVIE_ID) {
     });
 }
 function onDBSuccessGetReview(resolve, MOVIE_ID, event) {
-    console.debug("getMovieReview");
     const BDD = event.target.result;
 
     const TRANSACTION = BDD.transaction(["reviews"], "readonly");
@@ -199,14 +191,12 @@ function onDBSuccessGetReview(resolve, MOVIE_ID, event) {
     REQUEST.onerror = dbTransactionErrorResolve.bind(this, resolve);
 }
 function onGetMovieReview(resolve, event) {
-    console.debug(event.target.result);
     resolve(event.target.result);
 }
 
 // AJOUT D'UNE REVIEW
 
 function submitMovieReview(MOVIE_ID, REVIEW) {
-    console.debug("submitMovieReview");
     return new Promise(function (resolve) {
         const REQUEST = indexedDB.open(DB, DB_VERSION);
 
@@ -217,7 +207,6 @@ function submitMovieReview(MOVIE_ID, REVIEW) {
     })
 }
 function onDBSuccessSubmitReview(resolve, MOVIE_ID, REVIEW, event) {
-    console.debug("onDBSuccessSubmitReview");
 
     const BDD = event.target.result;
 
@@ -231,7 +220,5 @@ function onDBSuccessSubmitReview(resolve, MOVIE_ID, REVIEW, event) {
     REQUEST.onerror = dbTransactionErrorResolve.bind(this, resolve);
 }
 function onSubmitReview(resolve, MOVIE_ID, event) {
-    console.debug("onDBSuccessSubmitReview");
-    console.debug("Succes : ", event.target.result, MOVIE_ID);
     resolve(event.target.result);
 }

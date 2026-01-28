@@ -33,7 +33,6 @@ let beforeInstallPromptEvent;
 main();
 
 function main() {
-    console.debug("main()");
 
     if (window.matchMedia("(display-mode: standalone)").matches) {
         console.log("Running as PWA");
@@ -55,7 +54,6 @@ function main() {
 /******************************************************************************/
 
 function onBeforeInstallPrompt(event) {
-    console.debug("onBeforeInstallPrompt()");
 
     event.preventDefault();
     showInstallModal();
@@ -65,7 +63,6 @@ function onBeforeInstallPrompt(event) {
 /**************************************/
 
 async function installPwa() {
-    console.debug("installPwa()");
 
     const RESULT = await beforeInstallPromptEvent.prompt();
 
@@ -81,14 +78,12 @@ async function installPwa() {
 /**************************************/
 
 function onAppInstalled() {
-    console.debug("onAppInstalled()");
     INSTALL_APP_BTN.classList.add("d-none");
 
     registerServiceWorker();
 }
 
 function showInstallModal() {
-    console.debug("showing install modal");
     INSTALL_MODAL_OBJ.show();
 }
 
@@ -104,7 +99,6 @@ function hideInstallModal() {
 /******************************************************************************/
 
 async function registerServiceWorker() {
-    console.debug("registerServiceWorker()");
 
     if ("serviceWorker" in navigator) {
         console.log("Register Service Worker…");
@@ -129,7 +123,6 @@ async function registerServiceWorker() {
 /******************************************************************************/
 
 function onUpdateFound(event) {
-    console.debug("onUpdateFound()");
 
     const REGISTRATION = event.target;
     const SERVICE_WORKER = REGISTRATION.installing;
@@ -141,7 +134,6 @@ function onUpdateFound(event) {
 function onStateChange(event) {
     const SERVICE_WORKER = event.target;
 
-    console.debug("onStateChange", SERVICE_WORKER.state);
 
     if (SERVICE_WORKER.state == "installed" && navigator.serviceWorker.controller) {
         console.log("PWA Updated");
@@ -153,7 +145,6 @@ function onStateChange(event) {
 /**************************************/
 
 function reloadPwa() {
-    console.debug("reloadPwa()");
 
     window.location.reload();
 }

@@ -1,3 +1,4 @@
+const TMDB_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YzAwODk3NTQ0ZTUwZTg5N2Y4ZGZhNzlkNzY4YjcxNyIsIm5iZiI6MTY1NjI3ODM4NC4xNTYsInN1YiI6IjYyYjhjZDcwMTdjNDQzMDA2MDRiMjEwOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZNZGW6-VnxqWAMDfqYZYtNRxbdZfLgqcMu3mysVMv-c';
 const SEARCHBAR = document.getElementById("searchbar");
 const SEARCHBAR_DROPDOWN = bootstrap.Dropdown.getOrCreateInstance(SEARCHBAR);
 const SEARCHBAR_DROPDOWN_LIST = document.getElementById("searchbar-dropdown-menu-list");
@@ -29,12 +30,11 @@ function updateSearchBar() {
     }
 }
 function selectSearchBar() {
-    LOGO.style.opacity = "0";
-    LOGO.style.pointerEvents = "none";
-    if (PAGE_TITLE) PAGE_TITLE.style.opacity = "0";
+    LOGO.classList.add("searching");
+    if (PAGE_TITLE) PAGE_TITLE.classList.add("searching");
     updateSearchBar();
-    SEARCHBAR.style.width = "75vw";
-    SEARCHBAR.placeholder = "Rechercher...";
+    SEARCHBAR.closest(".search-container").classList.add("active");
+    SEARCHBAR.placeholder = "Search...";
 }
 function deselectSearchBar() {
 
@@ -43,21 +43,19 @@ function deselectSearchBar() {
 }
 function resetSearchBar() {
     SEARCHBAR_DROPDOWN.hide();
-    SEARCHBAR.style.width = "36px";
+    SEARCHBAR.closest(".search-container").classList.remove("active");
     SEARCHBAR.placeholder = "⌕";
     SEARCHBAR.value = "";
-    LOGO.style.opacity = "1";
-    LOGO.style.pointerEvents = "auto";
-    if (PAGE_TITLE) PAGE_TITLE.style.opacity = "1";
+    LOGO.classList.remove("searching");
+    if (PAGE_TITLE) PAGE_TITLE.classList.remove("searching");
 }
 
 async function searchTmdb(SEARCHSTRING) {
-    console.log("recherche tmdb : ", SEARCHSTRING);
     const options = {
         method: 'GET',
         headers: {
             accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YzAwODk3NTQ0ZTUwZTg5N2Y4ZGZhNzlkNzY4YjcxNyIsIm5iZiI6MTY1NjI3ODM4NC4xNTYsInN1YiI6IjYyYjhjZDcwMTdjNDQzMDA2MDRiMjEwOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZNZGW6-VnxqWAMDfqYZYtNRxbdZfLgqcMu3mysVMv-c'
+            Authorization: `Bearer ${TMDB_TOKEN}`
         }
     };
 
@@ -75,7 +73,7 @@ async function searchTmdb(SEARCHSTRING) {
 function createSeachDropdownHtmlList(array) {
     let html = '';
     for (let element of array) {
-        html += `<li><a href="https://webdev.fourny.org/victor/SAE302/film/?id=${element.id}">
+        html += `<li><a href="./film/?id=${element.id}">
                 <div class="card dropdown-search-card">
                     <div class="d-flex">
                         
@@ -84,7 +82,7 @@ function createSeachDropdownHtmlList(array) {
                         
                             <div class="card-body">
                                 <h5 class="card-title">${element.title}</h5>
-                                    <p class="card-text"><small class="anee-card">${element.release_date.substring(0, 4)}</small></p>
+                                    <p class="card-text"><small class="year-card">${element.release_date.substring(0, 4)}</small></p>
                                     <p class="card-text card-text-truncate">${element.overview}</p>
                             
                         </div>
@@ -97,57 +95,57 @@ function createSeachDropdownHtmlList(array) {
 
 async function getFilmData(ID) {
 
-    const options = {
+    const OPTIONS = {
         method: 'GET',
         headers: {
             accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YzAwODk3NTQ0ZTUwZTg5N2Y4ZGZhNzlkNzY4YjcxNyIsIm5iZiI6MTY1NjI3ODM4NC4xNTYsInN1YiI6IjYyYjhjZDcwMTdjNDQzMDA2MDRiMjEwOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZNZGW6-VnxqWAMDfqYZYtNRxbdZfLgqcMu3mysVMv-c'
+            Authorization: `Bearer ${TMDB_TOKEN}`
         }
     };
 
 
-    const RESPONSE = await fetch(`https://api.themoviedb.org/3/movie/${ID}?language=en-US`, options);
+    const RESPONSE = await fetch(`https://api.themoviedb.org/3/movie/${ID}?language=en-US`, OPTIONS);
     const RESPONSE_JSON = await RESPONSE.json();
     return RESPONSE_JSON;
 }
 
 async function getMovieCast(ID) {
-    const options = {
+    const OPTIONS = {
         method: 'GET',
         headers: {
             accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YzAwODk3NTQ0ZTUwZTg5N2Y4ZGZhNzlkNzY4YjcxNyIsIm5iZiI6MTY1NjI3ODM4NC4xNTYsInN1YiI6IjYyYjhjZDcwMTdjNDQzMDA2MDRiMjEwOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZNZGW6-VnxqWAMDfqYZYtNRxbdZfLgqcMu3mysVMv-c'
+            Authorization: `Bearer ${TMDB_TOKEN}`
         }
     };
 
-    const RESPONSE = await fetch(`https://api.themoviedb.org/3/movie/${ID}/credits?language=en-US`, options);
+    const RESPONSE = await fetch(`https://api.themoviedb.org/3/movie/${ID}/credits?language=en-US`, OPTIONS);
     const RESPONSE_JSON = await RESPONSE.json();
     return RESPONSE_JSON.cast;
 }
 
 async function getTrendingMovies() {
-    const options = {
+    const OPTIONS = {
         method: 'GET',
         headers: {
             accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YzAwODk3NTQ0ZTUwZTg5N2Y4ZGZhNzlkNzY4YjcxNyIsIm5iZiI6MTY1NjI3ODM4NC4xNTYsInN1YiI6IjYyYjhjZDcwMTdjNDQzMDA2MDRiMjEwOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZNZGW6-VnxqWAMDfqYZYtNRxbdZfLgqcMu3mysVMv-c'
+            Authorization: `Bearer ${TMDB_TOKEN}`
         }
     };
 
-    const RESPONSE = await fetch('https://api.themoviedb.org/3/trending/movie/week?language=en-US', options);
+    const RESPONSE = await fetch('https://api.themoviedb.org/3/trending/movie/week?language=en-US', OPTIONS);
     const RESPONSE_JSON = await RESPONSE.json();
     return RESPONSE_JSON.results;
 }
 async function getTrendingMoviesToday() {
-    const options = {
+    const OPTIONS = {
         method: 'GET',
         headers: {
             accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YzAwODk3NTQ0ZTUwZTg5N2Y4ZGZhNzlkNzY4YjcxNyIsIm5iZiI6MTY1NjI3ODM4NC4xNTYsInN1YiI6IjYyYjhjZDcwMTdjNDQzMDA2MDRiMjEwOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZNZGW6-VnxqWAMDfqYZYtNRxbdZfLgqcMu3mysVMv-c'
+            Authorization: `Bearer ${TMDB_TOKEN}`
         }
     };
 
-    const RESPONSE = await fetch('https://api.themoviedb.org/3/trending/movie/day?language=en-US', options);
+    const RESPONSE = await fetch('https://api.themoviedb.org/3/trending/movie/day?language=en-US', OPTIONS);
     const RESPONSE_JSON = await RESPONSE.json();
     return RESPONSE_JSON.results;
 }

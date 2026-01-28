@@ -2,8 +2,8 @@ const PARAMS = new URLSearchParams(document.location.search);
 const FILM_ID = PARAMS.get("id");
 const REVIEW_TEXT_INPUT = document.getElementById("review-text-input");
 const SUBMIT_BUTTON = document.getElementById("save-button");
-const REVIEW_ReadView = document.getElementById("review-read-view");
-const REVIEW_EditView = document.getElementById("review-edit-view");
+const REVIEW_READ_VIEW = document.getElementById("review-read-view");
+const REVIEW_EDIT_VIEW = document.getElementById("review-edit-view");
 const EDIT_BUTTON = document.getElementById("edit-button");
 const CANCEL_BUTTON = document.getElementById("cancel-button");
 const SNAP_BUTTON = document.getElementById("snap-button");
@@ -56,19 +56,18 @@ function selectedFile(event) {
 }
 
 async function toggleEditMode() {
-    console.debug("toggleEditMode");
-    if (REVIEW_EditView.classList.contains("d-none")) {
-        // En mode Lecture -> Passage en mode Edition
-        REVIEW_EditView.classList.remove("d-none");
-        REVIEW_ReadView.classList.add("d-none");
+    if (REVIEW_EDIT_VIEW.classList.contains("d-none")) {
+        // Read Mode -> Switch to Edit Mode
+        REVIEW_EDIT_VIEW.classList.remove("d-none");
+        REVIEW_READ_VIEW.classList.add("d-none");
         const REVIEW = await getMovieReview(FILM_ID);
         if (REVIEW) {
             prepareEditValues(REVIEW);
         }
     } else {
-        // En mode Edition -> Passage en mode Lecture
-        REVIEW_EditView.classList.add("d-none");
-        REVIEW_ReadView.classList.remove("d-none");
+        // Edit Mode -> Switch to Read Mode
+        REVIEW_EDIT_VIEW.classList.add("d-none");
+        REVIEW_READ_VIEW.classList.remove("d-none");
     }
 }
 
@@ -76,35 +75,26 @@ main();
 async function main() {
     const IS_LIKED = await checkIfMovieLiked(parseInt(FILM_ID));
     let FILM;
-    console.debug(IS_LIKED);
     if (IS_LIKED) {
         FILM = IS_LIKED;
-        console.debug("Données du film lues en DB");
     } else {
-        console.debug("Données du film lues depuis l'api");
         FILM = await getFilmData(FILM_ID);
     }
 
-    REVIEW = await getMovieReview(FILM_ID);
-    console.debug(REVIEW);
-    let review_text;
+    const REVIEW = await getMovieReview(FILM_ID);
     if (REVIEW) {
-        console.debug("review existante");
 
         createReviewReadCard(REVIEW.review);
 
-        REVIEW_EditView.classList.add("d-none");
-        REVIEW_ReadView.classList.remove("d-none");
+        REVIEW_EDIT_VIEW.classList.add("d-none");
+        REVIEW_READ_VIEW.classList.remove("d-none");
 
     } else {
-        console.debug("review inexistante");
-        review_text = null;
         // Default to Edit Mode (already set in HTML)
-        REVIEW_EditView.classList.remove("d-none");
-        REVIEW_ReadView.classList.add("d-none");
+        REVIEW_EDIT_VIEW.classList.remove("d-none");
+        REVIEW_READ_VIEW.classList.add("d-none");
     }
     createMovieCard(FILM);
-    console.debug(review_text);
 
 }
 function createMovieCard(FILM) {
@@ -118,10 +108,8 @@ function createMovieCard(FILM) {
 
 }
 function createReviewReadCard(REVIEW) {
-    console.debug(REVIEW);
     const RATING = REVIEW.rating;
-    review_text = REVIEW.text;
-    READ_TEXT.innerHTML = review_text
+    READ_TEXT.innerHTML = REVIEW.text;
     let starsHtml = "";
     for (let i = 1; i <= 5; i++) {
         if (i <= RATING) {
@@ -152,12 +140,12 @@ async function saveReview() {
     const REVIEW = { rating: getRating(), text: REVIEW_TEXT_INPUT.value, location: LOCATION_INPUT.value, mfw: `${FILM_ID}-mfw` };
     submitMovieReview(FILM_ID, REVIEW);
     if (photoToSave) {
-        const cache = await caches.open('mfw-cache');
+        const CACHE = await caches.open('mfw-cache');
 
         const response = new Response(photoToSave, { //reponse http fictive pour que le cache autoriqe le stockage
             headers: { 'Content-Type': photoToSave.type }
         });
-        await cache.put(`/mfw/${FILM_ID}`, response); // fausse url de stockage
+        await CACHE.put(`/mfw/${FILM_ID}`, response); // fausse url de stockage
     }
 
 
@@ -209,8 +197,6 @@ async function geoLocation() {
     navigator.geolocation.getCurrentPosition(convertCoordinates);
 }
 async function convertCoordinates(pos) {
-    console.debug(pos.coords.latitude);
-    console.debug(pos.coords.longitude);
     const RESPONSE = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&format=json`);
     const RESPONSE_JSON = await RESPONSE.json();
     LOCATION_INPUT.value = `${RESPONSE_JSON.address.house_number} ${RESPONSE_JSON.address.road}, ${RESPONSE_JSON.address.postcode} ${RESPONSE_JSON.address.municipality}`;

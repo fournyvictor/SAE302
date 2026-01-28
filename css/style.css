@@ -43,7 +43,7 @@ button:disabled {
     display: none;
 }
 
-.annee-card {
+.year-card {
     color: #aeaeae;
 }
 
@@ -228,8 +228,13 @@ button:disabled {
     height: 10vh;
     /* Hauteur initiale */
 
-    transition: height 0.3s ease-in-out;
+    transition: height 0.3s ease-in-out, opacity 0.3s ease;
     /* Animation fluide */
+}
+
+.logo.searching {
+    opacity: 0;
+    pointer-events: none;
 }
 
 /* Bordure par-dessus l'image via pseudo-élément */
@@ -297,7 +302,7 @@ button:disabled {
 }
 
 /* Le bouton 2 (Likes) ne doit pas prendre de place quand le logo est petit */
-#bouton2 {
+#btn-library {
     opacity: 0;
     flex: 0;
     /* Pas de place par défaut */
@@ -307,7 +312,7 @@ button:disabled {
     background-size: 40%;
 }
 
-.logo:hover #bouton2 {
+.logo:hover #btn-library {
     flex: 1;
     opacity: 1;
     transition-delay: 0.1s;
@@ -315,11 +320,11 @@ button:disabled {
 
 
 /* Picto Coeur */
-#bouton2 {
+#btn-library {
     background-image: url('../Misc/icon_heart.svg');
 }
 
-#bouton2:hover {
+#btn-library:hover {
     background-image: url('../Misc/icon_heart_full.svg');
     transition: ease-in;
     transition-duration: 0.1s;
@@ -359,6 +364,11 @@ body {
     z-index: 1000;
     display: flex;
     justify-content: center;
+    transition: width 0.3s ease-in-out;
+}
+
+.search-container.active {
+    width: 75vw;
 }
 
 .search-container input {
@@ -437,6 +447,10 @@ body {
     transition: opacity 0.3s ease;
     pointer-events: none;
     /* Let clicks pass through if needed */
+}
+
+#page-title.searching {
+    opacity: 0;
 }
 
 /* Mobile adjustments */
@@ -701,6 +715,7 @@ body {
 
 .review-movie-card {
     background-color: #14181c;
+    cursor: default;
     /* Couleur de fond de la page */
 }
 

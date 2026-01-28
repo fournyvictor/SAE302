@@ -15,12 +15,9 @@ async function main() {
     createTrendingCaroussel();
 }
 async function createTrendingCaroussel() {
-    console.debug("createTrendingCaroussel");
     const MOVIES = await getTrendingMovies();
-    console.debug(MOVIES);
     let html = "";
     for (element of MOVIES) {
-        console.debug("iter");
         html += `<a href="./film/?id=${element.id}" class="trending-card">
     <img src="https://image.tmdb.org/t/p/w342${element.poster_path}" class="img-fluid" alt="${element.title}">
     </a>`;
@@ -28,12 +25,9 @@ async function createTrendingCaroussel() {
     TRENDING_CONTAINER.innerHTML = html;
 }
 async function createTrendingCarousselDay() {
-    console.debug("createTrendingCarousselDay");
     const MOVIES = await getTrendingMoviesToday();
-    console.debug(MOVIES);
     let html = "";
     for (element of MOVIES) {
-        console.debug("iter");
         html += `<a href="./film/?id=${element.id}" class="trending-card">
     <img src="https://image.tmdb.org/t/p/w342${element.poster_path}" class="img-fluid" alt="${element.title}">
     </a>`;

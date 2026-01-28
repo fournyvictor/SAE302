@@ -21,12 +21,9 @@ async function main() {
 
     const IS_LIKED = await checkIfMovieLiked(parseInt(FILM_ID));
     let FILM;
-    console.debug(IS_LIKED);
     if (IS_LIKED) {
         FILM = IS_LIKED;
-        console.debug("Données du film lues en DB");
     } else {
-        console.debug("Données du film lues depuis l'api");
         FILM = await getFilmData(FILM_ID);
     }
 
@@ -52,7 +49,7 @@ async function main() {
 
 function makeFilmDisplayHtml(DATA, CAST) {
     const YEAR = DATA.release_date.substring(0, 4);
-    DATA_BACKDROP_IMAGE.style = `background-image: url('https://image.tmdb.org/t/p/original${DATA.backdrop_path}');`;
+    DATA_BACKDROP_IMAGE.style.backgroundImage = `url('https://image.tmdb.org/t/p/original${DATA.backdrop_path}')`;
     DATA_IMAGE_POSTER.src = `https://image.tmdb.org/t/p/original${DATA.poster_path}`;
     REVIEW_BUTTON.href = `https://webdev.fourny.org/victor/SAE302/review/?id=${DATA.id}`
     DATA_FILM_TITLE.innerHTML = DATA.title;
@@ -60,12 +57,13 @@ function makeFilmDisplayHtml(DATA, CAST) {
     DATA_ORIGINAL_TITLE.innerHTML = DATA.original_title;
     DATA_FILM_TAGLINE.innerHTML = DATA.tagline;
     DATA_FILM_OVERVIEW.innerHTML = DATA.overview;
-    const shareData = {
+    const SHARE_DATA = {
         title: `FullBoxd - ${DATA.title}`,
         text: `Write a review on FullBoxd about ${DATA.title}`,
-        url: `https://webdev.fourny.org/victor/SAE302/film/?id=${DATA.id}`,
+        url: window.location.href,
+        posterPath: DATA.poster_path // On passe le chemin pour le fetcher au moment du clic
     };
-    SHARE_BUTTON.addEventListener("click", shareMovie.bind(null, shareData));
+    SHARE_BUTTON.addEventListener("click", shareMovie.bind(null, SHARE_DATA));
     let casthtml = ""
     for (let element of CAST.slice(0, 10)) {
         casthtml += `<div class="cast-item d-flex align-items-center mb-2">
@@ -82,29 +80,22 @@ function makeFilmDisplayHtml(DATA, CAST) {
     CAST_LIST.innerHTML = casthtml;
 
 }
-async function shareMovie(shareData) {
+async function shareMovie(SHARE_DATA) {
     try {
-        await navigator.share(shareData);
-        console.debug("MDN shared successfully");
+        await navigator.share(SHARE_DATA);
     } catch (err) {
-        console.debug(`Error: ${err}`);
     }
 }
 async function updateReviewPicto(FILM_ID) {
-    console.debug("updating review picto");
-    REVIEW = await getMovieReview(FILM_ID);
+    const REVIEW = await getMovieReview(FILM_ID);
     const ID = FILM_ID + "-review-picto";
-    let chemin = "../Misc/icon_book.svg";
+    let path = "../Misc/icon_book.svg";
 
     if (REVIEW) {
-        chemin = "../Misc/icon_book_full.svg";
-        console.debug("review exists, updating");
+        path = "../Misc/icon_book_full.svg";
     }
-    const REVIEWPICTO = document.getElementById(ID);
-    if (REVIEWPICTO) {
-        REVIEWPICTO.src = chemin;
-        console.debug("picto exists, updating");
-
-
+    const REVIEW_PICTO = document.getElementById(ID);
+    if (REVIEW_PICTO) {
+        REVIEW_PICTO.src = path;
     }
 }

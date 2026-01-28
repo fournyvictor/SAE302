@@ -4,7 +4,7 @@
 
 const VERSION = "2.1";
 
-const RESSOURCES = [
+const RESOURCES = [
 
     "./",
     "./index.html",
@@ -60,7 +60,6 @@ self.addEventListener("fetch", onFetch);
 /******************************************************************************/
 
 function onInstall(event) {
-    console.debug("onInstall()");
 
     event.waitUntil(caching());
     self.skipWaiting();
@@ -69,14 +68,13 @@ function onInstall(event) {
 /******************************************************************************/
 
 async function caching() {
-    console.debug("caching()");
 
     const KEYS = await caches.keys();
 
     if (!KEYS.includes(VERSION)) {
         console.log("Caching version:", VERSION);
         const CACHE = await caches.open(VERSION);
-        await CACHE.addAll(RESSOURCES);
+        await CACHE.addAll(RESOURCES);
 
         for (const KEY of KEYS) {
             if (KEY !== VERSION) {
@@ -93,7 +91,6 @@ async function caching() {
 /******************************************************************************/
 
 function onFetch(event) {
-    console.debug("onFetch()");
 
     event.respondWith(getResponse(event.request));
 }
@@ -101,7 +98,6 @@ function onFetch(event) {
 /******************************************************************************/
 
 async function getResponse(request) {
-    console.debug("getResponse()");
 
     const RESPONSE = await caches.match(request);
 

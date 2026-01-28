@@ -10,7 +10,6 @@ function main() {
 
 async function createMovieListHtml() {
     const ARRAY = await getAllLikedMovies();
-    console.debug(ARRAY);
     let html = "";
 
 
@@ -18,14 +17,12 @@ async function createMovieListHtml() {
 
         let reviewHtml = "";
         const DATA = element['filmData'];
-        console.debug(DATA);
         const YEAR = DATA.release_date.substring(0, 4);
         const REVIEW = await getMovieReview(DATA.id);
-        let review_text;
+        let reviewText;
         let starsHtml = "";
-        console.debug("REVIEW : ", DATA.id, REVIEW);
         if (REVIEW) {
-            review_text = REVIEW.review.text;
+            reviewText = REVIEW.review.text;
             for (let i = 1; i <= 5; i++) {
                 if (i <= REVIEW.review.rating) {
                     starsHtml += "★";
@@ -33,13 +30,13 @@ async function createMovieListHtml() {
                     starsHtml += "☆";
                 }
             }
-        } else { review_text = false; }
-        if (!review_text) {
+        } else { reviewText = false; }
+        if (!reviewText) {
             reviewHtml = `<p class="card-text card-text-truncate-3">You did not write a review about ${DATA.title} yet. </p>
-                    <a class="write-review-button" href="https://webdev.fourny.org/victor/SAE302/review/?id=${DATA.id}"><button class="btn btn-outline-light btn-sm mt-2" >Write a review</button></a>`
+                    <a class="write-review-button" href="../review/?id=${DATA.id}"><button class="btn btn-outline-light btn-sm mt-2" >Write a review</button></a>`
         } else {
-            reviewHtml = `<p class="card-text card-text-truncate-3">${review_text}</p>
-                    <a class="write-review-button" href="https://webdev.fourny.org/victor/SAE302/review/?id=${DATA.id}"><button class="btn btn-outline-light btn-sm mt-2" >Go to review</button></a>`
+            reviewHtml = `<p class="card-text card-text-truncate-3">${reviewText}</p>
+                    <a class="write-review-button" href="../review/?id=${DATA.id}"><button class="btn btn-outline-light btn-sm mt-2" >Go to review</button></a>`
         }
         html += `<div class="card mb-3 w-100 border-0 bg-transparent text-white">
         <div class="row g-0 align-items-center">

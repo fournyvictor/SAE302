@@ -18,7 +18,6 @@ function onLikeButtonClick() {
 
 }
 function onReviewButtonClick() {
-    console.debug("AHAHAHA");
 }
 function checkIfMovieLiked() {
     const DB = "FullBoxdDB";
