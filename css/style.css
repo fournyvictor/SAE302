@@ -338,6 +338,7 @@ button:disabled {
     align-items: center;
     justify-content: center;
     border-color: #456;
+    margin-top: 0;
 }
 
 .action-btn:hover {
