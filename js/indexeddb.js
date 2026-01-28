@@ -204,7 +204,7 @@ function onDBSuccessSubmitReview(resolve, MOVIE_ID, REVIEW, event) {
     const TRANSACTION = BDD.transaction(["reviews"], "readwrite");
     const OBJECTSTORE = TRANSACTION.objectStore("reviews");
 
-    const ENTRY = { filmId: MOVIE_ID, addedAt: new Date(), review: REVIEW };
+    const ENTRY = { filmId: parseInt(MOVIE_ID), addedAt: new Date(), review: REVIEW };
     const REQUEST = OBJECTSTORE.put(ENTRY); //écraser si déjà existante
 
     REQUEST.onsuccess = onSubmitReview.bind(this, resolve, MOVIE_ID);
