@@ -651,3 +651,10 @@ body {
     -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 100%);
     mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 100%);
 }
+
+/* Fix visibility of placeholders in dark inputs */
+#review-text-input::placeholder,
+#location-input::placeholder {
+    color: #abb !important;
+    opacity: 0.8;
+}

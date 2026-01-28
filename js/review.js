@@ -15,6 +15,7 @@ const MOVIE_YEAR = document.getElementById("review-movie-year");
 const MOVIE_OVERVIEW = document.getElementById("review-movie-overview");
 const READ_TEXT = document.getElementById("read-text");
 const READ_STARS = document.getElementById("read-stars");
+const LOCATION_INPUT = document.getElementById("location-input");
 const STAR_1 = document.getElementById("star1");
 const STAR_2 = document.getElementById("star2");
 const STAR_3 = document.getElementById("star3");
@@ -108,9 +109,8 @@ function createReviewReadCard(REVIEW) {
 
 }
 function saveReview() {
-    const SUBMIT_REVIEW_TEXT = REVIEW_TEXT_INPUT.value;
-    const REVIEW_DATA = { rating: getRating() };
-    const REVIEW = { filmId: MOVIE_ID, addedAt: new Date(), review: REVIEW };
+    const REVIEW_DATA = { rating: getRating(), text: REVIEW_TEXT_INPUT.value, location: LOCATION_INPUT.value };
+    const REVIEW = { filmId: MOVIE_ID, addedAt: new Date(), review: REVIEW_DATA };
 }
 function getRating() {
     if (STAR_5.checked) { return 5; }
