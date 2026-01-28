@@ -13,6 +13,7 @@ const MOVIE_TITLE = document.getElementById("review-movie-title");
 const MOVIE_POSTER = document.getElementById("review-movie-poster");
 const MOVIE_YEAR = document.getElementById("review-movie-year");
 const MOVIE_OVERVIEW = document.getElementById("review-movie-overview");
+const READ_TEXT = document.getElementById("read-text");
 
 
 SUBMIT_BUTTON.addEventListener("click", sendReviewToDB);
@@ -52,10 +53,7 @@ async function main() {
     if (REVIEW) {
         console.debug("review existante");
         review_text = REVIEW.review;
-
-        // Populate Read View
-        document.getElementById("read-text").innerText = REVIEW.review || "";
-        // TODO: Populate stars, location, mfw
+        READ_TEXT.innerHTML = review_text
 
         // Switch to Read Mode
         REVIEW_EditView.classList.add("d-none");
