@@ -85,12 +85,12 @@ async function onLikeButtonClick(MOVIE) {
         REQUEST.onsuccess = onDBSuccessLikeAdd.bind(this, MOVIE);
     }
 }
-function onDBSuccessLikeAdd(MOVIE, event) {
+async function onDBSuccessLikeAdd(MOVIE, event) {
     const BDD = event.target.result;
     console.debug("Film ajouté aux likes : ", MOVIE.title);
     const TRANSACTION = BDD.transaction(["likes"], "readwrite");
     const OBJECTSTORE = TRANSACTION.objectStore("likes");
-    const IMAGE = fetch("https://image.tmdb.org/t/p/original" + MOVIE.poster_path);
+    const IMAGE = await fetch("https://image.tmdb.org/t/p/original" + MOVIE.poster_path);
     console.debug("image : ", IMAGE);
     //const IMAGEB64 = 
     // ajout du film aux likes
