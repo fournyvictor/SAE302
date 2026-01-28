@@ -156,7 +156,7 @@ function prepareEditValues(REVIEW) {
     setRating(REVIEW.review.rating);
 }
 async function geoLocation() {
-    navigator.geolocation.getCurrentPosition(convertCoordinates(pos));
+    navigator.geolocation.getCurrentPosition(convertCoordinates);
 
 
     //const COORDINATES = 
