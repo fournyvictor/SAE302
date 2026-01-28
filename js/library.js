@@ -56,9 +56,6 @@ async function createMovieListHtml() {
                     
                     <p class="card-text text-secondary mb-1 d-none d-md-block">${YEAR}</p>
                     <p class="card-text card-text-truncate-2 d-none d-md-block">${DATA.overview}</p>
-                    <a href="../film/?id=${DATA.id}" class="d-none d-md-inline-block">
-                        <button class="btn btn-outline-light btn-sm mt-2">See details</button>
-                    </a>
                     
                     <hr class="my-4 d-none d-md-block"> <!-- Separator hidden on mobile if content above is hidden -->
                     
