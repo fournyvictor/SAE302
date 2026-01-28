@@ -11,6 +11,8 @@ const SNAP_BUTTON = document.getElementById("snap-button");
 const RETAKE_BUTTON = document.getElementById("retake-button");
 const MOVIE_TITLE = document.getElementById("review-movie-title");
 const MOVIE_POSTER = document.getElementById("review-movie-poster");
+const MOVIE_YEAR = document.getElementById("review-movie-year");
+
 
 SUBMIT_BUTTON.addEventListener("click", sendReviewToDB);
 START_CAM_BUTTON.addEventListener("click", startCamera);
@@ -77,6 +79,9 @@ function startCamera() {
     console.debug("starting camera");
 }
 function createMovieCard(FILM) {
+    const YEAR = DATA.release_date.substring(0, 4);
+
     MOVIE_TITLE.innerHTML = FILM.title;
     MOVIE_POSTER.src = `https://image.tmdb.org/t/p/original${FILM.poster_path}`;
+    MOVIE_YEAR.innerHTML = YEAR;
 }
