@@ -150,7 +150,11 @@ async function saveReview() {
 
     createReviewReadCard(REVIEW);
     toggleEditMode();
-    onLikeButtonClick(await getFilmData(FILM_ID));
+
+    if (!await checkIfMovieLiked(parseInt(FILM_ID))) {
+        onLikeButtonClick(await getFilmData(FILM_ID));
+
+    }
 }
 function getRating() {
     if (STAR_5.checked) { return 5; }
