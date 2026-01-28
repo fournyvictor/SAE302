@@ -15,8 +15,6 @@ const LIKE_BUTTON_IMAGE = document.getElementById("like-button-image");
 const REVIEW_BUTTON_IMAGE = document.getElementById("review-button-image");
 const SHARE_BUTTON = document.getElementById("share-button");
 
-
-
 main();
 
 async function main() {
@@ -39,7 +37,6 @@ async function main() {
         updateLikePicto(IS_LIKED, FILM.id);
         const CAST = await getMovieCast(FILM.id);
         makeFilmDisplayHtml(FILM, CAST);
-        REVIEW_BUTTON.href = `https://webdev.fourny.org/victor/SAE302/review/?id=${DATA.id}`
     }
 }
 
@@ -47,6 +44,7 @@ function makeFilmDisplayHtml(DATA, CAST) {
     const YEAR = DATA.release_date.substring(0, 4);
     DATA_BACKDROP_IMAGE.style = `background-image: url('https://image.tmdb.org/t/p/original${DATA.backdrop_path}');`;
     DATA_IMAGE_POSTER.src = `https://image.tmdb.org/t/p/original${DATA.poster_path}`;
+    REVIEW_BUTTON.href = `https://webdev.fourny.org/victor/SAE302/review/?id=${DATA.id}`
     DATA_FILM_TITLE.innerHTML = DATA.title;
     DATA_FILM_YEAR.innerHTML = YEAR;
     DATA_ORIGINAL_TITLE.innerHTML = DATA.original_title;
