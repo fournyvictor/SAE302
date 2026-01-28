@@ -143,7 +143,7 @@ function onDBSuccessGetAllLikedMovies(resolve, event) {
 function onGetAllLikedMoviesResult(resolve, event) {
     const RESULT = event.target.result;
     RESULT.sort((a, b) => new Date(b.addedAt) - new Date(a.addedAt));
-
+    RESULT.reverse();
     resolve(RESULT);
 }
 
