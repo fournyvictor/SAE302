@@ -242,8 +242,8 @@ button:disabled {
 
 /* Au survol, on "déploie" vers le bas */
 .logo:hover {
-    height: 22.5vh;
-    /* Réduit de 25% (30vh -> 22.5vh) */
+    height: 15vh;
+    /* Réduit pour 2 boutons (Home + Heart) */
 }
 
 .logo img {
@@ -278,15 +278,14 @@ button:disabled {
     transition: opacity 0.3s ease-in-out;
 }
 
-/* Style des icônes pour bouton 2 et 3 */
-#bouton2,
-#bouton3 {
+/* Style des icônes pour bouton 2 */
+#bouton2 {
     opacity: 0;
     /* Invisible par défaut */
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 30%;
-    /* Taille du picto relative au bouton (réduit de 20%) */
+    background-size: 40%;
+    /* Taille du picto */
 }
 
 /* Apparition au survol du parent (.logo) */
@@ -295,11 +294,6 @@ button:disabled {
     transition-delay: 0.15s;
 }
 
-.logo:hover #bouton3 {
-    opacity: 1;
-    transition-duration: 0.1s;
-
-}
 
 /* Picto Coeur */
 #bouton2 {
@@ -308,19 +302,6 @@ button:disabled {
 
 #bouton2:hover {
     background-image: url('../Misc/icon_heart_full.svg');
-    transition: ease-in;
-    transition-duration: 0.1s;
-    cursor: pointer;
-}
-
-/* Picto Livre */
-#bouton3 {
-    background-image: url('../Misc/icon_book.svg');
-
-}
-
-#bouton3:hover {
-    background-image: url('../Misc/icon_book_full.svg');
     transition: ease-in;
     transition-duration: 0.1s;
     cursor: pointer;
