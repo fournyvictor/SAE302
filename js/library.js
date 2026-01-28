@@ -23,12 +23,12 @@ async function createMovieListHtml() {
         console.debug(DATA);
         const YEAR = DATA.release_date.substring(0, 4);
         const REVIEW = await getMovieReview(DATA.id);
-        console.debug("review : ", REVIEW, "REVIEW.review : ", REVIEW.review);
-        if (!REVIEW) {
+        const REVIEW_TEXT = REVIEW.review;
+        if (!REVIEW_TEXT) {
             reviewHtml = `<p class="card-text d-none d-sm-block text-truncate">You did not write a review about ${DATA.title} yet. </p>
                     <a class="write-review-button" href="https://webdev.fourny.org/victor/SAE302/review/?id=${DATA.id}"><button class="btn btn-outline-light btn-sm mt-2" >Write a review</button></a>`
         } else {
-            reviewHtml = `<p class="card-text d-none d-sm-block text-truncate">${REVIEW}</p>
+            reviewHtml = `<p class="card-text d-none d-sm-block text-truncate">${REVIEW_TEXT}</p>
                     <a class="write-review-button" href="https://webdev.fourny.org/victor/SAE302/review/?id=${DATA.id}"><button class="btn btn-outline-light btn-sm mt-2" >Edit your review</button></a>`
         }
         html += `<div class="card mb-3 w-100 border-0 bg-transparent text-white">
