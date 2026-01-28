@@ -2,7 +2,7 @@
 /* Constants                                                                  */
 /******************************************************************************/
 
-const VERSION = "2.0";
+const VERSION = "2.1";
 
 const RESSOURCES = [
 
@@ -11,6 +11,20 @@ const RESSOURCES = [
     "./service_worker.js",
 
     "./css/style.css",
+    "./bootstrap-5.3.8-dist/css/bootstrap.min.css",
+    "./bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js",
+
+    "./js/app.js",
+    "./js/search.js",
+    "./js/home.js",
+    "./js/indexeddb.js",
+    "./js/film.js",
+    "./js/library.js",
+    "./js/review.js",
+
+    "./film/index.html",
+    "./library/index.html",
+    "./review/index.html",
 
     "./favicon/apple-touch-icon.png",
     "./favicon/favicon.ico",
@@ -19,10 +33,16 @@ const RESSOURCES = [
     "./favicon/site.webmanifest",
     "./favicon/web-app-manifest-192x192.png",
     "./favicon/web-app-manifest-512x512.png",
-    "./js/app.js",
-    "./bootstrap-5.3.8-dist",
-    "./library/index.html",
-    "./reviews/index.html"
+
+    "./Misc/logo_the_long_way.svg",
+    "./Misc/icon_heart.svg",
+    "./Misc/icon_heart_full.svg",
+    "./Misc/icon_book.svg",
+    "./Misc/icon_book_full.svg",
+    "./Misc/icon_search.svg",
+    "./Misc/icon_search_full.svg",
+    "./Misc/icon_share.svg",
+    "./Misc/icon_camera.svg"
 ];
 
 /******************************************************************************/
