@@ -66,7 +66,11 @@ function onDBSuccessCheckLike(resolve, MOVIE_ID, event) {
 function onCheckLikedResult(resolve, event) {
     const RESULT = event.target.result;
     console.debug(RESULT);
-    return RESULT.filmData;
+    if (RESULT) {
+        resolve(RESULT.filmData);
+    } else {
+        resolve(false);
+    }
 }
 
 async function onLikeButtonClick(MOVIE) {
