@@ -86,6 +86,7 @@ function createMovieCard(FILM) {
     const YEAR = FILM.release_date.substring(0, 4);
 
     MOVIE_TITLE.innerHTML = FILM.title;
+    document.getElementById("review-backdrop").style.backgroundImage = `url('https://image.tmdb.org/t/p/original${FILM.backdrop_path}')`;
     MOVIE_POSTER.src = `https://image.tmdb.org/t/p/original${FILM.poster_path}`;
     MOVIE_YEAR.innerHTML = YEAR;
     MOVIE_OVERVIEW.innerHTML = FILM.overview;
@@ -95,7 +96,7 @@ function createReviewReadCard(REVIEW) {
     const RATING = REVIEW.rating;
     review_text = REVIEW.review;
     READ_TEXT.innerHTML = review_text
-    let starsHtml;
+    let starsHtml = "";
     for (let i = 1; i <= 5; i++) {
         if (i <= RATING) {
             starsHtml += "★";
