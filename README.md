@@ -30,6 +30,24 @@ FullBoxd est une **Progressive Web App (PWA)** moderne dédiée aux passionnés 
 2.  **OpenStreetMap (Nominatim)** :
     *   Utilisée pour le **Reverse Geocoding**. Transforme les coordonnées GPS brutes en une adresse lisible (ex: "Paris, France") pour les reviews.
 
+###  Systèmes de Stockage
+
+*   **IndexedDB** : Base de données locale intégrée au navigateur.
+    *   Stockage des films likés (`likes`).
+    *   Stockage des critiques textuelles et métadonnées (`reviews`).
+    *   Permet un accès ultra-rapide et un support offline complet.
+*   **Cache API (Service Worker)** :
+    *   Mise en cache des ressources statiques (HTML, CSS, JS, icônes).
+    *   Mise en cache dynamique des affiches de films pour la consultation hors-ligne.
+    *   Gestion fine des versions pour forcer la mise à jour de l'application.
+
+###  Capteurs & Matériel
+
+*   **Geolocation API** : Récupération des coordonnées précises de l'utilisateur lors de la rédaction d'une critique.
+*   **Media Capture / Camera** : Utilisation de l'attribut `capture="user"` sur les entrées de fichiers pour déclencher nativement la caméra selfie sur mobile, permettant la fonctionnalité "My Face When".
+
+---
+
 ##  Architecture 
 
 ### Architecture Logicielle
@@ -55,21 +73,54 @@ graph TD
     JS <--> IDB[(IndexedDB)]
 ```
 
-###  Systèmes de Stockage
+---
 
-*   **IndexedDB** : Base de données locale intégrée au navigateur.
-    *   Stockage des films likés (`likes`).
-    *   Stockage des critiques textuelles et métadonnées (`reviews`).
-    *   Permet un accès ultra-rapide et un support offline complet.
-*   **Cache API (Service Worker)** :
-    *   Mise en cache des ressources statiques (HTML, CSS, JS, icônes).
-    *   Mise en cache dynamique des affiches de films pour la consultation hors-ligne.
-    *   Gestion fine des versions pour forcer la mise à jour de l'application.
+## Modèle de Données
 
-###  Capteurs & Matériel
+Les données manipulées par l'application sont structurées selon les modèles suivants.
 
-*   **Geolocation API** : Récupération des coordonnées précises de l'utilisateur lors de la rédaction d'une critique.
-*   **Media Capture / Camera** : Utilisation de l'attribut `capture="user"` sur les entrées de fichiers pour déclencher nativement la caméra selfie sur mobile, permettant la fonctionnalité "My Face When".
+### Objets TMDB (Films)
+
+Structure simplifiée des données récupérées depuis l'API TMDB et utilisées dans l'interface :
+
+| Champ | Description |
+| :--- | :--- |
+| `id` | Identifiant unique du film |
+| `title` | Titre du film |
+| `original_title` | Titre original |
+| `release_date` | Date de sortie |
+| `overview` | Synopsis / Résumé |
+| `poster_path` | Chemin de l'affiche (poster) |
+| `backdrop_path` | Chemin de l'image de fond (cliché du film) |
+
+### Stockage Local (IndexedDB)
+
+#### Table `likes`
+Stocke les films ajoutés à la bibliothèque.
+
+| Propriété | Type | Description |
+| :--- | :--- | :--- |
+| `filmId` | Number (PK) | Identifiant unique (TMDB) |
+| `filmData` | Object | Objet film complet (modèle TMDB) |
+| `addedAt` | Date | Horodatage de l'ajout |
+
+#### Table `reviews`
+Stocke les critiques rédigées par l'utilisateur.
+
+| Propriété | Type | Description |
+| :--- | :--- | :--- |
+| `filmId` | Number (PK) | Identifiant du film associé |
+| `addedAt` | Date | Date de dernière modification |
+| `review` | Object | Contenu de la critique (voir détail ci-après) |
+
+**Détail de l'objet `review` :**
+
+| Champ | Type | Description |
+| :--- | :--- | :--- |
+| `rating` | Number | Note sur 5 étoiles |
+| `text` | String | Corps de la critique |
+| `location` | String | Libellé géographique (ville, pays) |
+| `mfw` | String | Référence à l'image selfie stockée en cache |
 
 ---
 
