@@ -20,7 +20,7 @@ FullBoxd est une **Progressive Web App (PWA)** moderne dédiée aux passionnés 
 
 ---
 
-##  Architecture Technique
+##  Composants Techniques
 
 ###  APIs Externes
 
@@ -29,6 +29,31 @@ FullBoxd est une **Progressive Web App (PWA)** moderne dédiée aux passionnés 
     *   Authentification via Token Bearer pour sécuriser les appels.
 2.  **OpenStreetMap (Nominatim)** :
     *   Utilisée pour le **Reverse Geocoding**. Transforme les coordonnées GPS brutes en une adresse lisible (ex: "Paris, France") pour les reviews.
+
+##  Architecture 
+
+### Architecture Logicielle
+
+*   **Routage Physique** : L'utilisation de dossiers par page (ex: `/film/index.html`) permet d'avoir des "Pretty URLs" (ex: `site.com/film/?id=...`) sans avoir besoin d'un serveur de routage complexe.
+*   **Dossier JavaScript** : Tout le code javascript est centralisé dans le même dossier, et les liens sont relatifs pour garantir la portabilité.
+*   **Clef d'API** : La clef TMDB est isolée dans `config.js` (ignoré par Git) pour sécuriser les credentials.
+*   **Séparation des Responsabilités** :
+    *   `app.js` : Point d'entrée, installation PWA et cycle de vie du Service Worker.
+    *   `search.js` : Logique d'appel API et gestion globale de la barre de recherche.
+    *   `indexeddb.js` : Couche d'abstraction pour les transactions de données locales.
+*   **Cycle de Mise à jour** : Utilisation d'un système de versioning strict dans le Service Worker avec modal de rechargement forcé pour l'intégrité du cache.
+
+### Flux de données
+
+```mermaid
+graph TD
+    User((Utilisateur)) --> UI[Interface HTML/CSS]
+    UI --> JS[Logiciels JS search.js, film.js...]
+    JS --> SW{Service Worker}
+    SW -- Cache First --> Cache[(Cache API)]
+    SW -- Fallback --> API[API TMDB]
+    JS <--> IDB[(IndexedDB)]
+```
 
 ###  Systèmes de Stockage
 
