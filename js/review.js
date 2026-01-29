@@ -170,12 +170,12 @@ async function saveReview() {
 }
 //récupère la note sélectionnée
 function getRating() {
-  let value = 0;
-    if (STAR_5.checked) { value = 1; }
-    if (STAR_4.checked) { value = 2; }
+    let value = 0;
+    if (STAR_5.checked) { value = 5; }
+    if (STAR_4.checked) { value = 4; }
     if (STAR_3.checked) { value = 3; }
-    if (STAR_2.checked) { value = 4; }
-    if (STAR_1.checked) { value = 5; }
+    if (STAR_2.checked) { value = 2; }
+    if (STAR_1.checked) { value = 1; }
     return value;
 }
 //coche les étoiles selon la note
@@ -209,7 +209,7 @@ function prepareEditValues(REVIEW) {
 }
 //déclenche la géolocalisation
 async function geoLocation() {
-    navigator.geolocation.getCurrentPosition(convertCoordinates,errorOnGeoloc);
+    navigator.geolocation.getCurrentPosition(convertCoordinates, errorOnGeoloc);
 }
 //convertit les coordonnées en adresse textuelle
 async function convertCoordinates(pos) {
@@ -217,6 +217,6 @@ async function convertCoordinates(pos) {
     const RESPONSE_JSON = await RESPONSE.json();
     LOCATION_INPUT.value = `${RESPONSE_JSON.address.house_number} ${RESPONSE_JSON.address.road}, ${RESPONSE_JSON.address.postcode} ${RESPONSE_JSON.address.municipality}`;
 }
-function errorOnGeoLoc(event){
-  console.error("ERREUR LORS DE LA GEOLOCALISATION : ", event);
+function errorOnGeoLoc(event) {
+    console.error("ERREUR LORS DE LA GEOLOCALISATION : ", event);
 }
