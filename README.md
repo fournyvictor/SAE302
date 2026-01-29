@@ -13,8 +13,8 @@ FullBoxd est une **Progressive Web App (PWA)** moderne dédiée aux passionnés 
 - **Bibliothèque Personnelle** : Système de "Like" pour sauvegarder vos films préférés.
 - **Critiques Enrichies** :
   - Notation par étoiles.
-  - Géolocalisation automatique du lieu de visionnage.
-  - **MFW (My Face When)** : Capture d'un selfie "réaction" via la caméra pour illustrer votre critique.
+  - Localisation automatique ou manuelle du lieu de visionnage.
+  - **MFW (My Face When)** : Capture optionelle d'un selfie "réaction" via la caméra pour illustrer votre critique.
 - **Mode Hors-ligne (Offline)** : Consultation de la bibliothèque et des critiques même sans connexion internet.
 - **Installation Native** : Installation sur écran d'accueil (Mobile/Desktop) avec gestion des mises à jour automatiques.
 
@@ -46,13 +46,15 @@ FullBoxd est une **Progressive Web App (PWA)** moderne dédiée aux passionnés 
 
 ## 📖 Guide d'Utilisation
 
-1.  **Rechercher** : Cliquez sur la loupe en haut à droite pour ouvrir la barre de recherche. Tapez le nom d'un film pour voir les résultats en temps réel.
-2.  **Enregistrer** : Sur la page d'un film, cliquez sur l'icône **Cœur** pour l'ajouter à votre bibliothèque. Le film et ses images seront alors disponibles hors-ligne.
+1.  **Rechercher** : Cliquez sur la loupe en haut pour ouvrir la barre de recherche. Tapez le nom d'un film pour voir les résultats en temps réel.
+2.  **Enregistrer** : Sur la page d'un film, cliquez sur l'icône ![coeur](./Misc/heart.svg) pour l'ajouter à votre bibliothèque. Le film et ses images seront alors disponibles hors-ligne.
 3.  **Critiquer** : Cliquez sur l'icône **Livre** pour ouvrir l'éditeur. Vous pouvez :
+    *   Écrire votre passionnante critique.
     *   Attribuer une note (étoiles).
     *   Prendre un selfie "MFW" (My Face When) via votre caméra.
     *   Utiliser "Use my current location" pour localiser votre visionnage.
-4.  **Installer** : Sur mobile ou desktop (Chrome/Edge), un bouton "Install App" en bas de page vous permet de transformer le site en application native.
+> Écrire une critique ajoute de facto le film a votre bibliothèque, ce qui le rend disponible hors-ligne.
+5.  **Installer** : Sur mobile ou desktop, un popup vous proposera d'installer l'application. Si vous déclinez par inadvertance, un bouton "Install App" en bas de page vous permet d'installer l'application.
 
 ---
 
@@ -144,8 +146,9 @@ graph TD
 2.  **Mises à jour** : Détection automatique des changements de version et invitation au rechargement.
 3.  **Manifeste** : Permet l'installation en "Standalone" sur l'écran d'accueil.
 
-## 🚀 Roadmap & Évolutions
+##  Roadmap & Évolutions
 
+- [ ] **Fix CORS** : Pérennisation du workaround par proxy pour les conflits de politiques CORS.
 - [ ] **Refactorisation du Code** : Refactorisation et optimisation du code pour des performances accrues et une serviçabilité maximale.
 - [ ] **Mode Sombre Automatique** : Support du `prefers-color-scheme` pour un confort visuel accru.
 - [ ] **Synchronisation DB** : Synchroniser les données utilisateur avec une base de données SQL. Cela permettrait à l'utilisateur de partager ses critiques et de voir les critiques de ses pairs.
@@ -155,7 +158,7 @@ graph TD
 
 ---
 
-## 👤 Auteur
+##  Auteur
 
 **Victor Fourny**
 *Email : victor.fourny@etu.univ-smb.fr*
