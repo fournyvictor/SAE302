@@ -34,11 +34,10 @@ function updateSearchBar() {
         if (!navigator.onLine) { //si non connecté à internet
             SEARCHBAR_DROPDOWN_LIST.innerHTML = '<li class="p-3 text-center text-secondary small">Research is only available online</li>'; //message searchbar indispo hors ligne
             SEARCHBAR_DROPDOWN.show(); //afficher le dropdown
-            return;
-        }
-        searchTmdb(SEARCHBAR_STRING); //sinon effectuer la recherche
-        SEARCHBAR_DROPDOWN.show(); //afficher dropdown
-
+        }else{
+              searchTmdb(SEARCHBAR_STRING); //sinon effectuer la recherche
+              SEARCHBAR_DROPDOWN.show(); //afficher dropdown
+            }
     } else {
         SEARCHBAR_DROPDOWN.hide(); //si rien de tapé, cacher le dropdown
     }
@@ -66,21 +65,22 @@ function resetSearchBar() { //remise à zéro searchbar (voir selectsearchbar)
     if (PAGE_TITLE) PAGE_TITLE.style.opacity = "1";
 }
 
+
 function createSeachDropdownHtmlList(array) { //création du dropdown avec les éléments récupérés
     let html = '';
     for (let element of array) { //itérer pour chaque objet du tableau renvoyé par tmdb
         html += `<li><a href="./film/?id=${element.id}">
                 <div class="card dropdown-search-card">
                     <div class="d-flex">
-                        
+
                             <img src="https://image.tmdb.org/t/p/w342${element.poster_path}" class="rounded-start" alt="${element.title} poster">
-                        
-                        
+
+
                             <div class="card-body">
                                 <h5 class="card-title">${element.title}</h5>
                                     <p class="card-text"><small class="year-card">${element.release_date.substring(0, 4)}</small></p>
                                     <p class="card-text card-text-truncate">${element.overview}</p>
-                            
+
                         </div>
                     </div>
                 </div></a></li>`;

@@ -3,13 +3,13 @@
   "short_name": "FBXd",
   "icons": [
     {
-      "src": "/victor/SAE302/favicon/web-app-manifest-192x192.png",
+      "src": "/fournyv/SAE302/favicon/web-app-manifest-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/victor/SAE302/favicon/web-app-manifest-512x512.png",
+      "src": "/fournyv/SAE302/favicon/web-app-manifest-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -20,6 +20,6 @@
   "display": "standalone",
   "description": "FullBoxd",
   "orientation": "portrait",
-  "start_url": "https://webdev.fourny.org/victor/SAE302/",
-  "scope": "https://webdev.fourny.org/victor/SAE302/"
+  "start_url": "https://srv-peda2.iut-acy.univ-smb.fr/fournyv/SAE302/",
+  "scope": "https://srv-peda2.iut-acy.univ-smb.fr/fournyv/SAE302/"
 }

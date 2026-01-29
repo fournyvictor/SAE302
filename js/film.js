@@ -58,7 +58,7 @@ function makeFilmDisplayHtml(DATA, CAST) {
     const YEAR = DATA.release_date.substring(0, 4);
     DATA_BACKDROP_IMAGE.style.backgroundImage = `url('https://image.tmdb.org/t/p/original${DATA.backdrop_path}')`;
     DATA_IMAGE_POSTER.src = `https://image.tmdb.org/t/p/original${DATA.poster_path}`;
-    REVIEW_BUTTON.href = `https://webdev.fourny.org/victor/SAE302/review/?id=${DATA.id}`
+    REVIEW_BUTTON.href = `https://srv-peda2.iut-acy.univ-smb.fr/fournyv/SAE302/review/?id=${DATA.id}`
     DATA_FILM_TITLE.innerHTML = DATA.title;
     DATA_FILM_YEAR.innerHTML = YEAR;
     DATA_ORIGINAL_TITLE.innerHTML = DATA.original_title;
@@ -90,10 +90,7 @@ function makeFilmDisplayHtml(DATA, CAST) {
 }
 //partage natif du film
 async function shareMovie(SHARE_DATA) {
-    try {
-        await navigator.share(SHARE_DATA);
-    } catch (err) {
-    }
+  await navigator.share(SHARE_DATA);
 }
 //met à jour l'icône de review
 async function updateReviewPicto(FILM_ID) {

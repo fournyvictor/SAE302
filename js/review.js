@@ -133,8 +133,8 @@ function createReviewReadCard(REVIEW) {
 }
 //récupère la photo selfie depuis le cache
 async function getMFWImageFromCache(FILM_ID) {
-    const CACHE = await caches.open("mfw-cache");
-    const RESPONSE = await CACHE.match("/mfw/" + FILM_ID);
+    const CACHE = await caches.open("mfw-cache"); // ouverture du cache mfw-cache
+    const RESPONSE = await CACHE.match("/mfw/" + FILM_ID); //creer chemin
     const IMG_TAG = document.getElementById("read-mfw-image");
     const IMG_CONTAINER = document.getElementById("read-mfw-container");
 
@@ -170,12 +170,13 @@ async function saveReview() {
 }
 //récupère la note sélectionnée
 function getRating() {
-    if (STAR_5.checked) { return 5; }
-    if (STAR_4.checked) { return 4; }
-    if (STAR_3.checked) { return 3; }
-    if (STAR_2.checked) { return 2; }
-    if (STAR_1.checked) { return 1; }
-    return 0;
+  let value = 0;
+    if (STAR_5.checked) { value = 1; }
+    if (STAR_4.checked) { value = 2; }
+    if (STAR_3.checked) { value = 3; }
+    if (STAR_2.checked) { value = 4; }
+    if (STAR_1.checked) { value = 5; }
+    return value;
 }
 //coche les étoiles selon la note
 function setRating(VALUE) {
@@ -208,11 +209,14 @@ function prepareEditValues(REVIEW) {
 }
 //déclenche la géolocalisation
 async function geoLocation() {
-    navigator.geolocation.getCurrentPosition(convertCoordinates);
+    navigator.geolocation.getCurrentPosition(convertCoordinates,errorOnGeoloc);
 }
 //convertit les coordonnées en adresse textuelle
 async function convertCoordinates(pos) {
     const RESPONSE = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&format=json`);
     const RESPONSE_JSON = await RESPONSE.json();
     LOCATION_INPUT.value = `${RESPONSE_JSON.address.house_number} ${RESPONSE_JSON.address.road}, ${RESPONSE_JSON.address.postcode} ${RESPONSE_JSON.address.municipality}`;
+}
+function errorOnGeoLoc(event){
+  console.error("ERREUR LORS DE LA GEOLOCALISATION : ", event);
 }

@@ -58,7 +58,6 @@ function checkIfMovieLiked(MOVIE_ID) {
         REQUEST.onupgradeneeded = onDBUgradeNeeded; //si pas la bonne version
         REQUEST.onerror = onDBError; //si echec
         REQUEST.onsuccess = onDBSuccessCheckLike.bind(this, resolve, MOVIE_ID); //si reussite (bind pour passer des arguments a un callback)
-
     });
 }
 // Si ouverture db réussie
@@ -117,9 +116,9 @@ async function successfullyAddedLike(LIKED, MOVIE) {
     //ajout des images au cache
     const CACHE = await caches.open('images-cache');
 
-    await CACHE.add(`https://image.tmdb.org/t/p/w342${MOVIE.poster_path}`);
-    await CACHE.add(`https://image.tmdb.org/t/p/original${MOVIE.poster_path}`);
-    await CACHE.add(`https://image.tmdb.org/t/p/original${MOVIE.backdrop_path}`);
+    await CACHE.add(`https://rss.kakol.fr/https://image.tmdb.org/t/p/w342${MOVIE.poster_path}`);
+    await CACHE.add(`https://rss.kakol.fr/https://image.tmdb.org/t/p/original${MOVIE.poster_path}`);
+    await CACHE.add(`https://rss.kakol.fr/https://image.tmdb.org/t/p/original${MOVIE.backdrop_path}`);
 
 }
 // Si ouverture db réussie pour suppression de like
