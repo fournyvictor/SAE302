@@ -8,7 +8,7 @@
 
 const TMDB_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YzAwODk3NTQ0ZTUwZTg5N2Y4ZGZhNzlkNzY4YjcxNyIsIm5iZiI6MTY1NjI3ODM4NC4xNTYsInN1YiI6IjYyYjhjZDcwMTdjNDQzMDA2MDRiMjEwOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZNZGW6-VnxqWAMDfqYZYtNRxbdZfLgqcMu3mysVMv-c';
 const SEARCHBAR = document.getElementById("searchbar");
-const SEARCHBAR_DROPDOWN = bootstrap.Dropdown.getOrCreateInstance(SEARCHBAR);
+const SEARCHBAR_DROPDOWN = bootstrap.Dropdown.getOrCreateInstance(SEARCHBAR); //instancier le dropdown
 const SEARCHBAR_DROPDOWN_LIST = document.getElementById("searchbar-dropdown-menu-list");
 const LOGO = document.getElementById("logo");
 const PAGE_TITLE = document.getElementById("page-title");
@@ -27,35 +27,36 @@ SEARCHBAR.addEventListener("blur", deselectSearchBar);
 /* Gestion searchbar                                                          */
 /******************************************************************************/
 
+//mise a jour de du dropdown searchbar
 function updateSearchBar() {
-    const SEARCHBAR_STRING = SEARCHBAR.value;
-    if (SEARCHBAR_STRING != '') {
-        if (!navigator.onLine) {
-            SEARCHBAR_DROPDOWN_LIST.innerHTML = '<li class="p-3 text-center text-secondary small">Research is only available online</li>';
-            SEARCHBAR_DROPDOWN.show();
+    const SEARCHBAR_STRING = SEARCHBAR.value; // récupérer la valeur de la searchbar
+    if (SEARCHBAR_STRING != '') { // si searchbar non vide
+        if (!navigator.onLine) { // si non connecté à internet
+            SEARCHBAR_DROPDOWN_LIST.innerHTML = '<li class="p-3 text-center text-secondary small">Research is only available online</li>'; //message searchbar indispo hosr ligne
+            SEARCHBAR_DROPDOWN.show(); //afficher le dropdown
             return;
         }
-        searchTmdb(SEARCHBAR_STRING);
-        SEARCHBAR_DROPDOWN.show();
+        searchTmdb(SEARCHBAR_STRING); // sinon effectuer la recherche
+        SEARCHBAR_DROPDOWN.show(); //afficher dropdown
 
     } else {
-        SEARCHBAR_DROPDOWN.hide();
+        SEARCHBAR_DROPDOWN.hide(); // si rien de tapé, cacher le dropdown
     }
 }
-function selectSearchBar() {
-    LOGO.style.opacity = "0";
-    LOGO.style.pointerEvents = "none";
-    if (PAGE_TITLE) PAGE_TITLE.style.opacity = "0";
-    updateSearchBar();
-    SEARCHBAR.style.width = "75vw";
-    SEARCHBAR.placeholder = "Search...";
+function selectSearchBar() { // lorsque l'utilisateur clique dans la searchbar
+    LOGO.style.opacity = "0"; // masquer le logo
+    LOGO.style.pointerEvents = "none"; // empêcher le clic sur le logo
+    if (PAGE_TITLE) { PAGE_TITLE.style.opacity = "0"; }  // masquer le titre si il existe
+    updateSearchBar(); // mettre a jour la searchbar
+    SEARCHBAR.style.width = "75vw"; //élargir la searchbar
+    SEARCHBAR.placeholder = "Search..."; // changer le texte placeholder de loupe a Search...
 }
-function deselectSearchBar() {
+function deselectSearchBar() { //lorsque l'utilisateur clique en dehors de la searchbar
 
-    setTimeout(resetSearchBar, 200);
+    setTimeout(resetSearchBar, 200); // délai avant exécution pour éviter de casser les liens du dropdown
 
 }
-function resetSearchBar() {
+function resetSearchBar() { // remise a zéro searchbar (voir selectSearchBar)
     SEARCHBAR_DROPDOWN.hide();
     SEARCHBAR.style.width = "36px";
     SEARCHBAR.placeholder = "⌕";
@@ -65,9 +66,9 @@ function resetSearchBar() {
     if (PAGE_TITLE) PAGE_TITLE.style.opacity = "1";
 }
 
-function createSeachDropdownHtmlList(array) {
+function createSeachDropdownHtmlList(array) { //création du dropdown avec les elements récupérés
     let html = '';
-    for (let element of array) {
+    for (let element of array) { //itérer pour chaque objet du tableau renvoyé par tmdb
         html += `<li><a href="./film/?id=${element.id}">
                 <div class="card dropdown-search-card">
                     <div class="d-flex">
@@ -92,12 +93,12 @@ function createSeachDropdownHtmlList(array) {
 /* Fonctions api tmdb                                                         */
 /******************************************************************************/
 
-async function searchTmdb(SEARCHSTRING) {
+async function searchTmdb(SEARCHSTRING) { //recherche par string dans l'api tmdb
     const options = {
         method: 'GET',
         headers: {
             accept: 'application/json',
-            Authorization: `Bearer ${TMDB_TOKEN}`
+            Authorization: `Bearer ${TMDB_TOKEN}` //token utilisateur api défini en haut
         }
     };
 
@@ -111,11 +112,11 @@ async function searchTmdb(SEARCHSTRING) {
     //    .catch(err => console.error(err));
 
 
-    createSeachDropdownHtmlList(RESPONSE_JSON.results);
+    createSeachDropdownHtmlList(RESPONSE_JSON.results); // créer la liste
 }
 
+//récupérer les infos d'un film par son id
 async function getFilmData(ID) {
-
     const OPTIONS = {
         method: 'GET',
         headers: {
@@ -124,12 +125,12 @@ async function getFilmData(ID) {
         }
     };
 
-
     const RESPONSE = await fetch(`https://api.themoviedb.org/3/movie/${ID}?language=en-US`, OPTIONS);
     const RESPONSE_JSON = await RESPONSE.json();
     return RESPONSE_JSON;
 }
 
+//Récupérer le cast d'un film par son ID
 async function getMovieCast(ID) {
     const OPTIONS = {
         method: 'GET',
@@ -144,6 +145,7 @@ async function getMovieCast(ID) {
     return RESPONSE_JSON.cast;
 }
 
+//récupérer les tendences de la semaine
 async function getTrendingMovies() {
     const OPTIONS = {
         method: 'GET',
@@ -157,6 +159,8 @@ async function getTrendingMovies() {
     const RESPONSE_JSON = await RESPONSE.json();
     return RESPONSE_JSON.results;
 }
+
+//récupérer les tendences de la journée
 async function getTrendingMoviesToday() {
     const OPTIONS = {
         method: 'GET',
