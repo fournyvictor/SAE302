@@ -84,10 +84,10 @@
       </div>
     </section>
   </div>
-  <div class="modal" tabindex="-1" role="dialog" id="install-modal">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
+  <div class="modal fade" tabindex="-1" role="dialog" id="install-modal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content text-center">
+        <div class="modal-header d-flex justify-content-center">
           <h5 class="modal-title">Install FullBoxd as an application ?</h5>
         </div>
         <div class="modal-body">
@@ -95,23 +95,24 @@
             on the uncultivated !</p>
           <p>If you ignore this prompt, you will still be able to install the app from the bottom of this page.</p>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer d-flex justify-content-center">
           <button type="button" class="btn btn-outline-warning" id="install_button">Install</button>
           <button type="button" class="btn btn-outline-secondary" id="ignore-button">Ignore</button>
         </div>
       </div>
     </div>
   </div>
-  <div class="modal" tabindex="-1" role="dialog" id="reload-modal">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
+  <div class="modal fade" tabindex="-1" role="dialog" id="reload-modal" data-bs-backdrop="static"
+    data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content text-center">
+        <div class="modal-header d-flex justify-content-center">
           <h5 class="modal-title">Reload App</h5>
         </div>
         <div class="modal-body">
           <p>A significant software update was installed. Please reload the app to use it !</p>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer d-flex justify-content-center">
           <button type="button" class="btn btn-outline-warning" id="reload_button">Reload</button>
         </div>
       </div>
