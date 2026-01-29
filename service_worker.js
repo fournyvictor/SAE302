@@ -2,7 +2,7 @@
 /* Constants                                                                  */
 /******************************************************************************/
 
-const VERSION = "2.7";
+const VERSION = "2.8";
 
 const RESOURCES = [
 
@@ -15,6 +15,7 @@ const RESOURCES = [
     "./bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js",
 
     "./js/app.js",
+    "./js/config.js",
     "./js/search.js",
     "./js/home.js",
     "./js/indexeddb.js",

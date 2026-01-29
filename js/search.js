@@ -6,7 +6,7 @@
 /* Constantes                                                                 */
 /******************************************************************************/
 
-const TMDB_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YzAwODk3NTQ0ZTUwZTg5N2Y4ZGZhNzlkNzY4YjcxNyIsIm5iZiI6MTY1NjI3ODM4NC4xNTYsInN1YiI6IjYyYjhjZDcwMTdjNDQzMDA2MDRiMjEwOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZNZGW6-VnxqWAMDfqYZYtNRxbdZfLgqcMu3mysVMv-c';
+// TMDB_TOKEN est défini dans js/config.js
 const SEARCHBAR = document.getElementById("searchbar");
 const SEARCHBAR_DROPDOWN = bootstrap.Dropdown.getOrCreateInstance(SEARCHBAR); //instancier le dropdown
 const SEARCHBAR_DROPDOWN_LIST = document.getElementById("searchbar-dropdown-menu-list");
@@ -34,10 +34,10 @@ function updateSearchBar() {
         if (!navigator.onLine) { //si non connecté à internet
             SEARCHBAR_DROPDOWN_LIST.innerHTML = '<li class="p-3 text-center text-secondary small">Research is only available online</li>'; //message searchbar indispo hors ligne
             SEARCHBAR_DROPDOWN.show(); //afficher le dropdown
-        }else{
-              searchTmdb(SEARCHBAR_STRING); //sinon effectuer la recherche
-              SEARCHBAR_DROPDOWN.show(); //afficher dropdown
-            }
+        } else {
+            searchTmdb(SEARCHBAR_STRING); //sinon effectuer la recherche
+            SEARCHBAR_DROPDOWN.show(); //afficher dropdown
+        }
     } else {
         SEARCHBAR_DROPDOWN.hide(); //si rien de tapé, cacher le dropdown
     }
