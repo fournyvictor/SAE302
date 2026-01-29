@@ -20,6 +20,42 @@ FullBoxd est une **Progressive Web App (PWA)** moderne dédiée aux passionnés 
 
 ---
 
+## 📸 Aperçu de l'Interface
+
+### Version Ordinateur (Desktop)
+
+````carousel
+![Page d'accueil](./img/accueil.jpg)
+<!-- slide -->
+![Détails d'un film](./img/film.jpg)
+<!-- slide -->
+![Rédaction d'une critique](./img/review.jpg)
+````
+
+### Version Mobile (Smartphone)
+
+````carousel
+![Page d'accueil Mobile](./img/accueil_mobile.jpg)
+<!-- slide -->
+![Détails d'un film Mobile](./img/film_mobile.jpg)
+<!-- slide -->
+![Rédaction d'une critique Mobile](./img/review_mobile.jpg)
+````
+
+---
+
+## 📖 Guide d'Utilisation
+
+1.  **Rechercher** : Cliquez sur la loupe en haut à droite pour ouvrir la barre de recherche. Tapez le nom d'un film pour voir les résultats en temps réel.
+2.  **Enregistrer** : Sur la page d'un film, cliquez sur l'icône **Cœur** pour l'ajouter à votre bibliothèque. Le film et ses images seront alors disponibles hors-ligne.
+3.  **Critiquer** : Cliquez sur l'icône **Livre** pour ouvrir l'éditeur. Vous pouvez :
+    *   Attribuer une note (étoiles).
+    *   Prendre un selfie "MFW" (My Face When) via votre caméra.
+    *   Utiliser "Use my current location" pour localiser votre visionnage.
+4.  **Installer** : Sur mobile ou desktop (Chrome/Edge), un bouton "Install App" en bas de page vous permet de transformer le site en application native.
+
+---
+
 ##  Composants Techniques
 
 ###  APIs Externes
@@ -30,21 +66,28 @@ FullBoxd est une **Progressive Web App (PWA)** moderne dédiée aux passionnés 
 2.  **OpenStreetMap (Nominatim)** :
     *   Utilisée pour le **Reverse Geocoding**. Transforme les coordonnées GPS brutes en une adresse lisible (ex: "Paris, France") pour les reviews.
 
-###  Systèmes de Stockage
+###  Gestion du Cache et Persistance
 
-*   **IndexedDB** : Base de données locale intégrée au navigateur.
-    *   Stockage des films likés (`likes`).
-    *   Stockage des critiques textuelles et métadonnées (`reviews`).
-    *   Permet un accès ultra-rapide et un support offline complet.
-*   **Cache API (Service Worker)** :
-    *   Mise en cache des ressources statiques (HTML, CSS, JS, icônes).
-    *   Mise en cache dynamique des affiches de films pour la consultation hors-ligne.
-    *   Gestion fine des versions pour forcer la mise à jour de l'application.
+L'application utilise une stratégie hydride pour garantir une expérience fluide, même sans connexion.
+
+#### 1. Pre-caching (Statique)
+Dès l'installation, le **Service Worker** met en cache les fichiers essentiels (`RESOURCES` dans `service_worker.js`).
+*   **But** : Lancement instantané de l'interface et fonctionnement hors-ligne des pages structurelles.
+
+#### 2. Cache Dynamique (Images & Médias)
+Les médias sont gérés dans des compartiments séparés :
+*   **`images-cache`** : Stocke posters et backdrops. Ils sont ajoutés au cache dès qu'un utilisateur "Like" un film pour garantir que sa bibliothèque reste visuelle hors-ligne.
+*   **`mfw-cache`** : Stocke les selfies de réaction (MFW) sous forme de Blobs associés à l'ID du film.
+
+#### 3. Persistance des Données (IndexedDB)
+Les données textuelles et relations sont stockées dans **IndexedDB** (`FullBoxdDB`) :
+*   **Table `likes`** : Métadonnées complètes des films favoris.
+*   **Table `reviews`** : Notes, textes et géolocalisation.
 
 ###  Capteurs & Matériel
 
 *   **Geolocation API** : Récupération des coordonnées précises de l'utilisateur lors de la rédaction d'une critique.
-*   **Media Capture / Camera** : Utilisation de l'attribut `capture="user"` sur les entrées de fichiers pour déclencher nativement la caméra selfie sur mobile, permettant la fonctionnalité "My Face When".
+*   **Media Capture / Camera** : Utilisation de l'attribut `capture="user"` sur les entrées de fichiers pour déclencher nativement la caméra selfie sur mobile.
 
 ---
 
@@ -52,14 +95,12 @@ FullBoxd est une **Progressive Web App (PWA)** moderne dédiée aux passionnés 
 
 ### Architecture Logicielle
 
-*   **Routage Physique** : L'utilisation de dossiers par page (ex: `/film/index.html`) permet d'avoir des "Pretty URLs" (ex: `site.com/film/?id=...`) sans avoir besoin d'un serveur de routage complexe.
-*   **Dossier JavaScript** : Tout le code javascript est centralisé dans le même dossier, et les liens sont relatifs pour garantir la portabilité.
-*   **Clef d'API** : La clef TMDB est isolée dans `config.js` (ignoré par Git) pour sécuriser les credentials.
+*   **Routage Physique** : L'utilisation de dossiers par page (ex: `/film/index.html`) permet d'avoir des "Pretty URLs" sans serveur de routage complexe.
 *   **Séparation des Responsabilités** :
-    *   `app.js` : Point d'entrée, installation PWA et cycle de vie du Service Worker.
-    *   `search.js` : Logique d'appel API et gestion globale de la barre de recherche.
-    *   `indexeddb.js` : Couche d'abstraction pour les transactions de données locales.
-*   **Cycle de Mise à jour** : Utilisation d'un système de versioning strict dans le Service Worker avec modal de rechargement forcé pour l'intégrité du cache.
+    *   `app.js` : Point d'entrée, installation PWA et Service Worker.
+    *   `search.js` : Appels API TMDB et barre de recherche.
+    *   `indexeddb.js` : Persistance locale.
+*   **Clef d'API** : Isolée dans `config.js` et protégée par `.gitignore`.
 
 ### Flux de données
 
@@ -77,65 +118,40 @@ graph TD
 
 ## Modèle de Données
 
-Les données manipulées par l'application sont structurées selon les modèles suivants.
-
 ### Objets TMDB (Films)
-
-Structure simplifiée des données récupérées depuis l'API TMDB et utilisées dans l'interface :
-
 | Champ | Description |
 | :--- | :--- |
 | `id` | Identifiant unique du film |
 | `title` | Titre du film |
-| `original_title` | Titre original |
 | `release_date` | Date de sortie |
-| `overview` | Synopsis / Résumé |
-| `poster_path` | Chemin de l'affiche (poster) |
-| `backdrop_path` | Chemin de l'image de fond (cliché du film) |
+| `poster_path` | Chemin de l'affiche |
 
-### Stockage Local (IndexedDB)
+### Objets TMDB (Cast)
+| Champ | Description |
+| :--- | :--- |
+| `name` | Nom de l'acteur |
+| `character` | Rôle |
 
-#### Table `likes`
-Stocke les films ajoutés à la bibliothèque.
-
-| Propriété | Type | Description |
-| :--- | :--- | :--- |
-| `filmId` | Number (PK) | Identifiant unique (TMDB) |
-| `filmData` | Object | Objet film complet (modèle TMDB) |
-| `addedAt` | Date | Horodatage de l'ajout |
-
-#### Table `reviews`
-Stocke les critiques rédigées par l'utilisateur.
-
-| Propriété | Type | Description |
-| :--- | :--- | :--- |
-| `filmId` | Number (PK) | Identifiant du film associé |
-| `addedAt` | Date | Date de dernière modification |
-| `review` | Object | Contenu de la critique (voir détail ci-après) |
-
-**Détail de l'objet `review` :**
-
-| Champ | Type | Description |
-| :--- | :--- | :--- |
-| `rating` | Number | Note sur 5 étoiles |
-| `text` | String | Corps de la critique |
-| `location` | String | Libellé géographique (ville, pays) |
-| `mfw` | String | Référence à l'image selfie stockée en cache |
+### IndexedDB
+*   **Table `likes`** : `{ filmId (PK), filmData, addedAt }`
+*   **Table `reviews`** : `{ filmId (PK), addedAt, review: { rating, text, location, mfw } }`
 
 ---
 
 ##  Fonctionnement PWA
 
-L'application est conçue pour se comporter comme un logiciel natif :
+1.  **Service Worker** : Intercepte les requêtes pour servir le cache en priorité (**Cache-First strategy**).
+2.  **Mises à jour** : Détection automatique des changements de version et invitation au rechargement.
+3.  **Manifeste** : Permet l'installation en "Standalone" sur l'écran d'accueil.
 
-1.  **Service Worker (`service_worker.js`)** :
-    *   Intercepte les requêtes réseau (`fetch`).
-    *   Priorise la récupération depuis le cache pour la performance.
-    *   Gère la suppression des anciens caches lors du changement de version (`VERSION = "2.6"`).
-2.  **Cycle de Vie & Mises à jour** :
-    *   Détection automatique des nouvelles versions via `onupdatefound`.
-    *   Affichage d'un modal de rechargement bloquant pour garantir que l'utilisateur utilise toujours la dernière version stable.
-3.  **Manifeste** : Définit les icônes, les couleurs de thème et le comportement plein écran (`standalone`).
+## 🚀 Roadmap & Évolutions
+
+- [ ] **Refactorisation du Code** : Refactorisation et optimisation du code pour des performances accrues et une serviçabilité maximale.
+- [ ] **Mode Sombre Automatique** : Support du `prefers-color-scheme` pour un confort visuel accru.
+- [ ] **Synchronisation DB** : Synchroniser les données utilisateur avec une base de données SQL. Cela permettrait à l'utilisateur de partager ses critiques et de voir les critiques de ses pairs.
+- [ ] **Partage Social** : Partage direct des critiques sur Twitter/Threads avec l'image MFW.
+- [ ] **Listes Personnalisées** : Permettre à l'utilisateur de créer ses propres collections (ex: "À voir", "Classiques").
+
 
 ---
 
