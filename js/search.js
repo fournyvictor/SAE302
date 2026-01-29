@@ -69,7 +69,7 @@ function resetSearchBar() { //remise à zéro searchbar (voir selectsearchbar)
 function createSeachDropdownHtmlList(array) { //création du dropdown avec les éléments récupérés
     let html = '';
     for (let element of array) { //itérer pour chaque objet du tableau renvoyé par tmdb
-        html += `<li><a href="./?id=${element.id}">
+        html += `<li><a href="../film/?id=${element.id}">
                 <div class="card dropdown-search-card">
                     <div class="d-flex">
 
