@@ -25,13 +25,16 @@ FullBoxd est une **Progressive Web App (PWA)** moderne dédiée aux passionnés 
 ### Version Ordinateur (Desktop)
 
 #### Page d'accueil
-<img src="./img/accueil.jpg" width="800" alt="Accueil">
+<img src="./img/accueil.png" width="800" alt="Accueil">
 
 #### Détails d'un film
-<img src="./img/film.jpg" width="800" alt="Détails">
+<img src="./img/film.png" width="800" alt="Détails">
 
 #### Rédaction d'une critique
-<img src="./img/review.jpg" width="800" alt="Critique">
+<img src="./img/review.png" width="800" alt="Critique">
+
+#### Bibliothèque
+<img src="./img/library.png" width="800" alt="Critique">
 
 ### Version Mobile (Smartphone)
 
