@@ -24,15 +24,20 @@ FullBoxd est une **Progressive Web App (PWA)** moderne dédiée aux passionnés 
 
 ### Version Ordinateur (Desktop)
 
-| Page d'accueil | Détails d'un film | Rédaction d'une critique |
-| :---: | :---: | :---: |
-| <img src="https://github.com/favicon.ico" width="150"> | ![Détails](./img/film.jpg) | ![Critique](./img/review.jpg) |
+#### Page d'accueil
+<img src="./img/accueil.jpg" width="800" alt="Accueil">
+
+#### Détails d'un film
+<img src="./img/film.jpg" width="800" alt="Détails">
+
+#### Rédaction d'une critique
+<img src="./img/review.jpg" width="800" alt="Critique">
 
 ### Version Mobile (Smartphone)
 
 | Page d'accueil | Détails d'un film | Rédaction d'une critique |
 | :---: | :---: | :---: |
-| ![Accueil](./img/accueil_mobile.png) | ![Détails](./img/film.gif) | ![Critique](./img/review.gif) |
+| <img src="./img/accueil_mobile.png" width="250" alt="Accueil"> | <img src="./img/film.gif" width="250" alt="Détails"> | <img src="./img/review.gif" width="250" alt="Critique"> |
 
 ---
 
