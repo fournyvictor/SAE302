@@ -10,6 +10,7 @@
   <meta name="author" content="victor.fourny@etu.univ-smb.fr" />
   <meta name="description" content="FullBoxd">
 
+  <!-- Opengraph -->
   <meta property="og:description" content="Look down on the uncultivated">
   <meta property="og:image" content="https://webdev.fourny.org/victor/SAE302/favicon/web-app-manifest-512x512.png">
   <meta property="og:locale" content="en_US">
@@ -17,7 +18,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://webdev.fourny.org/victor/SAE302/">
 
-
+  <!-- Favicon et webmanifest -->
   <link rel="icon" type="image/png" href="./favicon/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="./favicon/favicon.svg" />
   <link rel="shortcut icon" href="./favicon/favicon.ico" />
@@ -26,16 +27,11 @@
   <link rel="manifest" href="./favicon/site.webmanifest" />
   <title>FullBoxd</title>
 
-
-
-  <!-- Development version -->
-  <!-- Production version -->
-  <script defer src="./bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
-  <script defer src="./js/app.js"></script>
-
-
+  <!-- Lib css, fichier css et javascript -->
   <link rel="stylesheet" href="./bootstrap-5.3.8-dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="./css/style.css">
+  <script defer src="./bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+  <script defer src="./js/app.js"></script>
   <script defer src="./js/search.js"></script>
   <script defer src="./js/home.js"></script>
 
@@ -43,6 +39,7 @@
 
 <body>
   <header>
+    <!-- Logo / menu -->
     <div class="logo" id="logo">
       <img src="./Misc/logo_the_long_way.svg">
       <div class="logo-actions">
@@ -53,6 +50,7 @@
     </div>
   </header>
 
+  <!-- Barre de recherche -->
   <div class="search-container">
     <div class="dropdown">
       <input type="search" class="form-control" id="searchbar" placeholder="⌕" name="q" autocomplete="off" />
@@ -60,15 +58,13 @@
       </ul>
     </div>
   </div>
+  <!-- Caroussels -->
   <div class="container mt-5 pt-5 text-white">
-
-    <!-- Section: Trending Movies -->
+    <!-- Section: Trending Movies Today -->
     <section id="trending-section" class="mb-5">
       <h3 class="fw-bold mb-3 text-uppercase small text-secondary">Trending Today</h3>
-
       <!-- Horizontal Scroll Container -->
       <div id="trending-container-today" class="scrolling-wrapper">
-        <!-- JS will inject movie cards here -->
       </div>
     </section>
   </div>
@@ -77,13 +73,13 @@
     <!-- Section: Trending Movies -->
     <section id="trending-section" class="mb-5">
       <h3 class="fw-bold mb-3 text-uppercase small text-secondary">Trending This Week</h3>
-
       <!-- Horizontal Scroll Container -->
       <div id="trending-container" class="scrolling-wrapper">
-        <!-- JS will inject movie cards here -->
       </div>
     </section>
   </div>
+
+  <!-- Modal d'installation -->
   <div class="modal fade" tabindex="-1" role="dialog" id="install-modal">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content text-center">
@@ -102,6 +98,8 @@
       </div>
     </div>
   </div>
+
+  <!-- Modal de reload -->
   <div class="modal fade" tabindex="-1" role="dialog" id="reload-modal" data-bs-backdrop="static"
     data-bs-keyboard="false">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -118,13 +116,12 @@
       </div>
     </div>
   </div>
+
+  <!-- Footer avec boutons install et reload -->
   <footer class="d-flex justify-content-center gap-3 p-4 mt-5 border-top border-secondary">
     <button id="install-app-btn" class="btn btn-outline-warning d-none">Install App</button>
     <button id="update-app-btn" class="btn btn-outline-warning d-none">Update App</button>
   </footer>
-
-  <!-- Modal kept for legacy or remove if user wants pure button flow? Keeping strictly footer request -->
-  <!-- ... keeping existing modal code ... -->
 
 </body>
 
