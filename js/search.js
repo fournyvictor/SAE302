@@ -1,3 +1,11 @@
+/******************************************************************************/
+/* Recherche TMDB et gestion de la barre de recherche                         */
+/******************************************************************************/
+
+/******************************************************************************/
+/* Constantes                                                                 */
+/******************************************************************************/
+
 const TMDB_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YzAwODk3NTQ0ZTUwZTg5N2Y4ZGZhNzlkNzY4YjcxNyIsIm5iZiI6MTY1NjI3ODM4NC4xNTYsInN1YiI6IjYyYjhjZDcwMTdjNDQzMDA2MDRiMjEwOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZNZGW6-VnxqWAMDfqYZYtNRxbdZfLgqcMu3mysVMv-c';
 const SEARCHBAR = document.getElementById("searchbar");
 const SEARCHBAR_DROPDOWN = bootstrap.Dropdown.getOrCreateInstance(SEARCHBAR);
@@ -5,13 +13,18 @@ const SEARCHBAR_DROPDOWN_LIST = document.getElementById("searchbar-dropdown-menu
 const LOGO = document.getElementById("logo");
 const PAGE_TITLE = document.getElementById("page-title");
 
+
+/******************************************************************************/
+/* EventListeners                                                             */
+/******************************************************************************/
+
 SEARCHBAR.addEventListener("input", updateSearchBar);
 SEARCHBAR.addEventListener("focus", selectSearchBar);
 SEARCHBAR.addEventListener("blur", deselectSearchBar);
 
 
 /******************************************************************************/
-/* TEST TMDB                                                    */
+/* Gestion searchbar                                                          */
 /******************************************************************************/
 
 function updateSearchBar() {
@@ -52,26 +65,6 @@ function resetSearchBar() {
     if (PAGE_TITLE) PAGE_TITLE.style.opacity = "1";
 }
 
-async function searchTmdb(SEARCHSTRING) {
-    const options = {
-        method: 'GET',
-        headers: {
-            accept: 'application/json',
-            Authorization: `Bearer ${TMDB_TOKEN}`
-        }
-    };
-
-    const RESPONSE = await fetch('https://api.themoviedb.org/3/search/movie?query=' + SEARCHSTRING + '&include_adult=false&language=en-US&page=1', options);
-    const RESPONSE_JSON = await RESPONSE.json();
-    //fetch('https://api.themoviedb.org/3/search/movie?query=' + SEARCHSTRING + '&include_adult=false&language=en-US&page=1', options)
-    //    .then(res => res.json())
-    //    .then(res => console.log(res.results))
-    //    .catch(err => console.error(err));
-
-
-    createSeachDropdownHtmlList(RESPONSE_JSON.results);
-}
-
 function createSeachDropdownHtmlList(array) {
     let html = '';
     for (let element of array) {
@@ -90,9 +83,35 @@ function createSeachDropdownHtmlList(array) {
                         </div>
                     </div>
                 </div></a></li>`;
-        // html += '<li><img href="https://image.tmdb.org/t/p/w92' + element.poster_path + '"><a class="dropdown-item" href="#">' + element.title + '</a></li>';
     }
     SEARCHBAR_DROPDOWN_LIST.innerHTML = html;
+}
+
+
+/******************************************************************************/
+/* Fonctions api tmdb                                                         */
+/******************************************************************************/
+
+async function searchTmdb(SEARCHSTRING) {
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${TMDB_TOKEN}`
+        }
+    };
+
+    const RESPONSE = await fetch('https://api.themoviedb.org/3/search/movie?query=' + SEARCHSTRING + '&include_adult=false&language=en-US&page=1', options);
+    const RESPONSE_JSON = await RESPONSE.json();
+
+    //Mode opératoire proposé par la doc de tmdb
+    //fetch('https://api.themoviedb.org/3/search/movie?query=' + SEARCHSTRING + '&include_adult=false&language=en-US&page=1', options)
+    //    .then(res => res.json())
+    //    .then(res => console.log(res.results))
+    //    .catch(err => console.error(err));
+
+
+    createSeachDropdownHtmlList(RESPONSE_JSON.results);
 }
 
 async function getFilmData(ID) {

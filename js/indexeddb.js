@@ -3,16 +3,23 @@
 /* INTERACTIONS DB                                                            */
 /******************************************************************************/
 
-// CONSTANTES 
+/******************************************************************************/
+/* Constantes                                                                 */
+/******************************************************************************/
 
 const DB = "FullBoxdDB";
 const DB_VERSION = 6;
 
-// FONCTIONS GENERALES
+/******************************************************************************/
+/* Fonctions générales                                                        */
+/******************************************************************************/
 
+//Gestion des erreurs ouverture DB
 function onDBError(event) {
     console.error("IndexedDB Error:", event.target.error);
 }
+
+//Mise à jour / création de la db
 function onDBUgradeNeeded(event) {
     const BDD = event.target.result;
     //creation de likes si non existant
@@ -24,10 +31,14 @@ function onDBUgradeNeeded(event) {
         BDD.createObjectStore("reviews", { keyPath: "filmId" });
     }
 }
+
+//Gestion des erreurs transaction DB
 function dbTransactionError(event) {
 
     console.error("DB transaction error: ", event.target.error);
 }
+
+//Gestion des erreurs transaction DB impliquant une promesse
 function dbTransactionErrorResolve(resolve, event) {
     resolve(false);
     console.error("DB transaction error: ", event.target.error);
@@ -35,8 +46,11 @@ function dbTransactionErrorResolve(resolve, event) {
 }
 
 
-// FONCTIONS LIKE
+/******************************************************************************/
+/* Fonctions like                                                             */
+/******************************************************************************/
 
+//Check si le film est dans la librairie
 function checkIfMovieLiked(MOVIE_ID) {
     return new Promise(function (resolve) { //promesse pour pouvoir attendre la fin
         const REQUEST = indexedDB.open(DB, DB_VERSION);
@@ -69,6 +83,8 @@ function onCheckLikedResult(resolve, event) {
     }
 }
 
+
+//Liker / déliker le film
 async function onLikeButtonClick(MOVIE) {
     const LIKED = await checkIfMovieLiked(MOVIE.id);
     const REQUEST = indexedDB.open(DB, DB_VERSION);
@@ -137,6 +153,9 @@ function updateLikePicto(LIKE, MOVIE_ID) {
 
     }
 }
+
+
+//Récupérer la liste des films likés
 function getAllLikedMovies() {
     return new Promise(function (resolve) {
         const REQUEST = indexedDB.open(DB, DB_VERSION);
@@ -146,7 +165,6 @@ function getAllLikedMovies() {
         REQUEST.onsuccess = onDBSuccessGetAllLikedMovies.bind(this, resolve);
     }
     );
-
 }
 function onDBSuccessGetAllLikedMovies(resolve, event) {
     const BDD = event.target.result;
@@ -164,11 +182,16 @@ function onGetAllLikedMoviesResult(resolve, event) {
     RESULT.sort(trierParDate); //trier par date
     resolve(RESULT);
 }
-function trierParDate(a, b) {
+function trierParDate(a, b) { //Tri par date la plus récente en premier
     return new Date(a.addedAt) - new Date(b.addedAt); // delta de temps
 }
-/////////// FONCTIONS REVIEW ///////////
 
+
+/******************************************************************************/
+/* Fonctions review                                                           */
+/******************************************************************************/
+
+//Récupérer la review par l'id film
 function getMovieReview(MOVIE_ID) {
     return new Promise(function (resolve) { //promesse pour pouvoir attendre la fin
         const REQUEST = indexedDB.open(DB, DB_VERSION);
@@ -194,8 +217,8 @@ function onGetMovieReview(resolve, event) {
     resolve(event.target.result);
 }
 
-// AJOUT D'UNE REVIEW
 
+//Ajout d'une review / écrasement pour update d'une review
 function submitMovieReview(MOVIE_ID, REVIEW) {
     return new Promise(function (resolve) {
         const REQUEST = indexedDB.open(DB, DB_VERSION);

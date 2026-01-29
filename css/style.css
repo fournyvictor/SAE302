@@ -1,8 +1,6 @@
-@charset "UTF-8";
-
-/**************************************/
-/* Reset                              */
-/**************************************/
+/* ==========================================================================
+   1. BASE RESETS & GLOBAL STYLES
+   ========================================================================== */
 
 *,
 *::before,
@@ -13,24 +11,24 @@
     padding: 0;
 }
 
-/**************************************/
-/* Style                              */
-/**************************************/
-
 body {
+    background-color: #14181c;
     padding: 1rem;
 }
 
+/* Base typography */
 h1 {
     font-family: Arial;
     font-size: 2rem;
 }
 
+/* Logo image inside title */
 h1 img {
     height: 1.5rem;
     vertical-align: baseline;
 }
 
+/* Default button styling */
 button {
     font-family: Arial;
     font-size: 1rem;
@@ -39,14 +37,208 @@ button {
     padding: 0.2rem 1rem;
 }
 
+/* Hide buttons when disabled */
 button:disabled {
     display: none;
 }
 
+/* Utilities */
 .year-card {
     color: #aeaeae;
 }
 
+.hidden {
+    display: none !important;
+}
+
+/* Shadow for text overlaying images */
+.text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* ==========================================================================
+   2. NAVIGATION & LOGO
+   ========================================================================== */
+
+.logo {
+    opacity: 1;
+    position: absolute;
+    transition: all 0.5s ease;
+    z-index: 90;
+    top: 0;
+    left: 0;
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 10vh;
+    height: 10vh;
+    transition: height 0.3s ease-in-out;
+}
+
+/* Decorative border for the logo */
+.logo::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 5px solid #14181c;
+    border-radius: 5px;
+    pointer-events: none;
+    box-sizing: border-box;
+    z-index: 91;
+}
+
+/* Logo expansion on hover */
+.logo:hover {
+    height: 15vh;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+
+/* Container for nav buttons inside logo */
+.logo-actions {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    z-index: 92;
+    visibility: hidden;
+    transition: visibility 0s linear 0.2s;
+}
+
+.logo:hover .logo-actions {
+    visibility: visible;
+    transition-delay: 0.2s;
+}
+
+.logo-actions a {
+    flex: 1;
+    display: block;
+    position: relative;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Library button inside navigation */
+#btn-library {
+    opacity: 0;
+    flex: 0;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 40%;
+    background-image: url('../Misc/icon_heart.svg');
+}
+
+.logo:hover #btn-library {
+    flex: 1;
+    opacity: 1;
+    transition-delay: 0.1s;
+}
+
+#btn-library:hover {
+    background-image: url('../Misc/icon_heart_full.svg');
+    transition: ease-in;
+    transition-duration: 0.1s;
+    cursor: pointer;
+}
+
+/* Circular action buttons (Like, Review, Share) */
+.action-btn {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-color: #456;
+    margin-top: 0;
+}
+
+.action-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: #fff;
+}
+
+.action-btn-wide {
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   3. SEARCH INTERFACE
+   ========================================================================== */
+
+.search-container {
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+}
+
+.search-container input {
+    background-color: #2c3440;
+    color: #aeaeae;
+    border: 1px solid #456;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 20px;
+    text-align: center;
+    padding: 0;
+    width: 100%;
+    transition: background-color 0.2s, border-color 0.2s, width 0.3s ease-in-out;
+    -webkit-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+}
+
+.search-container input::placeholder {
+    color: #678;
+}
+
+.search-container input:focus {
+    background-color: #3b4657;
+    padding: 5px 15px;
+    text-align: left;
+    color: #fff;
+    border-color: #fff;
+    box-shadow: none;
+    outline: none;
+}
+
+/* Specific button for search (legacy) */
+#bouton-recherche {
+    background-image: url("../Misc/icon_search.svg");
+}
+
+/* Standard search décorations removal */
+.search-container input::-webkit-search-decoration,
+.search-container input::-webkit-search-cancel-button,
+.search-container input::-webkit-search-results-button,
+.search-container input::-webkit-search-results-decoration {
+    display: none;
+}
+
+/* ==========================================================================
+   4. COMPONENTS & SHARED UI
+   ========================================================================== */
+
+/* Truncation utility for text blocks */
 .card-text-truncate {
     display: -webkit-box;
     -webkit-line-clamp: 5;
@@ -71,30 +263,12 @@ button:disabled {
     overflow: hidden;
 }
 
+/* Search suggestions dropdown list */
 .dropdown-menu {
     max-height: 80vh;
     width: 75vw;
     overflow-y: auto;
     background-color: #2c3440;
-}
-
-.dropdown-search-card:hover {
-    background-color: grey;
-    transition: ease-in-out;
-    transition-duration: 200ms;
-}
-
-.dropdown-search-card {
-    color: white;
-    background-color: #2c3440;
-    width: 100%;
-    transition: ease-in-out;
-    transition-duration: 200ms;
-}
-
-.dropdown-search-card img {
-    max-width: 154px;
-    max-height: 231px;
 }
 
 .dropdown-menu a {
@@ -103,12 +277,70 @@ button:disabled {
     color: inherit;
 }
 
+/* Cards used in search dropdown */
+.dropdown-search-card {
+    color: white;
+    background-color: #2c3440;
+    width: 100%;
+    transition: ease-in-out;
+    transition-duration: 200ms;
+}
+
+.dropdown-search-card:hover {
+    background-color: grey;
+    transition: ease-in-out;
+    transition-duration: 200ms;
+}
+
+/* Fixed dimensions for posters in search results */
+.dropdown-search-card img {
+    max-width: 154px;
+    max-height: 231px;
+}
+
+/* Horizontal scrolling sections (Trending) */
+.scrolling-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scrolling-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* Trending movie thumbnail cards */
+.trending-card {
+    flex: 0 0 auto;
+    width: 160px;
+    transition: transform 0.2s;
+}
+
+.trending-card:hover {
+    transform: scale(1.05);
+}
+
+.trending-card img {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ==========================================================================
+   5. BANNERS & BACKDROPS (MOVIE PAGES)
+   ========================================================================== */
+
 .banner-wrapper {
     height: 450px;
     overflow: hidden;
     background-color: #14181c;
 }
 
+/* Cinematic backdrop image */
 .backdrop-image {
     width: 100%;
     height: 100%;
@@ -117,6 +349,7 @@ button:disabled {
     filter: brightness(0.6);
 }
 
+/* Fading overlay for backdrops */
 .backdrop-overlay {
     position: absolute;
     top: 0;
@@ -137,11 +370,16 @@ button:disabled {
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+/* ==========================================================================
+   6. FILM PAGE (CAST & SPECIFICS)
+   ========================================================================== */
+
 #film-body {
     background-color: #14181c;
     padding: 0;
 }
 
+/* Scrollable cast list */
 .cast-scroll-container {
     max-height: 350px;
     overflow-y: auto;
@@ -161,21 +399,7 @@ button:disabled {
     border-radius: 10px;
 }
 
-.cast-name {
-    color: #9ab;
-    background: rgba(153, 170, 187, 0.1);
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.cast-name:hover {
-    background: rgba(153, 170, 187, 0.2);
-    color: #fff;
-}
-
+/* Individual cast member photo */
 .cast-photo-wrapper {
     width: 50px;
     height: 50px;
@@ -197,10 +421,21 @@ button:disabled {
     min-width: 0;
 }
 
+/* Cast name label with hover effect */
 .cast-name {
     font-size: 0.9rem;
     line-height: 1.2;
     color: #ffffff;
+    background: rgba(153, 170, 187, 0.1);
+    padding: 2px 6px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.cast-name:hover {
+    background: rgba(153, 170, 187, 0.2);
+    color: #fff;
 }
 
 .cast-role {
@@ -209,321 +444,59 @@ button:disabled {
     margin-top: 2px;
 }
 
-.logo {
-    opacity: 1;
-    position: absolute;
-    transition: all 0.5s ease;
-    z-index: 90;
-    top: 0;
-    /* Coincide avec le haut */
-    left: 0;
-    margin-top: 10px;
-    margin-left: 10px;
-    border-radius: 5px;
-    /* Petit arrondi pour garder la forme rectangulaire si besoin */
-    overflow: hidden;
-
-    width: 10vh;
-    /* Largeur fixe */
-    height: 10vh;
-    /* Hauteur initiale */
-
-    transition: height 0.3s ease-in-out;
-    /* Animation fluide */
+/* Metadata link with icon */
+#share-button img {
+    margin-right: 5px;
 }
 
-/* Bordure par-dessus l'image via pseudo-élément */
-.logo::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 5px solid #14181c;
-    border-radius: 5px;
-    /* Doit correspondre à celui du parent */
-    pointer-events: none;
-    /* Ignore les clics */
-    box-sizing: border-box;
-    z-index: 91;
-    /* Au-dessus de l'image */
-}
-
-/* Au survol, on "déploie" vers le bas */
-.logo:hover {
-    height: 15vh;
-    /* Réduit pour 2 boutons (Home + Heart) */
-}
-
-.logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top;
-    /* Important : le haut de l'image reste fixe */
-}
-
-/* On s'assure que le conteneur de liens prend toute la place */
-.logo-actions {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    z-index: 92;
-    visibility: hidden;
-    /* Cache les liens par défaut */
-    transition: visibility 0s linear 0.2s;
-    /* Cache instantanément en quittant, ou garde un délai? 
-       En fait, on veut qu'il apparaisse avec un délai au survol. */
-}
-
-.logo:hover .logo-actions {
-    visibility: visible;
-    transition-delay: 0.2s;
-    /* Délai de 200ms avant de devenir cliquable (pour mobile) */
-}
-
-
-/* Chaque lien prend une part de la hauteur */
-.logo-actions a {
-    flex: 1;
-    display: block;
-    position: relative;
-    transition: opacity 0.3s ease-in-out;
-}
-
-/* Le bouton 2 (Likes) ne doit pas prendre de place quand le logo est petit */
-#btn-library {
-    opacity: 0;
-    flex: 0;
-    /* Pas de place par défaut */
-    overflow: hidden;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 40%;
-}
-
-.logo:hover #btn-library {
-    flex: 1;
-    opacity: 1;
-    transition-delay: 0.1s;
-}
-
-
-/* Picto Coeur */
-#btn-library {
-    background-image: url('../Misc/icon_heart.svg');
-}
-
-#btn-library:hover {
-    background-image: url('../Misc/icon_heart_full.svg');
-    transition: ease-in;
-    transition-duration: 0.1s;
-    cursor: pointer;
-}
-
-
-/**************************************/
-
-.action-btn {
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-color: #456;
-    margin-top: 0;
-}
-
-.action-btn:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: #fff;
-}
-
-body {
-    background-color: #14181c;
-}
-
-.search-container {
-    position: absolute;
-    top: 25px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 36px;
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-}
-
-.search-container input {
-    background-color: #2c3440;
-    color: #aeaeae;
-    border: 1px solid #456;
-    height: 36px;
-    line-height: 36px;
-    border-radius: 20px;
-    text-align: center;
-    padding: 0;
-    width: 100%;
-    transition: background-color 0.2s, border-color 0.2s, width 0.3s ease-in-out;
-}
-
-.search-container input::placeholder {
-    color: #678;
-}
-
-.search-container input:focus {
-    background-color: #3b4657;
-    padding: 5px 15px;
-    text-align: left;
-    color: #fff;
-    border-color: #fff;
-    box-shadow: none;
-    outline: none;
-}
-
-#bouton-recherche {
-    background-image: url("../Misc/icon_search.svg");
-}
-
-.search-container input {
-    /* ... tes propriétés existantes ... */
-    -webkit-appearance: none;
-    /* Ajoute ceci */
-    appearance: none;
-    /* Et ceci */
-    box-sizing: border-box;
-    /* Toujours utile pour être sûr des dimensions */
-}
-
-/* Ajoute cette nouvelle règle pour supprimer les marges internes cachées sur Chrome/Safari */
-.search-container input::-webkit-search-decoration,
-.search-container input::-webkit-search-cancel-button,
-.search-container input::-webkit-search-results-button,
-.search-container input::-webkit-search-results-decoration {
-    display: none;
-}
+/* ==========================================================================
+   7. LIBRARY PAGE
+   ========================================================================== */
 
 #movie-list-container {
     margin-top: 12vh;
 }
 
-#share-button img {
-    margin-right: 5px;
-}
-
-
-
-/* ------------ MOBILE ----------------*/
-
-/* Uniquement pour les écrans de moins de 768px de large (mobiles) */
-/* Page Title Styling */
-#page-title {
-    position: absolute;
-    top: 30px;
-    left: 15vh;
-    /* To the right of the logo */
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: white;
-    text-transform: uppercase;
-    z-index: 100;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-    /* Let clicks pass through if needed */
-}
-
-/* Mobile adjustments */
-@media (max-width: 768px) {
-
-    /* Existing mobile styles... */
-    .dropdown-menu {
-        max-height: 40vh;
-        width: 100vw;
-        overflow-y: auto;
-        background-color: #2c3440;
-    }
-
-    #page-title {
-        top: 70px;
-        /* Below search bar */
-        left: 0;
-        width: 100%;
-        text-align: center;
-        font-size: 1.2rem;
-    }
-
-    /* ... rest of existing mobile styles */
-
-
-    /* Réduit le titre */
-    .dropdown-search-card .card-title {
-        font-size: 0.9rem;
-        margin-bottom: 0.2rem;
-    }
-
-    /* Réduit le texte (date, description) */
-    .dropdown-search-card .card-text {
-        font-size: 0.75rem;
-        margin-bottom: 0;
-    }
-
-    /* Réduit la marge interne de la carte */
-    .dropdown-search-card .card-body {
-        padding: 0.5rem;
-    }
-
-
-    .dropdown-search-card img {
-        /* On fixe une taille stable */
-        width: 95px;
-        min-width: 95px;
-        /* Empêche l'écrasement par le texte */
-        flex-shrink: 0;
-        /* Interdit au flexbox de réduire l'image */
-
-        height: auto;
-        /* Garde le ratio */
-    }
-
-    .backdrop-image {
-        margin-top: -15vh;
-    }
-
-    .content-overlay {
-        margin-top: -40vh;
-        position: relative;
-        z-index: 10;
-    }
-
-    /* Library Page - Mobile Text Size */
-    #movie-list-container .card-title {
-        font-size: 0.9rem;
-    }
-
-    #movie-list-container .card-text {
-        font-size: 0.75rem;
-    }
-}
-
-/* Separator Visibility */
+/* Vertical separator for movie rows */
 #movie-list-container hr {
     opacity: 1;
     border-color: #445566;
 }
 
-/* Review Page Styles */
-.hidden {
-    display: none !important;
+/* ==========================================================================
+   8. REVIEW PAGE (FORMS, RATINGS, CAMERA)
+   ========================================================================== */
+
+.review-container {
+    max-width: 1200px;
 }
 
-/* Star Rating System */
+/* Main card in review page (Search style backdrop) */
+.review-movie-card {
+    background-color: #14181c;
+    cursor: default;
+}
+
+.review-movie-card:hover {
+    background-color: #14181c;
+}
+
+/* Faded background image for review cards */
+.review-card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.2;
+    pointer-events: none;
+    -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 100%);
+    mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 100%);
+}
+
+/* Star rating system (Flex-reverse for hover logic) */
 .star-rating input {
     display: none;
 }
@@ -535,26 +508,13 @@ body {
     transition: color 0.2s;
 }
 
-/* Colorer l'étoile survolée ET toutes celles qui la suivent (grâce au flex-reverse) */
 .star-rating input:checked~label,
 .star-rating label:hover,
 .star-rating label:hover~label {
     color: #ffc107;
-    /* Bootstrap warning color */
 }
 
-.action-btn-wide {
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-/* Review Page Styling Refactor */
-.review-container {
-    max-width: 1200px;
-    /* Wider for PC */
-}
-
-/* Force equal height and remove offsets for input group elements */
+/* Aligned input groups (Location search) */
 .input-group {
     align-items: center;
 }
@@ -563,24 +523,31 @@ body {
 .input-group .form-control {
     height: 100%;
     min-height: 38px;
-    /* Bootstrap default fallback */
     margin-top: 0 !important;
     margin-bottom: 0 !important;
 }
 
-.review-poster-wrapper {
-    width: 100px;
-    flex-shrink: 0;
+/* Input placeholder text */
+#location-input::placeholder {
+    color: #abb !important;
+    opacity: 0.8;
 }
 
+/* Review text preserves spacing */
 .review-read-text {
     white-space: pre-wrap;
 }
 
-.review-mfw-img {
-    max-height: 300px;
+/* Limited description text in reviews */
+.review-overview-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-width: 600px;
 }
 
+/* Camera viewport/MFW feature */
 .camera-container {
     height: 300px;
     display: none;
@@ -605,11 +572,15 @@ body {
     object-fit: cover;
 }
 
+.review-mfw-img {
+    max-height: 300px;
+}
+
 .start-cam-icon {
     width: 20px;
 }
 
-/* Movie Header Card Styling */
+/* Header card for the review page */
 .review-header-card {
     min-height: 200px;
 }
@@ -623,7 +594,6 @@ body {
     background-size: cover;
     background-position: center;
     filter: brightness(0.7) blur(2px);
-    /* Blur léger pour le style */
     z-index: 0;
 }
 
@@ -639,99 +609,20 @@ body {
 
 .review-poster-wrapper-card {
     width: 100px;
-    /* Poster plus petit dans la carte header */
     flex-shrink: 0;
     z-index: 2;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
-.text-shadow {
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+.review-poster-wrapper {
+    width: 100px;
+    flex-shrink: 0;
 }
 
-.review-overview-clamp {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    max-width: 600px;
-}
+/* ==========================================================================
+   9. MODALS
+   ========================================================================== */
 
-/* Horizontal Scroll Container (Netflix Style) */
-.scrolling-wrapper {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    /* Smooth scroll on iOS */
-    gap: 1rem;
-    padding-bottom: 1rem;
-    /* Space for scrollbar if visible */
-}
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-.scrolling-wrapper::-webkit-scrollbar {
-    display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.scrolling-wrapper {
-    -ms-overflow-style: none;
-    /* IE and Edge */
-    scrollbar-width: none;
-    /* Firefox */
-}
-
-.trending-card {
-    flex: 0 0 auto;
-    /* Don't shrink */
-    width: 160px;
-    /* Fixed width for cards */
-    transition: transform 0.2s;
-}
-
-.trending-card:hover {
-    transform: scale(1.05);
-}
-
-.trending-card img {
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-.review-movie-card {
-    background-color: #14181c;
-    cursor: default;
-    /* Couleur de fond de la page */
-}
-
-.review-movie-card:hover {
-    /* Suppression du hover gris car on a un backdrop custom */
-    background-color: #14181c;
-}
-
-.review-card-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    opacity: 0.2;
-    pointer-events: none;
-
-    /* Dégradé radial pour fader les bords vers 0% d'opacité */
-    -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 100%);
-    mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 100%);
-}
-
-#location-input::placeholder {
-    color: #abb !important;
-    opacity: 0.8;
-}
-
-/* Modal Dark Theme */
 .modal-content {
     background-color: #14181c;
     color: white;
@@ -741,4 +632,73 @@ body {
 .modal-header,
 .modal-footer {
     border-color: #445566;
+}
+
+/* ==========================================================================
+   10. MOBILE ADJUSTMENTS
+   ========================================================================== */
+
+#page-title {
+    position: absolute;
+    top: 30px;
+    left: 15vh;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    z-index: 100;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .dropdown-menu {
+        max-height: 40vh;
+        width: 100vw;
+    }
+
+    #page-title {
+        top: 70px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        font-size: 1.2rem;
+    }
+
+    .dropdown-search-card .card-title {
+        font-size: 0.9rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .dropdown-search-card .card-text {
+        font-size: 0.75rem;
+        margin-bottom: 0;
+    }
+
+    .dropdown-search-card .card-body {
+        padding: 0.5rem;
+    }
+
+    .dropdown-search-card img {
+        width: 95px;
+        min-width: 95px;
+        flex-shrink: 0;
+        height: auto;
+    }
+
+    .backdrop-image {
+        margin-top: -15vh;
+    }
+
+    .content-overlay {
+        margin-top: -40vh;
+    }
+
+    #movie-list-container .card-title {
+        font-size: 0.9rem;
+    }
+
+    #movie-list-container .card-text {
+        font-size: 0.75rem;
+    }
 }
