@@ -2,7 +2,7 @@
 
 FullBoxd est une **Progressive Web App (PWA)** moderne dédiée aux passionnés de cinéma. Elle permet de rechercher des films, de gérer une bibliothèque personnelle et d'écrire des critiques enrichies par des capteurs matériels (photo, géolocalisation).
 
-![Version](https://img.shields.io/badge/version-2.6-blue)
+![Version](https://img.shields.io/badge/version-2.8-blue)
 ![PWA](https://img.shields.io/badge/PWA-Ready-green)
 ![IndexedDB](https://img.shields.io/badge/Storage-IndexedDB-orange)
 
