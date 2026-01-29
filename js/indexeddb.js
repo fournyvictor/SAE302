@@ -53,19 +53,19 @@ function dbTransactionErrorResolve(resolve, event) {
 //Check si le film est dans la librairie
 function checkIfMovieLiked(MOVIE_ID) {
     return new Promise(function (resolve) { //promesse pour pouvoir attendre la fin
-        const REQUEST = indexedDB.open(DB, DB_VERSION);
+        const REQUEST = indexedDB.open(DB, DB_VERSION); //ouverture db
 
-        REQUEST.onupgradeneeded = onDBUgradeNeeded;
-        REQUEST.onerror = onDBError;
-        REQUEST.onsuccess = onDBSuccessCheckLike.bind(this, resolve, MOVIE_ID);
-
+        REQUEST.onupgradeneeded = onDBUgradeNeeded; //si pas la bonne version
+        REQUEST.onerror = onDBError; //si echec
+        REQUEST.onsuccess = onDBSuccessCheckLike.bind(this, resolve, MOVIE_ID); //si reussite (bind pour passer des arguments a un callback)
 
     });
 }
+// Si ouverture db réussie
 function onDBSuccessCheckLike(resolve, MOVIE_ID, event) {
     const BDD = event.target.result;
 
-    const TRANSACTION = BDD.transaction(["likes"], "readonly");
+    const TRANSACTION = BDD.transaction(["likes"], "readonly"); //creer la transaction sur la table en lecture seule
     const OBJECTSTORE = TRANSACTION.objectStore("likes");
 
     const REQUEST = OBJECTSTORE.get(MOVIE_ID);
@@ -74,6 +74,7 @@ function onDBSuccessCheckLike(resolve, MOVIE_ID, event) {
     REQUEST.onerror = dbTransactionErrorResolve.bind(this, resolve);
 
 }
+// Traitement du résultat du check de like
 function onCheckLikedResult(resolve, event) {
     const RESULT = event.target.result;
     if (RESULT) {
@@ -97,6 +98,7 @@ async function onLikeButtonClick(MOVIE) {
         REQUEST.onsuccess = onDBSuccessLikeAdd.bind(this, MOVIE);
     }
 }
+// Si ouverture db réussie pour ajout de like
 async function onDBSuccessLikeAdd(MOVIE, event) {
     const BDD = event.target.result;
     const TRANSACTION = BDD.transaction(["likes"], "readwrite");
@@ -109,6 +111,7 @@ async function onDBSuccessLikeAdd(MOVIE, event) {
     REQUEST.onerror = dbTransactionError;
 
 }
+// Suite à l'ajout réussi en db
 async function successfullyAddedLike(LIKED, MOVIE) {
     updateLikePicto(LIKED, MOVIE.id);
     //ajout des images au cache
@@ -119,6 +122,7 @@ async function successfullyAddedLike(LIKED, MOVIE) {
     await CACHE.add(`https://image.tmdb.org/t/p/original${MOVIE.backdrop_path}`);
 
 }
+// Si ouverture db réussie pour suppression de like
 function onDBSuccessLikeRemove(MOVIE, event) {
     const BDD = event.target.result;
 
@@ -131,6 +135,7 @@ function onDBSuccessLikeRemove(MOVIE, event) {
     REQUEST.onsuccess = successfullyRemovedLike.bind(null, false, MOVIE); //bind plutot que d'executer une fonction a la con vide
     REQUEST.onerror = dbTransactionError;
 }
+// Suite à la suppression réussie en db
 async function successfullyRemovedLike(LIKED, MOVIE) {
     updateLikePicto(LIKED, MOVIE.id);
     //suppression du cache
@@ -140,6 +145,7 @@ async function successfullyRemovedLike(LIKED, MOVIE) {
     await CACHE.delete(`https://image.tmdb.org/t/p/original${MOVIE.poster_path}`);
     await CACHE.delete(`https://image.tmdb.org/t/p/original${MOVIE.backdrop_path}`);
 }
+// Mise à jour visuelle du coeur
 function updateLikePicto(LIKE, MOVIE_ID) {
     const ID = MOVIE_ID + "-like-picto";
     let path = "../Misc/icon_heart.svg";
@@ -166,6 +172,7 @@ function getAllLikedMovies() {
     }
     );
 }
+// Si ouverture db réussie pour récupération de tous les likes
 function onDBSuccessGetAllLikedMovies(resolve, event) {
     const BDD = event.target.result;
 
@@ -177,6 +184,7 @@ function onDBSuccessGetAllLikedMovies(resolve, event) {
     REQUEST.onsuccess = onGetAllLikedMoviesResult.bind(this, resolve);
     REQUEST.onerror = dbTransactionErrorResolve.bind(this, resolve);
 }
+// Traitement du résultat de tous les likes
 function onGetAllLikedMoviesResult(resolve, event) {
     const RESULT = event.target.result;
     RESULT.sort(trierParDate); //trier par date
@@ -202,6 +210,7 @@ function getMovieReview(MOVIE_ID) {
 
     });
 }
+// Si ouverture db réussie pour récupération de review
 function onDBSuccessGetReview(resolve, MOVIE_ID, event) {
     const BDD = event.target.result;
 
@@ -213,6 +222,7 @@ function onDBSuccessGetReview(resolve, MOVIE_ID, event) {
     REQUEST.onsuccess = onGetMovieReview.bind(this, resolve);
     REQUEST.onerror = dbTransactionErrorResolve.bind(this, resolve);
 }
+// Résolution de la review récupérée
 function onGetMovieReview(resolve, event) {
     resolve(event.target.result);
 }
@@ -229,6 +239,7 @@ function submitMovieReview(MOVIE_ID, REVIEW) {
 
     })
 }
+// Si ouverture db réussie pour soumission de review
 function onDBSuccessSubmitReview(resolve, MOVIE_ID, REVIEW, event) {
 
     const BDD = event.target.result;
@@ -242,6 +253,7 @@ function onDBSuccessSubmitReview(resolve, MOVIE_ID, REVIEW, event) {
     REQUEST.onsuccess = onSubmitReview.bind(this, resolve, MOVIE_ID);
     REQUEST.onerror = dbTransactionErrorResolve.bind(this, resolve);
 }
+// Résolution après soumission de review
 function onSubmitReview(resolve, MOVIE_ID, event) {
     resolve(event.target.result);
 }

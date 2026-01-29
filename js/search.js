@@ -27,36 +27,36 @@ SEARCHBAR.addEventListener("blur", deselectSearchBar);
 /* Gestion searchbar                                                          */
 /******************************************************************************/
 
-//mise a jour de du dropdown searchbar
+//mise à jour du dropdown searchbar
 function updateSearchBar() {
-    const SEARCHBAR_STRING = SEARCHBAR.value; // récupérer la valeur de la searchbar
-    if (SEARCHBAR_STRING != '') { // si searchbar non vide
-        if (!navigator.onLine) { // si non connecté à internet
-            SEARCHBAR_DROPDOWN_LIST.innerHTML = '<li class="p-3 text-center text-secondary small">Research is only available online</li>'; //message searchbar indispo hosr ligne
+    const SEARCHBAR_STRING = SEARCHBAR.value; //récupérer la valeur de la searchbar
+    if (SEARCHBAR_STRING != '') { //si searchbar non vide
+        if (!navigator.onLine) { //si non connecté à internet
+            SEARCHBAR_DROPDOWN_LIST.innerHTML = '<li class="p-3 text-center text-secondary small">Research is only available online</li>'; //message searchbar indispo hors ligne
             SEARCHBAR_DROPDOWN.show(); //afficher le dropdown
             return;
         }
-        searchTmdb(SEARCHBAR_STRING); // sinon effectuer la recherche
+        searchTmdb(SEARCHBAR_STRING); //sinon effectuer la recherche
         SEARCHBAR_DROPDOWN.show(); //afficher dropdown
 
     } else {
-        SEARCHBAR_DROPDOWN.hide(); // si rien de tapé, cacher le dropdown
+        SEARCHBAR_DROPDOWN.hide(); //si rien de tapé, cacher le dropdown
     }
 }
-function selectSearchBar() { // lorsque l'utilisateur clique dans la searchbar
-    LOGO.style.opacity = "0"; // masquer le logo
-    LOGO.style.pointerEvents = "none"; // empêcher le clic sur le logo
-    if (PAGE_TITLE) { PAGE_TITLE.style.opacity = "0"; }  // masquer le titre si il existe
-    updateSearchBar(); // mettre a jour la searchbar
+function selectSearchBar() { //lorsque l'utilisateur clique dans la searchbar
+    LOGO.style.opacity = "0"; //masquer le logo
+    LOGO.style.pointerEvents = "none"; //empêcher le clic sur le logo
+    if (PAGE_TITLE) { PAGE_TITLE.style.opacity = "0"; }  //masquer le titre si il existe
+    updateSearchBar(); //mettre à jour la searchbar
     SEARCHBAR.style.width = "75vw"; //élargir la searchbar
-    SEARCHBAR.placeholder = "Search..."; // changer le texte placeholder de loupe a Search...
+    SEARCHBAR.placeholder = "Search..."; //changer le texte placeholder de loupe à search...
 }
 function deselectSearchBar() { //lorsque l'utilisateur clique en dehors de la searchbar
 
-    setTimeout(resetSearchBar, 200); // délai avant exécution pour éviter de casser les liens du dropdown
+    setTimeout(resetSearchBar, 200); //délai avant exécution pour éviter de casser les liens du dropdown
 
 }
-function resetSearchBar() { // remise a zéro searchbar (voir selectSearchBar)
+function resetSearchBar() { //remise à zéro searchbar (voir selectsearchbar)
     SEARCHBAR_DROPDOWN.hide();
     SEARCHBAR.style.width = "36px";
     SEARCHBAR.placeholder = "⌕";
@@ -66,7 +66,7 @@ function resetSearchBar() { // remise a zéro searchbar (voir selectSearchBar)
     if (PAGE_TITLE) PAGE_TITLE.style.opacity = "1";
 }
 
-function createSeachDropdownHtmlList(array) { //création du dropdown avec les elements récupérés
+function createSeachDropdownHtmlList(array) { //création du dropdown avec les éléments récupérés
     let html = '';
     for (let element of array) { //itérer pour chaque objet du tableau renvoyé par tmdb
         html += `<li><a href="./film/?id=${element.id}">
@@ -105,14 +105,14 @@ async function searchTmdb(SEARCHSTRING) { //recherche par string dans l'api tmdb
     const RESPONSE = await fetch('https://api.themoviedb.org/3/search/movie?query=' + SEARCHSTRING + '&include_adult=false&language=en-US&page=1', options);
     const RESPONSE_JSON = await RESPONSE.json();
 
-    //Mode opératoire proposé par la doc de tmdb
+    //mode opératoire proposé par la doc de tmdb
     //fetch('https://api.themoviedb.org/3/search/movie?query=' + SEARCHSTRING + '&include_adult=false&language=en-US&page=1', options)
     //    .then(res => res.json())
     //    .then(res => console.log(res.results))
     //    .catch(err => console.error(err));
 
 
-    createSeachDropdownHtmlList(RESPONSE_JSON.results); // créer la liste
+    createSeachDropdownHtmlList(RESPONSE_JSON.results); //créer la liste
 }
 
 //récupérer les infos d'un film par son id
@@ -130,7 +130,7 @@ async function getFilmData(ID) {
     return RESPONSE_JSON;
 }
 
-//Récupérer le cast d'un film par son ID
+//récupérer le cast d'un film par son id
 async function getMovieCast(ID) {
     const OPTIONS = {
         method: 'GET',
@@ -145,7 +145,7 @@ async function getMovieCast(ID) {
     return RESPONSE_JSON.cast;
 }
 
-//récupérer les tendences de la semaine
+//récupérer les tendances de la semaine
 async function getTrendingMovies() {
     const OPTIONS = {
         method: 'GET',
@@ -160,7 +160,7 @@ async function getTrendingMovies() {
     return RESPONSE_JSON.results;
 }
 
-//récupérer les tendences de la journée
+//récupérer les tendances de la journée
 async function getTrendingMoviesToday() {
     const OPTIONS = {
         method: 'GET',

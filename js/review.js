@@ -1,3 +1,4 @@
+//récupération des paramètres et de l'id
 const PARAMS = new URLSearchParams(document.location.search);
 const FILM_ID = PARAMS.get("id");
 const REVIEW_TEXT_INPUT = document.getElementById("review-text-input");
@@ -30,6 +31,7 @@ const CONTAINER_RESULT = document.getElementById("result-container");
 
 let photoToSave = null;
 
+//écouteurs d'événements
 SUBMIT_BUTTON.addEventListener("click", saveReview);
 EDIT_BUTTON.addEventListener("click", toggleEditMode);
 CANCEL_BUTTON.addEventListener("click", toggleEditMode);
@@ -38,10 +40,12 @@ BTN_SELFIE.addEventListener("click", openCamera);
 INPUT_CAMERA.addEventListener("change", selectedFile);
 
 
+//ouvre le sélecteur de fichier (caméra)
 function openCamera() {
     INPUT_CAMERA.click();
 }
 
+//gestion du fichier sélectionné
 function selectedFile(event) {
     const file = event.target.files[0];
 
@@ -55,9 +59,10 @@ function selectedFile(event) {
     }
 }
 
+//bascule entre le mode lecture et édition
 async function toggleEditMode() {
     if (REVIEW_EDIT_VIEW.classList.contains("d-none")) {
-        // Read Mode -> Switch to Edit Mode
+        //mode lecture -> mode édition
         REVIEW_EDIT_VIEW.classList.remove("d-none");
         REVIEW_READ_VIEW.classList.add("d-none");
         const REVIEW = await getMovieReview(FILM_ID);
@@ -65,12 +70,13 @@ async function toggleEditMode() {
             prepareEditValues(REVIEW);
         }
     } else {
-        // Edit Mode -> Switch to Read Mode
+        //mode édition -> mode lecture
         REVIEW_EDIT_VIEW.classList.add("d-none");
         REVIEW_READ_VIEW.classList.remove("d-none");
     }
 }
 
+//fonction principale
 main();
 async function main() {
     const IS_LIKED = await checkIfMovieLiked(parseInt(FILM_ID));
@@ -97,6 +103,7 @@ async function main() {
     createMovieCard(FILM);
 
 }
+//remplit les infos du film
 function createMovieCard(FILM) {
     const YEAR = FILM.release_date.substring(0, 4);
 
@@ -107,6 +114,7 @@ function createMovieCard(FILM) {
     MOVIE_OVERVIEW.innerHTML = FILM.overview;
 
 }
+//remplit la carte review en lecture
 function createReviewReadCard(REVIEW) {
     const RATING = REVIEW.rating;
     READ_TEXT.innerHTML = REVIEW.text;
@@ -123,6 +131,7 @@ function createReviewReadCard(REVIEW) {
     getMFWImageFromCache(FILM_ID);
 
 }
+//récupère la photo selfie depuis le cache
 async function getMFWImageFromCache(FILM_ID) {
     const CACHE = await caches.open("mfw-cache");
     const RESPONSE = await CACHE.match("/mfw/" + FILM_ID);
@@ -136,16 +145,17 @@ async function getMFWImageFromCache(FILM_ID) {
 
     } else { IMG_CONTAINER.classList.add("d-none"); }
 }
+//sauvegarde la review en db et la photo en cache
 async function saveReview() {
     const REVIEW = { rating: getRating(), text: REVIEW_TEXT_INPUT.value, location: LOCATION_INPUT.value, mfw: `${FILM_ID}-mfw` };
     submitMovieReview(FILM_ID, REVIEW);
     if (photoToSave) {
         const CACHE = await caches.open('mfw-cache');
 
-        const response = new Response(photoToSave, { //reponse http fictive pour que le cache autoriqe le stockage
+        const response = new Response(photoToSave, { //réponse http fictive pour le cache
             headers: { 'Content-Type': photoToSave.type }
         });
-        await CACHE.put(`/mfw/${FILM_ID}`, response); // fausse url de stockage
+        await CACHE.put(`/mfw/${FILM_ID}`, response); //fausse url de stockage
     }
 
 
@@ -158,6 +168,7 @@ async function saveReview() {
 
     }
 }
+//récupère la note sélectionnée
 function getRating() {
     if (STAR_5.checked) { return 5; }
     if (STAR_4.checked) { return 4; }
@@ -166,6 +177,7 @@ function getRating() {
     if (STAR_1.checked) { return 1; }
     return 0;
 }
+//coche les étoiles selon la note
 function setRating(VALUE) {
     switch (VALUE) {
         case 1:
@@ -188,14 +200,17 @@ function setRating(VALUE) {
     }
 
 }
+//prépare les champs avec les valeurs existantes
 function prepareEditValues(REVIEW) {
     REVIEW_TEXT_INPUT.value = REVIEW.review.text;
     LOCATION_INPUT.value = REVIEW.review.location;
     setRating(REVIEW.review.rating);
 }
+//déclenche la géolocalisation
 async function geoLocation() {
     navigator.geolocation.getCurrentPosition(convertCoordinates);
 }
+//convertit les coordonnées en adresse textuelle
 async function convertCoordinates(pos) {
     const RESPONSE = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&format=json`);
     const RESPONSE_JSON = await RESPONSE.json();

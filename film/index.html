@@ -8,7 +8,7 @@
     <meta name="author" content="victor.fourny@etu.univ-smb.fr" />
     <meta name="description" content="FullBoxd">
 
-    <!-- Favicon & Manifest -->
+    <!-- Favicon et manifest -->
     <link rel="icon" type="image/png" href="../favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg" />
     <link rel="shortcut icon" href="../favicon/favicon.ico" />
@@ -16,7 +16,7 @@
     <meta name="apple-mobile-web-app-title" content="FullBoxd" />
     <link rel="manifest" href="../favicon/site.webmanifest" />
 
-    <!-- Open Graph Properties -->
+    <!-- Opengraph -->
     <meta property="og:description" content="Look down on the uncultivated" id="og-description">
     <meta property="og:image" content="https://webdev.fourny.org/victor/SAE302/favicon/web-app-manifest-512x512.png"
         id="og-image">
@@ -27,19 +27,19 @@
 
     <title>FullBoxd - Film</title>
 
-    <!-- Styles -->
+    <!-- Css et javascript-->
     <link rel="stylesheet" href="../bootstrap-5.3.8-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
-
-    <!-- Scripts -->
     <script defer src="../bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="../js/search.js"></script>
     <script defer src="../js/indexeddb.js"></script>
     <script defer src="../js/film.js"></script>
+
 </head>
 
 <body id="film-body">
     <header>
+        <!-- Logo / menu -->
         <div class="logo" id="logo">
             <img src="../Misc/logo_the_long_way.svg">
             <div class="logo-actions">
@@ -50,6 +50,7 @@
         </div>
     </header>
 
+    <!-- Barre de recherche -->
     <div class="search-container">
         <div class="dropdown">
             <input type="search" class="form-control" id="searchbar" placeholder="⌕" name="q" autocomplete="off" />
@@ -57,12 +58,16 @@
             </ul>
         </div>
     </div>
+
+    <!-- Film -->
     <div id="film-container">
+        <!-- backdrop du film -->
         <div class="banner-wrapper position-relative">
             <div class="backdrop-image" id="data-backdrop-image"></div>
             <div class="backdrop-overlay"></div>
         </div>
 
+        <!-- Présentation dufilm -->
         <div class="container content-overlay">
             <div class="row">
                 <div class="col-md-3">

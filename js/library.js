@@ -1,29 +1,36 @@
+//conteneur de la liste des films
 const MOVIE_LIST_CONTAINER = document.getElementById("movie-list-container");
 
 
 main();
 
+//fonction principale
 function main() {
     createMovieListHtml();
 }
 
 
+//génère le html de la librairie
 async function createMovieListHtml() {
+    //récupération des films likés
     const ARRAY = await getAllLikedMovies();
     let html = "";
 
 
+    //boucle sur chaque film (inversé pour le plus récent en premier)
     for (element of ARRAY.reverse()) {
 
         let reviewHtml = "";
         const DATA = element['filmData'];
         const YEAR = DATA.release_date.substring(0, 4);
+        //récupération de la review
         const REVIEW = await getMovieReview(DATA.id);
         let reviewText;
         let starsHtml = "";
         if (REVIEW) {
             reviewText = REVIEW.review.text;
             for (let i = 1; i <= 5; i++) {
+                //génération des étoiles
                 if (i <= REVIEW.review.rating) {
                     starsHtml += "★";
                 } else {
@@ -31,6 +38,7 @@ async function createMovieListHtml() {
                 }
             }
         } else { reviewText = false; }
+        //préparation du code html de la review
         if (!reviewText) {
             reviewHtml = `<p class="card-text card-text-truncate-3">You did not write a review about ${DATA.title} yet. </p>
                     <a class="write-review-button" href="../review/?id=${DATA.id}"><button class="btn btn-outline-light btn-sm mt-2" >Write a review</button></a>`
@@ -71,5 +79,6 @@ async function createMovieListHtml() {
     <hr class="my-4">`
     }
 
+    //injection du html dans le conteneur
     MOVIE_LIST_CONTAINER.innerHTML = html;
 }

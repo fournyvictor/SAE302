@@ -1,3 +1,4 @@
+//récupération des paramètres de l'url
 const PARAMS = new URLSearchParams(document.location.search);
 const FILM_ID = PARAMS.get("id");
 const FILM_CONTAINER = document.getElementById("film-container");
@@ -17,8 +18,10 @@ const SHARE_BUTTON = document.getElementById("share-button");
 
 main();
 
+//fonction principale
 async function main() {
 
+    //vérifie si le film est liké
     const IS_LIKED = await checkIfMovieLiked(parseInt(FILM_ID));
     let FILM;
     if (IS_LIKED) {
@@ -27,14 +30,17 @@ async function main() {
         FILM = await getFilmData(FILM_ID);
     }
 
+    //écouteur pour le bouton like
     LIKE_BUTTON.addEventListener("click", onLikeButtonClick.bind(null, FILM));
     if (FILM) {
+        //préparation des pictogrammes
         REVIEW_BUTTON_IMAGE.id = `${FILM.id}-review-picto`;
         LIKE_BUTTON_IMAGE.id = `${FILM.id}-like-picto`;
         updateLikePicto(IS_LIKED, FILM.id);
         updateReviewPicto(FILM.id);
 
         let CAST = [];
+        //récupération du cast si en ligne
         if (navigator.onLine) {
             CAST = await getMovieCast(FILM.id);
         }
@@ -47,6 +53,7 @@ async function main() {
     }
 }
 
+//génère le html des détails du film
 function makeFilmDisplayHtml(DATA, CAST) {
     const YEAR = DATA.release_date.substring(0, 4);
     DATA_BACKDROP_IMAGE.style.backgroundImage = `url('https://image.tmdb.org/t/p/original${DATA.backdrop_path}')`;
@@ -61,9 +68,10 @@ function makeFilmDisplayHtml(DATA, CAST) {
         title: `FullBoxd - ${DATA.title}`,
         text: `Write a review on FullBoxd about ${DATA.title}`,
         url: window.location.href,
-        posterPath: DATA.poster_path // On passe le chemin pour le fetcher au moment du clic
+        posterPath: DATA.poster_path //chemin pour récupération au clic
     };
     SHARE_BUTTON.addEventListener("click", shareMovie.bind(null, SHARE_DATA));
+    //génération de la liste des acteurs
     let casthtml = ""
     for (let element of CAST.slice(0, 10)) {
         casthtml += `<div class="cast-item d-flex align-items-center mb-2">
@@ -80,12 +88,14 @@ function makeFilmDisplayHtml(DATA, CAST) {
     CAST_LIST.innerHTML = casthtml;
 
 }
+//partage natif du film
 async function shareMovie(SHARE_DATA) {
     try {
         await navigator.share(SHARE_DATA);
     } catch (err) {
     }
 }
+//met à jour l'icône de review
 async function updateReviewPicto(FILM_ID) {
     const REVIEW = await getMovieReview(FILM_ID);
     const ID = FILM_ID + "-review-picto";
