@@ -47,7 +47,7 @@ FullBoxd est une **Progressive Web App (PWA)** moderne dédiée aux passionnés 
 ## 📖 Guide d'Utilisation
 
 1.  **Rechercher** : Cliquez sur la loupe en haut pour ouvrir la barre de recherche. Tapez le nom d'un film pour voir les résultats en temps réel.
-2.  **Enregistrer** : Sur la page d'un film, cliquez sur l'icône ![coeur](./Misc/heart.svg) pour l'ajouter à votre bibliothèque. Le film et ses images seront alors disponibles hors-ligne.
+2.  **Enregistrer** : Sur la page d'un film, cliquez sur l'icône ![coeur](./Misc/icon_heart.svg) pour l'ajouter à votre bibliothèque. Le film et ses images seront alors disponibles hors-ligne.
 3.  **Critiquer** : Cliquez sur l'icône **Livre** pour ouvrir l'éditeur. Vous pouvez :
     *   Écrire votre passionnante critique.
     *   Attribuer une note (étoiles).
