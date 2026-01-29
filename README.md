@@ -37,9 +37,9 @@ FullBoxd est une **Progressive Web App (PWA)** moderne dédiée aux passionnés 
 ````carousel
 ![Page d'accueil Mobile](./img/accueil_mobile.jpg)
 <!-- slide -->
-![Détails d'un film Mobile](./img/film_mobile.jpg)
+![Détails d'un film Mobile](./img/film.gif)
 <!-- slide -->
-![Rédaction d'une critique Mobile](./img/review_mobile.jpg)
+![Rédaction d'une critique Mobile](./img/review.gif)
 ````
 
 ---
